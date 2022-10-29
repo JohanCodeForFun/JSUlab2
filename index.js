@@ -12,13 +12,25 @@ async function GetWeatherData() {
 });
 
   let result = await response.json();
+  // console.log(result)
   let arrayResult = [];
 
   // Loopar igenom arrayn för att lägga till object till arrayn-variabeln "arrayResult".
   for (let i = 0; i < result.properties.timeseries.length; i++) {
     arrayResult.push(result.properties.timeseries[i]);
   }
-  localStorage.setItem("weatherData", JSON.stringify(arrayResult));
+  
+  localStorage.setItem('weatherData', JSON.stringify(arrayResult))
+
+  // Här får jag information om när vädret senaste var uppdaterad och då lägger jag i detta i en localStorage-variabel som i detta fall kommer heta 'Updated'. Jag formaterar strängar från result med slice för att få just datumet, samma princip med tiden.
+
+  let UpdatedDate = result.properties.meta.updated_at.slice(0,10)
+  let currentTimeIndex = result.properties.meta.updated_at.indexOf(':')
+
+  let UpdatedTime = result.properties.meta.updated_at.slice(currentTimeIndex - 2, currentTimeIndex + 3)
+
+
+  localStorage.setItem('Updated', JSON.stringify({"time": UpdatedTime, "date": UpdatedDate}))
 }
 
 // Function, denna sorterar datat så vi bara plockar ut det viktigaste datat vi behöver
@@ -50,15 +62,10 @@ function SortWeatherData() {
   return weatherData;
 }
 
-function CheckDate() {
-  let dateToday = new Date().toLocaleDateString();
-  let timeToday = new Date().toLocaleTimeString();
-
-  // INTE ARRAY BARA LOKAL TIDEN
-  console.log("Timetoday " + timeToday);
-  let currentTimeIndex = timeToday.indexOf(":");
-  let currentTime = timeToday.slice(0, currentTimeIndex);
-  console.log("currentTime " + currentTime);
+// Function Jämnför den lokala tiden med tiden med väder-arrayn
+function CheckDateTime() {
+  let dateToday = new Date().toLocaleDateString()
+  let timeToday = new Date().toLocaleTimeString()
 
   // Här loopar igenom för att jämnföra den lokala tiden och tiden på arrayn
   for (let i = 0; i < weatherData.length; i++) {
@@ -71,17 +78,18 @@ function CheckDate() {
     // Här kollar vi tiden på arrayn och den lokala tiden och datum. Om detta är sant så då vet vi vilken array-index vi ska köra!
     if (ArraytimeNow === currentTime && weatherData[i].date === dateToday) {
       // Kör denna det är rätt på den lokala tiden! returna denna!
-      console.log(weatherData[i]);
+      
+      console.log(weatherData[i])
 
-      console.log("currentTime: " + currentTime);
-      console.log("ArraytimeNow " + ArraytimeNow);
     }
   }
 }
 
 // MAIN
-GetWeatherData();
-let weatherData = SortWeatherData();
-CheckDate();
+GetWeatherData()
+let weatherData = SortWeatherData()
+let UpdatedWeather = JSON.parse(localStorage.getItem('Updated')) // När vädret senaste var updaterad
 
-// console.log(weatherData)
+CheckDateTime()
+console.log(weatherData)
+console.log('WeatherUpdatedDate ' + UpdatedWeather.date, 'WeatherUpdatedTime ' + UpdatedWeather.time)
