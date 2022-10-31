@@ -7,7 +7,7 @@ let headers = new Headers({
 // Function för att hämta väder data
 async function GetWeatherData() {
   let response = await fetch(
-    "https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=60.5&lon=11.0", {
+    "https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=60.43112&lon=6.24668", {
         method: 'GET',
         headers: headers
 });
@@ -98,7 +98,7 @@ function CheckDateTime() {
     // Här kollar vi tiden på arrayn och den lokala tiden och datum. Om detta är sant så då vet vi vilken array-index vi ska köra!
     if (ArraytimeNow === currentTime && weatherData[i].date === dateToday) {
       // Denna är i realtid, vi får ut vädret just för denna timme!
-      console.log(weatherData[i])
+      console.log(weatherData[i]["Weather-Details"].air_temperature)
 
       /*
         Här ska vi appenda temperaturen, vindhastighet och all information. Samt så ska vi också välja och byta bild beroende på väder-förhållandet
@@ -120,14 +120,18 @@ function IntervalLoop() {
       GetWeatherData()      // Får all väder-data
       SortWeatherData()     // Sorterar all väder-data
       CheckDateTime()       // Kollar vilket specifikt väder-objekt vi ska ta
-    }, 5000)
+    }, 7000) //  900000 milisecounds, 15min interval update
  }
  // Anropar intervalen med data-inhämtning i detta fall varje 5 sekunder, men denna ska vara kanske var 10 min. Men har kvar detta för att ni kan se att detta funkar också
  IntervalLoop()
 
 
+
  // GLOBAL-variabler för hantering av väder, OBS: Denna uppdateras inte i "Realtid", för de sätts bara en gång! Medan i IntervalLoop-funktionen så hämtar vi om datat var 10 minuter och då kanske klockan slår 13:00 då kommer weatherData-objekt tiden vara där tiden är just 13:00
 
-//  let weatherData = JSON.parse(localStorage.getItem('sortedWeatherData'))
-//  let updatedWeatherReport = JSON.parse(localStorage.getItem('updated-weater-report'))
+ let weatherData = JSON.parse(localStorage.getItem('sortedWeatherData'))
+ console.log(weatherData[0]["Weather-Details"].air_pressure_at_sea_level)
+
+
+ //  let updatedWeatherReport = JSON.parse(localStorage.getItem('updated-weater-report'))
 //  let weatherDataIndex = JSON.parse(localStorage.getItem('weatherDataIndex'))
