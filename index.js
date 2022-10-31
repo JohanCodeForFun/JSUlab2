@@ -1,7 +1,19 @@
+// Description
+// 1. Hämta element att jobba med
+// 2. Hämta väderdata funktioner
+// 3. Visa väder-data
+// 3.
+// 4.
+// 5.
 
+// 1. Hämta element att jobba med
+const weatherDataSection = document.querySelector("#weatherDataSection");
+const imageIconElement = document.querySelector("#weatherImage");
+
+// 2. Hämta väder-data funktioner
 // Header för att identifiera oss mot weather api, yr.no
 let headers = new Headers({
-  "User-Agent": "jhellberg.com johan@jhellberg.com"
+  "User-Agent": "jhellberg.com johan@jhellberg.com",
 });
 
 // Function för att hämta väder data
@@ -87,7 +99,6 @@ async function GetWeatherData() {
   localStorage.setItem('tanaWeatherSymbol', JSON.stringify(tanaWeatherSymbol))
   localStorage.setItem('lofotenWeatherSymbol', JSON.stringify(lofotenWeatherSymbol))
   localStorage.setItem('hallingdalselvaWeatherSymbol', JSON.stringify(hallingdalselvaWeatherSymbol))
-
 }
 
 // Function, denna sorterar datat så vi bara plockar ut det viktigaste datat vi behöver
@@ -117,6 +128,7 @@ function SortWeatherData() {
     hallingdalselva_Date_time_Array.push(hallingdalselvaArrayData[i].time);
   }
 
+  // Här får vi allt väderdata till en array "weatherData", samt för väder-symbol
   let tanaWeatherData = []
   let lofotenWeatherData = []
   let hallingdalselvaWeatherData = []
@@ -183,8 +195,8 @@ function SortWeatherData() {
 
 // Function Jämnför den lokala tiden med tiden med väder-arrayn
 function CheckDateTime() {
-  let dateToday = new Date().toLocaleDateString()
-  let timeToday = new Date().toLocaleTimeString()
+  let dateToday = new Date().toLocaleDateString();
+  let timeToday = new Date().toLocaleTimeString();
 
   let sortedTanaWeatherData = JSON.parse(localStorage.getItem('sortedTanaWeatherData'))
   let sortedLofotenWeatherData = JSON.parse(localStorage.getItem('sortedLofotenWeatherData'))
@@ -207,9 +219,11 @@ function CheckDateTime() {
     // Här kollar vi tiden på arrayn och den lokala tiden och datum. Om detta är sant så då vet vi vilken array-index vi ska köra!
     if (ArraytimeNow === currentTime && sortedTanaWeatherData[i].date === dateToday) {
       // Denna är i realtid, vi får ut vädret just för denna timme!
+
       console.log(sortedTanaWeatherData[i])
       console.log(sortedLofotenWeatherData[i]);
       console.log(sortedHallingdalselvaWeatherData[i]);
+
       /*
         Här ska vi appenda temperaturen, vindhastighet och all information. Samt så ska vi också välja och byta bild beroende på väder-förhållandet
       */
@@ -223,6 +237,7 @@ function CheckDateTime() {
 */
 
 function IntervalLoop() {
+
       setInterval(() => {
         GetWeatherData()      // Får all väder-data
         SortWeatherData()     // Sorterar all väder-data
@@ -231,3 +246,47 @@ function IntervalLoop() {
  }
  // Anropar intervalen med data-inhämtning i detta fall varje 5 sekunder, men denna ska vara kanske var 10 min. Men har kvar detta för att ni kan se att detta funkar också
  IntervalLoop()
+
+
+// 3. Visa väder-data
+let weatherIcon;
+let weatherAirTemp = JSON.parse(localStorage.getItem("sortedWeatherData"))[0][
+  "Weather-Details"
+].air_temperature;
+
+// switch för att uppdatera bild som ska visas till sidan
+let weatherSwitch = JSON.parse(localStorage.getItem("sortedWeatherData"))[0][
+  "Weather-Symbol"
+];
+switch (weatherSwitch) {
+  case "partlycloudy_night":
+    weatherIcon = "partlycloudy_night";
+    break;
+  case "fair_night":
+    weatherIcon = "fair_night";
+    break;
+  case "partlycloudy_day":
+    weatherIcon = "partlycloudy_day";
+    break;
+  case "cloudy":
+    weatherIcon = "cloudy";
+    break;
+  case "lightrain":
+    weatherIcon = "lightrain";
+    break;
+  case "heavyrain":
+    weatherIcon = "heavyrain";
+    break;
+  case "fog":
+    weatherIcon = "fog";
+    break;
+  default:
+    weatherIcon = "Missing weather data switch";
+}
+
+// append image icon in html, weatherDataSection
+weatherDataSection.innerHTML += `
+<h1>Väder i Tana: ${weatherAirTemp} c°</h1>
+<img src=img/${weatherIcon}.png alt="Weather Icon" height="100px" width="100px">
+`;
+
