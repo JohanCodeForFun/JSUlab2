@@ -1,3 +1,10 @@
+// Description 
+// 1. Get weather data function
+// 2. Display weather data
+// 3. 
+// 4. 
+// 5. 
+
 
 // Header för att identifiera oss mot weather api, yr.no
 let headers = new Headers({
@@ -98,7 +105,7 @@ function CheckDateTime() {
     // Här kollar vi tiden på arrayn och den lokala tiden och datum. Om detta är sant så då vet vi vilken array-index vi ska köra!
     if (ArraytimeNow === currentTime && weatherData[i].date === dateToday) {
       // Denna är i realtid, vi får ut vädret just för denna timme!
-      console.log(weatherData[i])
+      console.log(weatherData[i]["Weather-Details"].air_temperature)
 
       /*
         Här ska vi appenda temperaturen, vindhastighet och all information. Samt så ska vi också välja och byta bild beroende på väder-förhållandet
@@ -131,3 +138,9 @@ function IntervalLoop() {
 //  let weatherData = JSON.parse(localStorage.getItem('sortedWeatherData'))
 //  let updatedWeatherReport = JSON.parse(localStorage.getItem('updated-weater-report'))
 //  let weatherDataIndex = JSON.parse(localStorage.getItem('weatherDataIndex'))
+
+
+
+// 2. Display weather data
+const weatherDataSection = document.querySelector('#weatherDataSection');
+weatherDataSection.textContent = JSON.parse(localStorage.getItem('sortedWeatherData'))[0]["Weather-Details"].air_temperature;
