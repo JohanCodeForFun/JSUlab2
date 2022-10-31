@@ -280,6 +280,9 @@ switch (weatherSwitch) {
   case "fog":
     weatherIcon = "fog";
     break;
+    // Saknar data & bilder för soliga förhållanden
+    // Saknar data & bilder för soliga förhållanden
+    // Saknar data & bilder för soliga förhållanden
   default:
     weatherIcon = "Missing weather data switch";
 }
