@@ -7,78 +7,134 @@
   5. Footer
 */
 
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600;700;800&family=Roboto:wght@100;300;400;500;700;900&family=Silkscreen:wght@700&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600;700;800&family=Roboto:wght@100;300;400;500;700;900&family=Silkscreen:wght@700&display=swap");
 
 /* 1. Root-element-settings */
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    /* font-family: Roboto Slab; */
-    overflow-x: hidden;
-
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  /* font-family: Roboto Slab; */
+  overflow-x: hidden;
 }
 
 /*3. Navbar*/
 nav {
-    display: flex;
-
+  display: flex;
 }
-nav #navbar-list{
-    cursor: pointer;
-    display: flex;
-    font-size: 1.4rem;
-    font-weight: 600;
-    justify-content: space-around;
-    align-items: center;
-    width: 100%;
-    height: 10vh;
-    background-color: rgb(0, 123, 0);
-    list-style: none;
-    color: white
+nav #navbar-list {
+  cursor: pointer;
+  display: flex;
+  font-size: 1.4rem;
+  font-weight: 600;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 10vh;
+  background-color: rgb(0, 123, 0);
+  list-style: none;
+  color: white;
 }
 
 /* 4. Hero-section */
 #hero-section {
-    display: flex;
-    color: white;
-    font-size: 1.2rem;
-    gap: 1rem;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-image: linear-gradient(rgba(1, 1, 1, 0.25), rgba(1, 1, 1, 0.25)), url('img/lake-640.jpg');
-    height: 30vh;
+  display: flex;
+  color: white;
+  font-size: 1.2rem;
+  gap: 1rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(rgba(1, 1, 1, 0.25), rgba(1, 1, 1, 0.25)),
+    url("img/lake-640.jpg");
+  height: 30vh;
 }
 
 /* 5. Content */
 #content {
-    display: flex;
-    height: 50vh;
-    /* background-color: red; */
-    /* background-image: url('img/NorgemapFinal.jpg'); */
-    /* background-size: cover; */
-    /* background-image: linear-gradient(rgba(1, 1, 1, 0.25), rgba(1, 1, 1, 0.25)), url('img/map.png'); */
-    background-position: center;
-    background-size: cover;
+  display: flex;
+  height: 50vh;
+  /* background-color: red; */
+  /* background-image: url('img/NorgemapFinal.jpg'); */
+  /* background-size: cover; */
+  /* background-image: linear-gradient(rgba(1, 1, 1, 0.25), rgba(1, 1, 1, 0.25)), url('img/map.png'); */
+  background-position: center;
+  background-size: cover;
 }
 
 #content .image-container {
-    width: 100%;
-    height: 100%;
-    /* background-color: green; */
-    background-image: url('img/NorgemapFinal.jpg');
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    /* background-position: center; */
-    position: relative;
+  display: grid;
+  grid-template-areas:
+    "loc1 locTana"
+    "locLofoten ."
+    "loc3 info"
+    "loc4 info"
+    "locHall info";
+
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+
+  width: 100%;
+  height: 100%;
+  /* background-color: green; */
+  background-image: url("img/NorgemapFinal.jpg");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* background-position: center; */
+  position: relative;
 }
+
+#content .image-container #loc1 {
+  grid-area: loc1;
+}
+
+#content .image-container #locationTana,
+#content .image-container #locationLofoten,
+#content .image-container #locationHallingdalselva {
+  color: red;
+  text-shadow: 1px 1px 1px black;
+  margin: 0.5rem 0.3rem;
+  border-radius: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
 #content .image-container #locationTana {
-    position: absolute;
-    width: 2px;
-    height: 2px;
+  grid-area: locTana;
+}
+
+#content .image-container #locationLofoten {
+  grid-area: locLofoten;
+}
+#content .image-container #locationHallingdalselva {
+  grid-area: locHall;
+}
+
+#content .image-container #infoHeader {
+  grid-area: infoHeader;
+}
+#content .image-container #info {
+  grid-area: info;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  background-color: green;
+  color: white;
+  border-radius: 1rem;
+  padding: 1rem;
+}
+#content .image-container #info h3 {
+  margin-bottom: 0.5rem;
+}
+
+#content .image-container button {
+  margin-top: 0.5rem;
+  padding: 0.5rem 0.3rem;
+  border-radius: .3rem;
 }
 
 /* #content img {
@@ -86,8 +142,9 @@ nav #navbar-list{
     height: 100%;
 } */
 
-#weatherDataSection {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+#mer-info {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
