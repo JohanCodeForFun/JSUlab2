@@ -106,7 +106,6 @@ async function GetWeatherData() {
 
 // Function, denna sorterar datat så vi bara plockar ut det viktigaste datat vi behöver
 function SortWeatherData() {
-
   let tanaWeatherSymbol =  JSON.parse(localStorage.getItem('tanaWeatherSymbol'))
   let lofotenWeatherSymbol = JSON.parse(localStorage.getItem('lofotenWeatherSymbol'))
   let hallingdalselvaWeatherSymbol = JSON.parse(localStorage.getItem('hallingdalselvaWeatherSymbol'))
@@ -176,7 +175,6 @@ function SortWeatherData() {
   for (let i = 0; i < tanaWeatherSymbol.length; i++) {
 
     let tanaDate = tana_Date_time_Array[i].slice(0, 10);
-    let hallingdalselvaDate = hallingdalselva_Date_time_Array[i].slice(0, 10);
 
     let tanaIndexTime = tana_Date_time_Array[i].indexOf("T");
     let tanaTimeAgain = tana_Date_time_Array[i].lastIndexOf(":");
@@ -195,23 +193,23 @@ function SortWeatherData() {
   localStorage.setItem('sortedHallingdalselvaWeatherData', JSON.stringify(hallingdalselvaWeatherData))
 }
 
-
 // Function Jämnför den lokala tiden med tiden med väder-arrayn
 function CheckDateTime() {
   let dateToday = new Date().toLocaleDateString();
   let timeToday = new Date().toLocaleTimeString();
 
-
   let sortedTanaWeatherData = JSON.parse(localStorage.getItem('sortedTanaWeatherData'))
   let sortedLofotenWeatherData = JSON.parse(localStorage.getItem('sortedLofotenWeatherData'))
   let sortedHallingdalselvaWeatherData = JSON.parse(localStorage.getItem('sortedHallingdalselvaWeatherData'))
 
-  // Här loopar igenom för att jämnföra den lokala tiden och tiden på arrayn. Denna har samma length på alla 3 arrays
+  // 3 deklarerade väder-iconer
+  let tanaWeatherIcon;
+  let lofotenWeatherIcon;
+  let hallingdalselvaIcon;
 
   /*
     Här så får vi se om det skiljer sig mellan 3 områdenas timmar på arrayn annars går det bra att köra på en length här bara. För alla kommer då vara samma
   */
-
   for (let i = 0; i < sortedTanaWeatherData.length; i++) {
     let ArrayindexTime = sortedTanaWeatherData[i].time.indexOf(":");
     let ArraytimeNow = sortedTanaWeatherData[i].time.slice(0, ArrayindexTime);
@@ -219,17 +217,118 @@ function CheckDateTime() {
     let currentTimeIndex = timeToday.indexOf(":");
     let currentTime = timeToday.slice(0, currentTimeIndex);
 
-
     // Här kollar vi tiden på arrayn och den lokala tiden och datum. Om detta är sant så då vet vi vilken array-index vi ska köra!
     if (ArraytimeNow === currentTime && sortedTanaWeatherData[i].date === dateToday) {
       // Denna är i realtid, vi får ut vädret just för denna timme!
-      console.log(sortedTanaWeatherData[i])
-      console.log(sortedLofotenWeatherData[i]);
-      console.log(sortedHallingdalselvaWeatherData[i]);
+      let tanaAirTemp = sortedTanaWeatherData[i]["Weather-Details"].air_temperature
+      let tanaWeatherSymbol = sortedTanaWeatherData[i]["Weather-Symbol"]
 
-      /*
-        Här ska vi appenda temperaturen, vindhastighet och all information. Samt så ska vi också välja och byta bild beroende på väder-förhållandet
-      */
+      let lofotenAirTemp = sortedLofotenWeatherData[i]["Weather-Details"].air_temperature
+      let lofotenWeatherSymbol = sortedLofotenWeatherData[i]["Weather-Symbol"]
+
+      let hallingdalselvaAirTemp = sortedHallingdalselvaWeatherData[i]["Weather-Details"].air_temperature
+
+      let hallingdalselvaWeatherSymbol = sortedHallingdalselvaWeatherData[i]["Weather-Symbol"]
+
+      localStorage.setItem('hallingdalselvaAirTemp', hallingdalselvaAirTemp)
+      localStorage.setItem('lofotenAirTemp', lofotenAirTemp)
+      localStorage.setItem('tanaAirTemp', tanaAirTemp)
+
+      switch (hallingdalselvaWeatherSymbol) {
+        case "partlycloudy_night":
+          hallingdalselvaIcon = "partlycloudy_night";
+          break;
+        case "fair_night":
+          hallingdalselvaIcon = "fair_night";
+          break;
+        case "partlycloudy_day":
+          hallingdalselvaIcon = "partlycloudy_day";
+          break;
+        case "cloudy":
+          hallingdalselvaIcon = "cloudy";
+          break;
+        case "lightrain":
+          hallingdalselvaIcon = "lightrain";
+          break;
+        case "heavyrain":
+          hallingdalselvaIcon = "heavyrain";
+          break;
+        case "fog":
+          hallingdalselvaIcon = "fog";
+          break;
+        default:
+          hallingdalselvaIcon = "Missing weather data switch";
+      }
+      switch (lofotenWeatherSymbol) {
+        case "partlycloudy_night":
+          lofotenWeatherIcon = "partlycloudy_night";
+          break;
+        case "fair_night":
+          lofotenWeatherIcon = "fair_night";
+          break;
+        case "partlycloudy_day":
+          lofotenWeatherIcon = "partlycloudy_day";
+          break;
+        case "cloudy":
+          lofotenWeatherIcon = "cloudy";
+          break;
+        case "lightrain":
+          lofotenWeatherIcon = "lightrain";
+          break;
+        case "heavyrain":
+          lofotenWeatherIcon = "heavyrain";
+          break;
+        case "fog":
+          lofotenWeatherIcon = "fog";
+          break;
+        default:
+          lofotenWeatherIcon = "Missing weather data switch";
+      }
+
+      switch (tanaWeatherSymbol) {
+        case "partlycloudy_night":
+          tanaWeatherIcon = "partlycloudy_night";
+          break;
+        case "fair_night":
+          tanaWeatherIcon = "fair_night";
+          break;
+        case "partlycloudy_day":
+          tanaWeatherIcon = "partlycloudy_day";
+          break;
+        case "cloudy":
+          tanaWeatherIcon = "cloudy";
+          break;
+        case "lightrain":
+          tanaWeatherIcon = "lightrain";
+          break;
+        case "heavyrain":
+          tanaWeatherIcon = "heavyrain";
+          break;
+        case "fog":
+          tanaWeatherIcon = "fog";
+          break;
+        default:
+          tanaWeatherIcon = "Missing weather data switch";
+      }
+
+      locationTana.innerHTML = `
+      <h3>${tanaAirTemp} c°</h3>
+      <img src=img/${tanaWeatherIcon}.png alt="Weather Icon" height="50px" width="50px">
+      `;
+
+      locationLofoten.innerHTML = `
+      <h3>${lofotenAirTemp} c°</h3>
+      <img src=img/${lofotenWeatherIcon}.png alt="Weather Icon" height="50px" width="50px">
+      `;
+
+      locationHallingdalselva.innerHTML = `
+      <h3>${hallingdalselvaAirTemp} c°</h3>
+      <img src=img/${hallingdalselvaIcon}.png alt="Weather Icon" height="50px" width="50px">
+      `;
+
+      localStorage.setItem('lofotenWeatherIcon', lofotenWeatherIcon)
+      localStorage.setItem('tanaWeatherIcon', tanaWeatherIcon)
+      localStorage.setItem('hallingdalselvaIcon', hallingdalselvaIcon)
       break;
     }
   }
@@ -249,58 +348,27 @@ function IntervalLoop() {
  }
  // Anropar intervalen med data-inhämtning i detta fall varje 5 sekunder, men denna ska vara kanske var 10 min. Men har kvar detta för att ni kan se att detta funkar också
  IntervalLoop()
+ let tanaAirTemp = localStorage.getItem('tanaAirTemp')
+ let tanaWeatherIcon = localStorage.getItem('tanaWeatherIcon');
 
+ let lofotenAirTemp = localStorage.getItem('lofotenAirTemp')
+ let lofotenWeatherIcon = localStorage.getItem('lofotenWeatherIcon')
 
-// 3. Visa väder-data
-let weatherIcon;
-let weatherAirTemp = JSON.parse(localStorage.getItem("sortedWeatherData"))[0][
-  "Weather-Details"
-].air_temperature;
+ let hallingdalselvaAirTemp = localStorage.getItem('hallingdalselvaAirTemp')
+ let hallingdalselvaIcon = localStorage.getItem('hallingdalselvaIcon')
 
-// switch för att uppdatera bild som ska visas till sidan
-let weatherSwitch = JSON.parse(localStorage.getItem("sortedWeatherData"))[0][
-  "Weather-Symbol"
-];
-switch (weatherSwitch) {
-  case "partlycloudy_night":
-    weatherIcon = "partlycloudy_night";
-    break;
-  case "fair_night":
-    weatherIcon = "fair_night";
-    break;
-  case "partlycloudy_day":
-    weatherIcon = "partlycloudy_day";
-    break;
-  case "cloudy":
-    weatherIcon = "cloudy";
-    break;
-  case "lightrain":
-    weatherIcon = "lightrain";
-    break;
-  case "heavyrain":
-    weatherIcon = "heavyrain";
-    break;
-  case "fog":
-    weatherIcon = "fog";
-    break;
-    // Saknar data & bilder för soliga förhållanden
-    // Saknar data & bilder för soliga förhållanden
-    // Saknar data & bilder för soliga förhållanden
-  default:
-    weatherIcon = "Missing weather data switch";
-}
+ //append image icon in html, weatherDataSection
+  locationTana.innerHTML = `
+    <h3>${tanaAirTemp} c°</h3>
+    <img src=img/${tanaWeatherIcon}.png alt="Weather Icon" height="50px" width="50px">
+  `;
 
-// append image icon in html, weatherDataSection
-locationTana.innerHTML += `
-<h3>${weatherAirTemp} c°</h3>
-<img src=img/${weatherIcon}.png alt="Weather Icon" height="50px" width="50px">
-`;
-locationLofoten.innerHTML += `
-<h3>${weatherAirTemp} c°</h3>
-<img src=img/${weatherIcon}.png alt="Weather Icon" height="50px" width="50px">
-`;
-locationHallingdalselva.innerHTML += `
-<h3>${weatherAirTemp} c°</h3>
-<img src=img/${weatherIcon}.png alt="Weather Icon" height="50px" width="50px">
-`;
+  locationLofoten.innerHTML = `
+      <h3>${lofotenAirTemp} c°</h3>
+      <img src=img/${lofotenWeatherIcon}.png alt="Weather Icon" height="50px" width="50px">
+  `;
 
+  locationHallingdalselva.innerHTML = `
+    <h3>${hallingdalselvaAirTemp} c°</h3>
+    <img src=img/${hallingdalselvaIcon}.png alt="Weather Icon" height="50px" width="50px">
+  `;
