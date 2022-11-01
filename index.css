@@ -49,22 +49,42 @@ nav #navbar-list{
     justify-content: center;
     align-items: center;
     background-image: linear-gradient(rgba(1, 1, 1, 0.25), rgba(1, 1, 1, 0.25)), url('img/lake-640.jpg');
-    height: 40vh;
+    height: 30vh;
 }
 
 /* 5. Content */
 #content {
     display: flex;
-    height: 40vh;
-    /* background-image: linear-gradient(rgba(1, 1, 1, 0.25), rgba(1, 1, 1, 0.25)), url('img/map.png');
+    height: 50vh;
+    /* background-color: red; */
+    /* background-image: url('img/NorgemapFinal.jpg'); */
+    /* background-size: cover; */
+    /* background-image: linear-gradient(rgba(1, 1, 1, 0.25), rgba(1, 1, 1, 0.25)), url('img/map.png'); */
     background-position: center;
-    background-size: cover; */
+    background-size: cover;
 }
 
-#content img {
+#content .image-container {
     width: 100%;
     height: 100%;
+    /* background-color: green; */
+    background-image: url('img/NorgemapFinal.jpg');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* background-position: center; */
+    position: relative;
 }
+#content .image-container #locationTana {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+}
+
+/* #content img {
+    width: 100%;
+    height: 100%;
+} */
 
 #weatherDataSection {
     display: flex;
