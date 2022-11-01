@@ -1,22 +1,25 @@
 // Description
 // 1. Hämta element att jobba med
 // 2. Hämta väderdata funktioner
-// 3. Visa väder-data
+// 3. Visa väderdata
 // 3.
 // 4.
 // 5.
 
 // 1. Hämta element att jobba med
 const weatherDataSection = document.querySelector("#weatherDataSection");
+const locationTana = document.querySelector('#locationTana');
+const locationLofoten = document.querySelector('#locationLofoten');
+const locationHallingdalselva = document.querySelector('#locationHallingdalselva');
 const imageIconElement = document.querySelector("#weatherImage");
 
-// 2. Hämta väder-data funktioner
+// 2. Hämta väderdata funktioner
 // Header för att identifiera oss mot weather api, yr.no
 let headers = new Headers({
   "User-Agent": "jhellberg.com johan@jhellberg.com",
 });
 
-// Function för att hämta väder data
+// Function för att hämta väderdata
 async function GetWeatherData() {
   result = await Promise.all([
     {"Tana" : await (await fetch('https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=60.43112&lon=6.24668', {
@@ -198,6 +201,7 @@ function CheckDateTime() {
   let dateToday = new Date().toLocaleDateString();
   let timeToday = new Date().toLocaleTimeString();
 
+
   let sortedTanaWeatherData = JSON.parse(localStorage.getItem('sortedTanaWeatherData'))
   let sortedLofotenWeatherData = JSON.parse(localStorage.getItem('sortedLofotenWeatherData'))
   let sortedHallingdalselvaWeatherData = JSON.parse(localStorage.getItem('sortedHallingdalselvaWeatherData'))
@@ -219,7 +223,6 @@ function CheckDateTime() {
     // Här kollar vi tiden på arrayn och den lokala tiden och datum. Om detta är sant så då vet vi vilken array-index vi ska köra!
     if (ArraytimeNow === currentTime && sortedTanaWeatherData[i].date === dateToday) {
       // Denna är i realtid, vi får ut vädret just för denna timme!
-
       console.log(sortedTanaWeatherData[i])
       console.log(sortedLofotenWeatherData[i]);
       console.log(sortedHallingdalselvaWeatherData[i]);
@@ -288,8 +291,16 @@ switch (weatherSwitch) {
 }
 
 // append image icon in html, weatherDataSection
-weatherDataSection.innerHTML += `
-<h1>Väder i Tana: ${weatherAirTemp} c°</h1>
-<img src=img/${weatherIcon}.png alt="Weather Icon" height="100px" width="100px">
+locationTana.innerHTML += `
+<h3>${weatherAirTemp} c°</h3>
+<img src=img/${weatherIcon}.png alt="Weather Icon" height="50px" width="50px">
+`;
+locationLofoten.innerHTML += `
+<h3>${weatherAirTemp} c°</h3>
+<img src=img/${weatherIcon}.png alt="Weather Icon" height="50px" width="50px">
+`;
+locationHallingdalselva.innerHTML += `
+<h3>${weatherAirTemp} c°</h3>
+<img src=img/${weatherIcon}.png alt="Weather Icon" height="50px" width="50px">
 `;
 
