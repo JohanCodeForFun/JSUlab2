@@ -6,6 +6,7 @@
 // 4.
 // 5.
 
+console.log("index.html")
 // 1. Hämta element att jobba med
 const weatherDataSection = document.querySelector("#weatherDataSection");
 const locationTana = document.querySelector('#locationTana');
@@ -35,6 +36,10 @@ async function GetWeatherData() {
       headers: headers
 })).json()}
   ])
+
+  let weatherData = {"tana": [],
+                    "lofoten" : [],
+                    "hallingdalselva": []}
 
   let tanaArrayData = [];
   let LofotenArrayData = [];
@@ -202,6 +207,8 @@ function CheckDateTime() {
   let sortedLofotenWeatherData = JSON.parse(localStorage.getItem('sortedLofotenWeatherData'))
   let sortedHallingdalselvaWeatherData = JSON.parse(localStorage.getItem('sortedHallingdalselvaWeatherData'))
 
+  console.log(sortedHallingdalselvaWeatherData)
+
   // 3 deklarerade väder-iconer
   let tanaWeatherIcon;
   let lofotenWeatherIcon;
@@ -310,6 +317,14 @@ function CheckDateTime() {
         default:
           tanaWeatherIcon = "Missing weather data switch";
       }
+
+      console.log('tanaAirTemp: ' + tanaAirTemp)
+      console.log('lofotenAirTemp: ' + lofotenAirTemp);
+      console.log('hallingdalselvaAirTemp: ' + hallingdalselvaAirTemp);
+
+      console.log('tanaWeatherIcon: ' + tanaWeatherIcon);
+      console.log('lofotenWeatherIcon: ' + lofotenWeatherIcon);
+      console.log('hallingdalselvaIcon: ' + hallingdalselvaIcon);
 
       locationTana.innerHTML = `
       <h3>${tanaAirTemp} c°</h3>

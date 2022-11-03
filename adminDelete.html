@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />    <title>Fiska i Norge</title>
+    <link rel="stylesheet" href="admin.css">
+  </head>
+  <body>
+    <nav>
+      <ul id="navbar-list">
+        <li><a href="index.html">Hem</a></li>
+        <li><a href="adminDelete.html">Ta bort</a></li>
+        <li><a href="adminChange.html">Ändra</a></li>
+        <li><a href="admin.html">Admin (POST)</a></li>
+      </ul>
+    </nav>
+    <section id="form-container">
+      <h2> Fyll i formuläret nedan:</h2>
+      <form>
+        <h3>Skriv in id:et på den du vill ta bort*</h3>
+        <label for="idInput"></label>
+        <input id="idInput" type="text">
+        <input type="button" value="submit" onclick="DeletePost()">
+      </form>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="js/adminDelete.js"></script>
+   </body>
+</html>
