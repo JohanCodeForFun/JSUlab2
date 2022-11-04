@@ -89,10 +89,6 @@ async function GetWeatherData() {
 
   localStorage.setItem('hallingdalselva-updated-weater-report', JSON.stringify({"time": HallingdalselvaUpdatedTime, "date": UpdatedDate3}))
 
-  let tanaWeatherSymbol = [];
-  let lofotenWeatherSymbol = [];
-  let hallingdalselvaWeatherSymbol = [];
-
   for(let i = 0; i < result[0].Tana.properties.timeseries.length; i++) {
     if(result[0].Tana.properties.timeseries[i].data?.next_1_hours !== undefined) {
       weatherData.tana.weatherSymbol.push(result[0].Tana.properties.timeseries[i].data.next_1_hours.summary.symbol_code)
@@ -110,48 +106,29 @@ async function GetWeatherData() {
       weatherData.hallingdalselva.weatherSymbol.push(result[2].Hallingdalselva.properties.timeseries[i].data.next_1_hours.summary.symbol_code)
     }
   }
-
-  localStorage.setItem('tanaWeatherSymbol', JSON.stringify(tanaWeatherSymbol))
-  localStorage.setItem('lofotenWeatherSymbol', JSON.stringify(lofotenWeatherSymbol))
-  localStorage.setItem('hallingdalselvaWeatherSymbol', JSON.stringify(hallingdalselvaWeatherSymbol))
-
   localStorage.setItem('weatherData', JSON.stringify(weatherData));
 }
 
 // Function, denna sorterar datat så vi bara plockar ut det viktigaste datat vi behöver
 function SortWeatherData() {
-  // let tanaWeatherSymbol =  JSON.parse(localStorage.getItem('tanaWeatherSymbol'))
-  // let lofotenWeatherSymbol = JSON.parse(localStorage.getItem('lofotenWeatherSymbol'))
-  // let hallingdalselvaWeatherSymbol = JSON.parse(localStorage.getItem('hallingdalselvaWeatherSymbol'))
-
   let tanaArrayData =  JSON.parse(localStorage.getItem('tanaArrayData'))
   let lofotenArrayData = JSON.parse(localStorage.getItem('LofotenArrayData'))
   let hallingdalselvaArrayData = JSON.parse(localStorage.getItem('HallingdalselvaArrayData'))
 
   let weatherData = JSON.parse(localStorage.getItem('weatherData'));
-  console.log(weatherData)
-  console.log("Above is right")
+  let tana_Date_time_Array = [];
+  let lofoten_Date_time_Array = [];
+  let hallingdalselva_Date_time_Array = [];
 
-  // let tana_Date_time_Array = [];
-  // let lofoten_Date_time_Array = [];
-  // let hallingdalselva_Date_time_Array = [];
-
-  // for (let i = 0; i < weatherData.tana.weatherSymbol.length; i++) {
-  //   tana_Date_time_Array.push(weatherData.tana.weatherSymbol[i]);
-  // }
-
-  // for (let i = 0; i < weatherData.lofoten.weatherSymbol.length; i++) {
-  //   lofoten_Date_time_Array.push(weatherData.lofoten.weatherSymbol[i]);
-  // }
-
-  // for (let i = 0; i < weatherData.hallingdalselva.weatherSymbol.length; i++) {
-  //   hallingdalselva_Date_time_Array.push(weatherData.lofoten.weatherSymbol[i]);
-  // }
-
-  // Här får vi allt väderdata till en array "weatherData", samt för väder-symbol
-  let tanaWeatherData = []
-  let lofotenWeatherData = []
-  let hallingdalselvaWeatherData = []
+  for (let i = 0; i < weatherData.tana.weatherSymbol.length; i++) {
+    tana_Date_time_Array.push(tanaArrayData[i].time);
+  }
+  for (let i = 0; i < weatherData.lofoten.weatherSymbol.length; i++) {
+    lofoten_Date_time_Array.push(lofotenArrayData[i].time);
+  }
+  for (let i = 0; i < weatherData.hallingdalselva.weatherSymbol.length; i++) {
+    hallingdalselva_Date_time_Array.push(hallingdalselvaArrayData[i].time);
+  }
 
   for(let i = 0; i < weatherData.hallingdalselva.weatherSymbol.length; i++) {
     let hallingdalselvaDate = hallingdalselva_Date_time_Array[i].slice(0, 10);
@@ -159,58 +136,42 @@ function SortWeatherData() {
     let hallingdalselvaTimeAgain = hallingdalselva_Date_time_Array[i].lastIndexOf(":")
 
     let hallingdalselvaTimeNow = hallingdalselva_Date_time_Array[i].slice(hallingdalselvaIndexTime + 1, hallingdalselvaTimeAgain);
-
-    let hallingdalselvaWeatherSymbol = JSON.parse(localStorage.getItem('hallingdalselvaWeatherSymbol'))
-
     let hallingdalselvaArrayData = JSON.parse(localStorage.getItem('HallingdalselvaArrayData'))
-
     weatherData.hallingdalselva.data.push({
       "Weather-Details": hallingdalselvaArrayData[i].data.instant.details,
-      "Weather-Symbol": hallingdalselvaWeatherSymbol[i],
+      "Weather-Symbol": weatherData.hallingdalselva.weatherSymbol[i],
       date: hallingdalselvaDate,
       time: hallingdalselvaTimeNow,
     });
   }
 
-  for(let i = 0; i < lofotenWeatherSymbol.length; i++) {
+  for(let i = 0; i < weatherData.lofoten.weatherSymbol.length; i++) {
     let lofotenDate = lofoten_Date_time_Array[i].slice(0, 10);
     let lofotenIndexTime = lofoten_Date_time_Array[i].indexOf("T");
     let lofotenTimeAgain = lofoten_Date_time_Array[i].lastIndexOf(":");
 
     let lofotenTimeNow = lofoten_Date_time_Array[i].slice(lofotenIndexTime + 1, lofotenTimeAgain);
-
-    let lofotenWeatherSymbol = JSON.parse(localStorage.getItem('lofotenWeatherSymbol'))
     let lofotenArrayData = JSON.parse(localStorage.getItem('LofotenArrayData'))
-
     weatherData.lofoten.data.push({
       "Weather-Details": lofotenArrayData[i].data.instant.details,
-      "Weather-Symbol": lofotenWeatherSymbol[i],
+      "Weather-Symbol": weatherData.lofoten.weatherSymbol[i],
       date: lofotenDate,
       time: lofotenTimeNow,
     });
   }
-
-  for (let i = 0; i < tanaWeatherSymbol.length; i++) {
-
+  for (let i = 0; i < weatherData.tana.weatherSymbol.length; i++) {
     let tanaDate = tana_Date_time_Array[i].slice(0, 10);
-
     let tanaIndexTime = tana_Date_time_Array[i].indexOf("T");
     let tanaTimeAgain = tana_Date_time_Array[i].lastIndexOf(":");
     let tanaTimeNow = tana_Date_time_Array[i].slice(tanaIndexTime + 1, tanaTimeAgain);
-
     weatherData.tana.data.push({
       "Weather-Details": tanaArrayData[i].data.instant.details,
-      "Weather-Symbol": tanaWeatherSymbol[i],
+      "Weather-Symbol": weatherData.tana.weatherSymbol[i],
       date: tanaDate,
       time: tanaTimeNow,
     });
   };
-
-  localStorage.setItem('sortedTanaWeatherData', JSON.stringify(tanaWeatherData))
-  localStorage.setItem('sortedLofotenWeatherData', JSON.stringify(lofotenWeatherData))
-  localStorage.setItem('sortedHallingdalselvaWeatherData', JSON.stringify(hallingdalselvaWeatherData))
-
-  console.log(weatherData)
+  localStorage.setItem('weatherData', JSON.stringify(weatherData));
 }
 
 // Function Jämnför den lokala tiden med tiden med väder-arrayn
@@ -218,12 +179,7 @@ function CheckDateTime() {
   let dateToday = new Date().toLocaleDateString();
   let timeToday = new Date().toLocaleTimeString();
 
-  let sortedTanaWeatherData = JSON.parse(localStorage.getItem('sortedTanaWeatherData'))
-  let sortedLofotenWeatherData = JSON.parse(localStorage.getItem('sortedLofotenWeatherData'))
-  let sortedHallingdalselvaWeatherData = JSON.parse(localStorage.getItem('sortedHallingdalselvaWeatherData'))
-
-  console.log(sortedHallingdalselvaWeatherData)
-
+  let weatherData = JSON.parse(localStorage.getItem('weatherData'))
   // 3 deklarerade väder-iconer
   let tanaWeatherIcon;
   let lofotenWeatherIcon;
@@ -232,31 +188,28 @@ function CheckDateTime() {
   /*
     Här så får vi se om det skiljer sig mellan 3 områdenas timmar på arrayn annars går det bra att köra på en length här bara. För alla kommer då vara samma
   */
-  for (let i = 0; i < sortedTanaWeatherData.length; i++) {
-    let ArrayindexTime = sortedTanaWeatherData[i].time.indexOf(":");
-    let ArraytimeNow = sortedTanaWeatherData[i].time.slice(0, ArrayindexTime);
+  for (let i = 0; i < weatherData.tana.weatherSymbol.length; i++) {
+    let ArrayindexTime = weatherData.tana.data[i].time.indexOf(":");
+    let ArraytimeNow = weatherData.tana.data[i].time.slice(0, ArrayindexTime);
 
     let currentTimeIndex = timeToday.indexOf(":");
     let currentTime = timeToday.slice(0, currentTimeIndex);
 
     // Här kollar vi tiden på arrayn och den lokala tiden och datum. Om detta är sant så då vet vi vilken array-index vi ska köra!
-    if (ArraytimeNow === currentTime && sortedTanaWeatherData[i].date === dateToday) {
+    if (ArraytimeNow === currentTime && weatherData.tana.data[i].date === dateToday) {
+
+      console.log(weatherData.tana.data[i])
+      console.log(weatherData.lofoten.data[i])
+      console.log(weatherData.hallingdalselva.data[i]);
       // Denna är i realtid, vi får ut vädret just för denna timme!
-      let tanaAirTemp = sortedTanaWeatherData[i]["Weather-Details"].air_temperature
-      let tanaWeatherSymbol = sortedTanaWeatherData[i]["Weather-Symbol"]
 
-      let lofotenAirTemp = sortedLofotenWeatherData[i]["Weather-Details"].air_temperature
-      let lofotenWeatherSymbol = sortedLofotenWeatherData[i]["Weather-Symbol"]
+      localStorage.setItem('hallingdalselvaAirTemp', weatherData.hallingdalselva.data[i]["Weather-Details"].air_temperature)
 
-      let hallingdalselvaAirTemp = sortedHallingdalselvaWeatherData[i]["Weather-Details"].air_temperature
+      localStorage.setItem('lofotenAirTemp', weatherData.lofoten.data[i]["Weather-Details"].air_temperature)
 
-      let hallingdalselvaWeatherSymbol = sortedHallingdalselvaWeatherData[i]["Weather-Symbol"]
+      localStorage.setItem('tanaAirTemp', weatherData.tana.data[i]["Weather-Details"].air_temperature)
 
-      localStorage.setItem('hallingdalselvaAirTemp', hallingdalselvaAirTemp)
-      localStorage.setItem('lofotenAirTemp', lofotenAirTemp)
-      localStorage.setItem('tanaAirTemp', tanaAirTemp)
-
-      switch (hallingdalselvaWeatherSymbol) {
+      switch (weatherData.hallingdalselva.data[i]["Weather-Symbol"]) {
         case "partlycloudy_night":
           hallingdalselvaIcon = "partlycloudy_night";
           break;
@@ -279,9 +232,10 @@ function CheckDateTime() {
           hallingdalselvaIcon = "fog";
           break;
         default:
-          hallingdalselvaIcon = "Missing weather data switch";
+            hallingdalselvaIcon = "Missing weather data switch";
       }
-      switch (lofotenWeatherSymbol) {
+
+      switch (weatherData.lofoten.data[i]["Weather-Symbol"]) {
         case "partlycloudy_night":
           lofotenWeatherIcon = "partlycloudy_night";
           break;
@@ -307,7 +261,7 @@ function CheckDateTime() {
           lofotenWeatherIcon = "Missing weather data switch";
       }
 
-      switch (tanaWeatherSymbol) {
+      switch (weatherData.tana.data[i]["Weather-Symbol"]) {
         case "partlycloudy_night":
           tanaWeatherIcon = "partlycloudy_night";
           break;
@@ -333,29 +287,20 @@ function CheckDateTime() {
           tanaWeatherIcon = "Missing weather data switch";
       }
 
-      console.log('tanaAirTemp: ' + tanaAirTemp)
-      console.log('lofotenAirTemp: ' + lofotenAirTemp);
-      console.log('hallingdalselvaAirTemp: ' + hallingdalselvaAirTemp);
-
-      console.log('tanaWeatherIcon: ' + tanaWeatherIcon);
-      console.log('lofotenWeatherIcon: ' + lofotenWeatherIcon);
-      console.log('hallingdalselvaIcon: ' + hallingdalselvaIcon);
-
       locationTana.innerHTML = `
-      <h3>${tanaAirTemp} c°</h3>
+      <h3>${weatherData.tana.data[i]["Weather-Details"].air_temperature} c°</h3>
       <img src=img/${tanaWeatherIcon}.png alt="Weather Icon" height="50px" width="50px">
       `;
 
       locationLofoten.innerHTML = `
-      <h3>${lofotenAirTemp} c°</h3>
+      <h3>${weatherData.lofoten.data[i]["Weather-Details"].air_temperature} c°</h3>
       <img src=img/${lofotenWeatherIcon}.png alt="Weather Icon" height="50px" width="50px">
       `;
 
       locationHallingdalselva.innerHTML = `
-      <h3>${hallingdalselvaAirTemp} c°</h3>
+      <h3>${weatherData.hallingdalselva.data[i]["Weather-Details"].air_temperature} c°</h3>
       <img src=img/${hallingdalselvaIcon}.png alt="Weather Icon" height="50px" width="50px">
       `;
-
       localStorage.setItem('lofotenWeatherIcon', lofotenWeatherIcon)
       localStorage.setItem('tanaWeatherIcon', tanaWeatherIcon)
       localStorage.setItem('hallingdalselvaIcon', hallingdalselvaIcon)
@@ -377,28 +322,27 @@ function IntervalLoop() {
       }, 7000) //  900000 milisecounds, 15min interval update
  }
  // Anropar intervalen med data-inhämtning i detta fall varje 5 sekunder, men denna ska vara kanske var 10 min. Men har kvar detta för att ni kan se att detta funkar också
- IntervalLoop()
- let tanaAirTemp = localStorage.getItem('tanaAirTemp')
- let tanaWeatherIcon = localStorage.getItem('tanaWeatherIcon');
+IntervalLoop()
 
- let lofotenAirTemp = localStorage.getItem('lofotenAirTemp')
- let lofotenWeatherIcon = localStorage.getItem('lofotenWeatherIcon')
+let tanaAirTemp = localStorage.getItem('tanaAirTemp')
+let tanaWeatherIcon = localStorage.getItem('tanaWeatherIcon');
 
- let hallingdalselvaAirTemp = localStorage.getItem('hallingdalselvaAirTemp')
- let hallingdalselvaIcon = localStorage.getItem('hallingdalselvaIcon')
+let lofotenAirTemp = localStorage.getItem('lofotenAirTemp')
+let lofotenWeatherIcon = localStorage.getItem('lofotenWeatherIcon')
 
- //append image icon in html, weatherDataSection
-  locationTana.innerHTML = `
-    <h3>${tanaAirTemp} c°</h3>
-    <img src=img/${tanaWeatherIcon}.png alt="Weather Icon" height="50px" width="50px">
-  `;
+let hallingdalselvaAirTemp = localStorage.getItem('hallingdalselvaAirTemp')
+let hallingdalselvaIcon = localStorage.getItem('hallingdalselvaIcon')
 
-  locationLofoten.innerHTML = `
-      <h3>${lofotenAirTemp} c°</h3>
-      <img src=img/${lofotenWeatherIcon}.png alt="Weather Icon" height="50px" width="50px">
-  `;
-
-  locationHallingdalselva.innerHTML = `
-    <h3>${hallingdalselvaAirTemp} c°</h3>
-    <img src=img/${hallingdalselvaIcon}.png alt="Weather Icon" height="50px" width="50px">
-  `;
+//append image icon in html, weatherDataSection
+locationTana.innerHTML = `
+  <h3>${tanaAirTemp} c°</h3>
+  <img src=img/${tanaWeatherIcon}.png alt="Weather Icon" height="50px" width="50px">
+`;
+locationLofoten.innerHTML = `
+    <h3>${lofotenAirTemp} c°</h3>
+    <img src=img/${lofotenWeatherIcon}.png alt="Weather Icon" height="50px" width="50px">
+`;
+locationHallingdalselva.innerHTML = `
+  <h3>${hallingdalselvaAirTemp} c°</h3>
+  <img src=img/${hallingdalselvaIcon}.png alt="Weather Icon" height="50px" width="50px">
+`;
