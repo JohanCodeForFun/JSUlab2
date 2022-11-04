@@ -37,9 +37,7 @@ async function GetWeatherData() {
 })).json()}
   ])
 
-  let weatherData = {"tana": [],
-                    "lofoten" : [],
-                    "hallingdalselva": []}
+  let weatherData = {"tana": {weatherSymbol: [], data: [], updatedWeatherReport: {}}, "lofoten" : {weatherSymbol: [], data: [], updatedWeatherReport: {}}, "hallingdalselva": {weatherSymbol: [], data: [], updatedWeatherReport: {}}}
 
   let tanaArrayData = [];
   let LofotenArrayData = [];
@@ -66,6 +64,9 @@ async function GetWeatherData() {
 
   let TanaUpdatedTime = result[0].Tana.properties.meta.updated_at.slice(currentTimeIndex - 2, currentTimeIndex + 3)
 
+  weatherData.tana.updatedWeatherReport.time = TanaUpdatedTime;
+  weatherData.tana.updatedWeatherReport.date = UpdatedDate
+
   localStorage.setItem('tana-updated-weater-report', JSON.stringify({"time": TanaUpdatedTime, "date": UpdatedDate}))
 
   let UpdatedDate2 = result[1]["Lofoten "].properties.meta.updated_at.slice(0,10)
@@ -73,12 +74,18 @@ async function GetWeatherData() {
 
   let LofotenUpdatedTime = result[1]["Lofoten "].properties.meta.updated_at.slice(currentTimeIndex2 - 2, currentTimeIndex2 + 3)
 
+  weatherData.lofoten.updatedWeatherReport.time = LofotenUpdatedTime;
+  weatherData.lofoten.updatedWeatherReport.date = UpdatedDate2;
+
   localStorage.setItem('lofoten-updated-weater-report', JSON.stringify({"time": LofotenUpdatedTime, "date": UpdatedDate2}))
 
   let UpdatedDate3 = result[2].Hallingdalselva.properties.meta.updated_at.slice(0,10)
   let currentTimeIndex3 = result[2].Hallingdalselva.properties.meta.updated_at.indexOf(':')
 
   let HallingdalselvaUpdatedTime = result[2].Hallingdalselva.properties.meta.updated_at.slice(currentTimeIndex3 - 2, currentTimeIndex3 + 3)
+
+  weatherData.hallingdalselva.updatedWeatherReport.time = HallingdalselvaUpdatedTime
+  weatherData.hallingdalselva.updatedWeatherReport.date = UpdatedDate3
 
   localStorage.setItem('hallingdalselva-updated-weater-report', JSON.stringify({"time": HallingdalselvaUpdatedTime, "date": UpdatedDate3}))
 
@@ -88,59 +95,65 @@ async function GetWeatherData() {
 
   for(let i = 0; i < result[0].Tana.properties.timeseries.length; i++) {
     if(result[0].Tana.properties.timeseries[i].data?.next_1_hours !== undefined) {
-      tanaWeatherSymbol.push(result[0].Tana.properties.timeseries[i].data.next_1_hours.summary.symbol_code)
+      weatherData.tana.weatherSymbol.push(result[0].Tana.properties.timeseries[i].data.next_1_hours.summary.symbol_code)
     }
   }
 
   for(let i = 0; i < result[1]["Lofoten "].properties.timeseries.length; i++) {
     if(result[1]["Lofoten "].properties.timeseries[i].data?.next_1_hours !== undefined) {
-      lofotenWeatherSymbol.push(result[1]["Lofoten "].properties.timeseries[i].data.next_1_hours.summary.symbol_code)
+      weatherData.lofoten.weatherSymbol.push(result[1]["Lofoten "].properties.timeseries[i].data.next_1_hours.summary.symbol_code)
     }
   }
 
   for(let i = 0; i < result[2].Hallingdalselva.properties.timeseries.length; i++) {
     if(result[2].Hallingdalselva.properties.timeseries[i].data?.next_1_hours !== undefined) {
-      hallingdalselvaWeatherSymbol.push(result[2].Hallingdalselva.properties.timeseries[i].data.next_1_hours.summary.symbol_code)
+      weatherData.hallingdalselva.weatherSymbol.push(result[2].Hallingdalselva.properties.timeseries[i].data.next_1_hours.summary.symbol_code)
     }
   }
 
   localStorage.setItem('tanaWeatherSymbol', JSON.stringify(tanaWeatherSymbol))
   localStorage.setItem('lofotenWeatherSymbol', JSON.stringify(lofotenWeatherSymbol))
   localStorage.setItem('hallingdalselvaWeatherSymbol', JSON.stringify(hallingdalselvaWeatherSymbol))
+
+  localStorage.setItem('weatherData', JSON.stringify(weatherData));
 }
 
 // Function, denna sorterar datat så vi bara plockar ut det viktigaste datat vi behöver
 function SortWeatherData() {
-  let tanaWeatherSymbol =  JSON.parse(localStorage.getItem('tanaWeatherSymbol'))
-  let lofotenWeatherSymbol = JSON.parse(localStorage.getItem('lofotenWeatherSymbol'))
-  let hallingdalselvaWeatherSymbol = JSON.parse(localStorage.getItem('hallingdalselvaWeatherSymbol'))
+  // let tanaWeatherSymbol =  JSON.parse(localStorage.getItem('tanaWeatherSymbol'))
+  // let lofotenWeatherSymbol = JSON.parse(localStorage.getItem('lofotenWeatherSymbol'))
+  // let hallingdalselvaWeatherSymbol = JSON.parse(localStorage.getItem('hallingdalselvaWeatherSymbol'))
 
   let tanaArrayData =  JSON.parse(localStorage.getItem('tanaArrayData'))
   let lofotenArrayData = JSON.parse(localStorage.getItem('LofotenArrayData'))
   let hallingdalselvaArrayData = JSON.parse(localStorage.getItem('HallingdalselvaArrayData'))
 
-  let tana_Date_time_Array = [];
-  let lofoten_Date_time_Array = [];
-  let hallingdalselva_Date_time_Array = [];
+  let weatherData = JSON.parse(localStorage.getItem('weatherData'));
+  console.log(weatherData)
+  console.log("Above is right")
 
-  for (let i = 0; i < tanaWeatherSymbol.length; i++) {
-    tana_Date_time_Array.push(tanaArrayData[i].time);
-  }
+  // let tana_Date_time_Array = [];
+  // let lofoten_Date_time_Array = [];
+  // let hallingdalselva_Date_time_Array = [];
 
-  for (let i = 0; i < lofotenWeatherSymbol.length; i++) {
-    lofoten_Date_time_Array.push(lofotenArrayData[i].time);
-  }
+  // for (let i = 0; i < weatherData.tana.weatherSymbol.length; i++) {
+  //   tana_Date_time_Array.push(weatherData.tana.weatherSymbol[i]);
+  // }
 
-  for (let i = 0; i < hallingdalselvaWeatherSymbol.length; i++) {
-    hallingdalselva_Date_time_Array.push(hallingdalselvaArrayData[i].time);
-  }
+  // for (let i = 0; i < weatherData.lofoten.weatherSymbol.length; i++) {
+  //   lofoten_Date_time_Array.push(weatherData.lofoten.weatherSymbol[i]);
+  // }
+
+  // for (let i = 0; i < weatherData.hallingdalselva.weatherSymbol.length; i++) {
+  //   hallingdalselva_Date_time_Array.push(weatherData.lofoten.weatherSymbol[i]);
+  // }
 
   // Här får vi allt väderdata till en array "weatherData", samt för väder-symbol
   let tanaWeatherData = []
   let lofotenWeatherData = []
   let hallingdalselvaWeatherData = []
 
-  for(let i = 0; i < hallingdalselvaWeatherSymbol.length; i++) {
+  for(let i = 0; i < weatherData.hallingdalselva.weatherSymbol.length; i++) {
     let hallingdalselvaDate = hallingdalselva_Date_time_Array[i].slice(0, 10);
     let hallingdalselvaIndexTime = hallingdalselva_Date_time_Array[i].indexOf("T");
     let hallingdalselvaTimeAgain = hallingdalselva_Date_time_Array[i].lastIndexOf(":")
@@ -151,7 +164,7 @@ function SortWeatherData() {
 
     let hallingdalselvaArrayData = JSON.parse(localStorage.getItem('HallingdalselvaArrayData'))
 
-    hallingdalselvaWeatherData.push({
+    weatherData.hallingdalselva.data.push({
       "Weather-Details": hallingdalselvaArrayData[i].data.instant.details,
       "Weather-Symbol": hallingdalselvaWeatherSymbol[i],
       date: hallingdalselvaDate,
@@ -169,7 +182,7 @@ function SortWeatherData() {
     let lofotenWeatherSymbol = JSON.parse(localStorage.getItem('lofotenWeatherSymbol'))
     let lofotenArrayData = JSON.parse(localStorage.getItem('LofotenArrayData'))
 
-    lofotenWeatherData.push({
+    weatherData.lofoten.data.push({
       "Weather-Details": lofotenArrayData[i].data.instant.details,
       "Weather-Symbol": lofotenWeatherSymbol[i],
       date: lofotenDate,
@@ -185,7 +198,7 @@ function SortWeatherData() {
     let tanaTimeAgain = tana_Date_time_Array[i].lastIndexOf(":");
     let tanaTimeNow = tana_Date_time_Array[i].slice(tanaIndexTime + 1, tanaTimeAgain);
 
-    tanaWeatherData.push({
+    weatherData.tana.data.push({
       "Weather-Details": tanaArrayData[i].data.instant.details,
       "Weather-Symbol": tanaWeatherSymbol[i],
       date: tanaDate,
@@ -196,6 +209,8 @@ function SortWeatherData() {
   localStorage.setItem('sortedTanaWeatherData', JSON.stringify(tanaWeatherData))
   localStorage.setItem('sortedLofotenWeatherData', JSON.stringify(lofotenWeatherData))
   localStorage.setItem('sortedHallingdalselvaWeatherData', JSON.stringify(hallingdalselvaWeatherData))
+
+  console.log(weatherData)
 }
 
 // Function Jämnför den lokala tiden med tiden med väder-arrayn
