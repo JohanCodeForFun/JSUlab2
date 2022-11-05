@@ -14,6 +14,11 @@ const locationLofoten = document.querySelector('#locationLofoten');
 const locationHallingdalselva = document.querySelector('#locationHallingdalselva');
 const imageIconElement = document.querySelector("#weatherImage");
 
+// Admin Elements
+let fishDescriptionElement = document.querySelector('#fishDescription')
+let adminImageElement = document.querySelector('#admin-image')
+let userDescriptionElement = document.querySelector('#userDescription')
+
 // 2. Hämta väderdata funktioner
 // Header för att identifiera oss mot weather api, yr.no
 let headers = new Headers({
@@ -35,7 +40,7 @@ async function GetWeatherData() {
       method: 'GET',
       headers: headers
 })).json()}
-  ])
+])
 
   let weatherData = {"tana": {weatherSymbol: [], data: [], updatedWeatherReport: {}}, "lofoten" : {weatherSymbol: [], data: [], updatedWeatherReport: {}}, "hallingdalselva": {weatherSymbol: [], data: [], updatedWeatherReport: {}}}
 
@@ -197,10 +202,6 @@ function CheckDateTime() {
 
     // Här kollar vi tiden på arrayn och den lokala tiden och datum. Om detta är sant så då vet vi vilken array-index vi ska köra!
     if (ArraytimeNow === currentTime && weatherData.tana.data[i].date === dateToday) {
-
-      console.log(weatherData.tana.data[i])
-      console.log(weatherData.lofoten.data[i])
-      console.log(weatherData.hallingdalselva.data[i]);
       // Denna är i realtid, vi får ut vädret just för denna timme!
 
       localStorage.setItem('hallingdalselvaAirTemp', weatherData.hallingdalselva.data[i]["Weather-Details"].air_temperature)
@@ -301,9 +302,9 @@ function CheckDateTime() {
       <h3>${weatherData.hallingdalselva.data[i]["Weather-Details"].air_temperature} c°</h3>
       <img src=img/${hallingdalselvaIcon}.png alt="Weather Icon" height="50px" width="50px">
       `;
-      localStorage.setItem('lofotenWeatherIcon', lofotenWeatherIcon)
-      localStorage.setItem('tanaWeatherIcon', tanaWeatherIcon)
-      localStorage.setItem('hallingdalselvaIcon', hallingdalselvaIcon)
+      sessionStorage.setItem('lofotenWeatherIcon', lofotenWeatherIcon)
+      sessionStorage.setItem('tanaWeatherIcon', tanaWeatherIcon)
+      sessionStorage.setItem('hallingdalselvaIcon', hallingdalselvaIcon)
       break;
     }
   }
@@ -322,7 +323,28 @@ function IntervalLoop() {
       }, 7000) //  900000 milisecounds, 15min interval update
  }
  // Anropar intervalen med data-inhämtning i detta fall varje 5 sekunder, men denna ska vara kanske var 10 min. Men har kvar detta för att ni kan se att detta funkar också
-IntervalLoop()
+
+//  CheckDateTime()
+GetWeatherData()      // Får all väder-data
+
+/*
+  let userDescriptionElement = document.querySelector('#userDescription')
+  let adminImageElement = document.querySelector('#admin-image')
+*/
+
+axios.get('http://localhost:3000/adminUpload').then(result => {
+  fishDescriptionElement.innerHTML += `
+    ${result.data[0].name} är en av våra många glada besökare,
+    här har fångats ${result.data[0].fishType}, med en vikt på hela ${result.data[0].fishWeight}
+  `
+  adminImageElement.setAttribute('src', `${result.data[0].image}`)
+  userDescriptionElement.innerHTML += `"${result.data[0].textDescription}"`
+
+})
+
+ IntervalLoop()
+
+ let weatherData = JSON.parse(localStorage.getItem('weatherData'))
 
 let tanaAirTemp = localStorage.getItem('tanaAirTemp')
 let tanaWeatherIcon = localStorage.getItem('tanaWeatherIcon');
