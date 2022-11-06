@@ -203,13 +203,6 @@ function CheckDateTime() {
     // Här kollar vi tiden på arrayn och den lokala tiden och datum. Om detta är sant så då vet vi vilken array-index vi ska köra!
     if (ArraytimeNow === currentTime && weatherData.tana.data[i].date === dateToday) {
       // Denna är i realtid, vi får ut vädret just för denna timme!
-
-      localStorage.setItem('hallingdalselvaAirTemp', weatherData.hallingdalselva.data[i]["Weather-Details"].air_temperature)
-
-      localStorage.setItem('lofotenAirTemp', weatherData.lofoten.data[i]["Weather-Details"].air_temperature)
-
-      localStorage.setItem('tanaAirTemp', weatherData.tana.data[i]["Weather-Details"].air_temperature)
-
       switch (weatherData.hallingdalselva.data[i]["Weather-Symbol"]) {
         case "partlycloudy_night":
           hallingdalselvaIcon = "partlycloudy_night";
@@ -235,7 +228,6 @@ function CheckDateTime() {
         default:
             hallingdalselvaIcon = "Missing weather data switch";
       }
-
       switch (weatherData.lofoten.data[i]["Weather-Symbol"]) {
         case "partlycloudy_night":
           lofotenWeatherIcon = "partlycloudy_night";
@@ -261,7 +253,6 @@ function CheckDateTime() {
         default:
           lofotenWeatherIcon = "Missing weather data switch";
       }
-
       switch (weatherData.tana.data[i]["Weather-Symbol"]) {
         case "partlycloudy_night":
           tanaWeatherIcon = "partlycloudy_night";
@@ -287,7 +278,6 @@ function CheckDateTime() {
         default:
           tanaWeatherIcon = "Missing weather data switch";
       }
-
       locationTana.innerHTML = `
       <h3>${weatherData.tana.data[i]["Weather-Details"].air_temperature} c°</h3>
       <img src=img/${tanaWeatherIcon}.png alt="Weather Icon" height="50px" width="50px">
@@ -302,20 +292,14 @@ function CheckDateTime() {
       <h3>${weatherData.hallingdalselva.data[i]["Weather-Details"].air_temperature} c°</h3>
       <img src=img/${hallingdalselvaIcon}.png alt="Weather Icon" height="50px" width="50px">
       `;
-      sessionStorage.setItem('lofotenWeatherIcon', lofotenWeatherIcon)
-      sessionStorage.setItem('tanaWeatherIcon', tanaWeatherIcon)
-      sessionStorage.setItem('hallingdalselvaIcon', hallingdalselvaIcon)
       break;
     }
   }
 }
-
 /*
   Denna funktion, hämtar all väderData på ett interval exempelvis varje 5 sekunder hämta api datat. Sorterar väder-datat. Funktionen "CheckDateTime" den kollar vilken den lokala tiden är alltså vad är klockan nu? jämförelse vad det är för tid på datat vi får på vädret. Om klockan är 12:34 och i vårat objekt har vi tiden 12:00 och vädret för denna tidslag. Så kommer detta objekt att sättas och displays "realtid" för varje timme, vad det är för väder just för denna timme.
 */
-
 function IntervalLoop() {
-
       setInterval(() => {
         GetWeatherData()      // Får all väder-data
         SortWeatherData()     // Sorterar all väder-data
@@ -324,14 +308,7 @@ function IntervalLoop() {
  }
  // Anropar intervalen med data-inhämtning i detta fall varje 5 sekunder, men denna ska vara kanske var 10 min. Men har kvar detta för att ni kan se att detta funkar också
 
-//  CheckDateTime()
-GetWeatherData()      // Får all väder-data
-
-/*
-  let userDescriptionElement = document.querySelector('#userDescription')
-  let adminImageElement = document.querySelector('#admin-image')
-*/
-
+// Display admin-uploads to home-page
 axios.get('http://localhost:3000/adminUpload').then(result => {
   fishDescriptionElement.innerHTML += `
     ${result.data[0].name} är en av våra många glada besökare,
@@ -342,29 +319,8 @@ axios.get('http://localhost:3000/adminUpload').then(result => {
 
 })
 
- IntervalLoop()
+IntervalLoop() // This function is asyncroumus
 
- let weatherData = JSON.parse(localStorage.getItem('weatherData'))
-
-let tanaAirTemp = localStorage.getItem('tanaAirTemp')
-let tanaWeatherIcon = localStorage.getItem('tanaWeatherIcon');
-
-let lofotenAirTemp = localStorage.getItem('lofotenAirTemp')
-let lofotenWeatherIcon = localStorage.getItem('lofotenWeatherIcon')
-
-let hallingdalselvaAirTemp = localStorage.getItem('hallingdalselvaAirTemp')
-let hallingdalselvaIcon = localStorage.getItem('hallingdalselvaIcon')
-
-//append image icon in html, weatherDataSection
-locationTana.innerHTML = `
-  <h3>${tanaAirTemp} c°</h3>
-  <img src=img/${tanaWeatherIcon}.png alt="Weather Icon" height="50px" width="50px">
-`;
-locationLofoten.innerHTML = `
-    <h3>${lofotenAirTemp} c°</h3>
-    <img src=img/${lofotenWeatherIcon}.png alt="Weather Icon" height="50px" width="50px">
-`;
-locationHallingdalselva.innerHTML = `
-  <h3>${hallingdalselvaAirTemp} c°</h3>
-  <img src=img/${hallingdalselvaIcon}.png alt="Weather Icon" height="50px" width="50px">
-`;
+GetWeatherData()      // Får all väder-data
+SortWeatherData()     // Sorterar all väder-data
+CheckDateTime()       // Kollar vilket specifikt väder-objekt vi ska ta
