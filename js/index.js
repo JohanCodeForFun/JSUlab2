@@ -2,7 +2,6 @@
 // 1. Hämta element att jobba med
 // 2. Hämta väderdata funktioner
 // 3. Visa väderdata
-// 3.
 // 4.
 // 5.
 
@@ -112,7 +111,7 @@ function CheckDateTime() {
   let dateToday = new Date().toLocaleDateString();
   let timeToday = new Date().toLocaleTimeString();
 
-  // Hej incomming change! 
+  // Hej incomming change!
   let weatherDataFinal = JSON.parse(localStorage.getItem('weatherDataFinal'))
   let locationKeys = JSON.parse(localStorage.getItem('locationKeys'))
   // 3 deklarerade väder-iconer
