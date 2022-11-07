@@ -246,9 +246,10 @@ nav #navbar-list {
 
 footer {
   background-color: #733B36;
+  padding: 1rem;
   color: white;
-  height: 4rem;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
