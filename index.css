@@ -4,7 +4,8 @@
   3. Navbar
   4. Hero-section
   5. Content
-  5. Footer
+  6. Fishing spots css
+  7. Footer
 */
 
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600;700;800&family=Roboto:wght@100;300;400;500;700;900&family=Silkscreen:wght@700&display=swap");
@@ -16,6 +17,10 @@
   box-sizing: border-box;
   /* font-family: Roboto Slab; */
   overflow-x: hidden;
+}
+
+body {
+  background-color: #FFE9DC;
 }
 
 /*3. Navbar*/
@@ -202,4 +207,48 @@ nav #navbar-list {
   font-size: 1.5rem;
   color: white;
   padding: 3vh 3vw;
+}
+
+
+
+/* Fishing spots */
+#hero-fishingspots {
+  background-color: #FFE9DC;
+  color: black;
+  background-image: url('img/fishing-spots/hero-lofoten.png');
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  height: 30vh;
+}
+
+#hero-fishing-container {
+  margin: .5rem .5rem;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  gap: .5rem;
+}
+
+#hero-fishingspots #fishing-header {
+  flex: 1;
+}
+
+#hero-fishingspots img {
+  height: 30px;
+  width: 30px;
+}
+
+#description-fishingspots p {
+  margin-bottom: 1rem;
+}
+
+
+footer {
+  background-color: #733B36;
+  color: white;
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
