@@ -12,18 +12,17 @@
   </head>
   <link rel="stylesheet" href="index.css" />
   <body>
-    <nav>
-      <ul id="navbar-list">
-        <li>Hem</li>
-        <li>Fiskeplatser</li>
-        <li>Kontakt</li>
-        <li><a href="admin.html">Admin</a></li>
-      </ul>
-    </nav>
     <section id="hero-section">
       <h1>Fiska i Norge</h1>
-      <h2>Hitta drömfisket</h2>
-      <h2>Till bästa priset</h2>
+
+      <div class="white">
+        <h3>Välj vart du vill resa</h3>
+        <input type="text" placeholder="Lofoten" />
+        <p>Start stad</p>
+        <input type="text" placeholder="Stockholm" />
+        <button>Räkna på priset</button>
+      </div>
+      
     </section>
     <section id="content">
       <div class="image-container">
@@ -66,5 +65,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="js/index.js"></script>
+    <footer>
+      <p>footer</p>
+    </footer>
   </body>
 </html>
