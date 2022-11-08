@@ -38,7 +38,7 @@ async function GetAllWeatherData() {
       method: 'GET',
       headers: headers
 })).json()},
-    {"Lofoten " : await (await fetch('https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=68.04534&lon=13.38235', {
+    {"Lofoten" : await (await fetch('https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=68.04534&lon=13.38235', {
       method: 'GET',
       headers: headers
 })).json()},
@@ -55,22 +55,27 @@ async function GetAllWeatherData() {
     if(result[i].hasOwnProperty(result[i]) !== undefined) {
       locationKeyInput.push(Object.keys(result[i]))
     }
+    console.log(locationKeyInput);
   }
 
   // Object.keys-funktion will return a array and locationKey is a array too
   // locationKeyInput är redan en array och Object.keys returnar också en array därför i detta fall använder jag mig av funktionen-flat som gör dessa till värden istället för arrays
   let locationKey = locationKeyInput.flat()
+  console.log(locationKey);
 
   // Pushar in objekt till arrayn weatherData, så många som det finns location
   let weatherData = [];
   for(let i = 0; i < result.length; i++) {
     weatherData.push({[locationKey[i]]: {data: [], updatedWeatherReport: {}}})
   }
+  // console.log(weatherData);
 
   // Genom denna loop får vi det uppdaterade-väder-raporten för just det specifika location
   for(let i = 0; i < result.length; i++) {
     let updatedDate = result[i][locationKey[i]].properties.meta.updated_at.slice(0,10)
+    // console.log(updatedDate);
     let currenTimeIndex = result[i][locationKey[i]].properties.meta.updated_at.indexOf(':')
+    // console.log(currenTimeIndex);
 
     updatedTimeFinal = result[i][locationKey[i]].properties.meta.updated_at.slice(currenTimeIndex - 2, currenTimeIndex + 3)
 
@@ -120,6 +125,9 @@ function CheckDateTime() {
 
   // Här så splitar jag varje tid på weatherData-arrayn och jämför om det är rätt datum och tid
   for(let i = 0; i < weatherDataFinal.length; i++) {
+    console.log(weatherDataFinal);
+    console.log(weatherDataFinal[0]);
+    console.log(weatherDataFinal[0][locationKeys[0]])
     for(let j = 0; j < weatherDataFinal[i][locationKeys[i]].data.length; j++) {
 
       let ArrayindexTime = weatherDataFinal[i][locationKeys[i]].data[j].time.indexOf(":");
