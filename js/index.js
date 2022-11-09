@@ -1,13 +1,14 @@
 // Description
-// 1. Hämta element att jobba med
-// 2. Hämta väderdata funktioner
-// 3. Visa väderdata
-// 3.
+// 1. Funktioner för att visa graf med Chart.js
+// 2. Hämta element att jobba med
+// 3. Hämta väderdata funktioner
+// 4. Visa väderdata
 // 4.
 // 5.
 
-console.log("index.html")
-// 1. Hämta element att jobba med
+
+
+// 2. Hämta element att jobba med
 const weatherDataSection = document.querySelector("#weatherDataSection");
 
 // Här skulle man istället ha appendat till en tom-div för att få detta ännu mer dynamiskt om det exempelvis skulle vara 20 location eller 100 locations.
@@ -26,7 +27,27 @@ let fishDescriptionElement = document.querySelector('#fishDescription')
 let adminImageElement = document.querySelector('#admin-image')
 let userDescriptionElement = document.querySelector('#userDescription')
 
-// 2. Hämta väderdata funktioner
+let destinationElement = document.querySelector('#destination')
+let startpointElement = document.querySelector('#startpunkt')
+let vechileElement = document.querySelectorAll('input[type="radio"]')
+
+
+// 2. Hämta data från user till annan sida
+function CounterPrice() {
+  console.log(destinationElement.value);
+  console.log(startpointElement.value);
+  for(let i = 0; i < vechileElement.length; i++) {
+    let isChecked = vechileElement[i].checked
+    if(isChecked === true) {
+      window.location.href = `http://127.0.0.1:5501/fiskeplatser.html?destination=${destinationElement.value}&startpoint=${startpointElement.value}&vechile=${vechileElement[i].value}`
+    }
+  }
+}
+
+
+
+
+// 3. Hämta väderdata funktioner
 // Header för att identifiera oss mot weather api, yr.no
 let headers = new Headers({
   "User-Agent": "jhellberg.com johan@jhellberg.com",
@@ -117,7 +138,6 @@ function CheckDateTime() {
   let dateToday = new Date().toLocaleDateString();
   let timeToday = new Date().toLocaleTimeString();
 
-  // Hej incomming change! 
   let weatherDataFinal = JSON.parse(localStorage.getItem('weatherDataFinal'))
   let locationKeys = JSON.parse(localStorage.getItem('locationKeys'))
   // 3 deklarerade väder-iconer
@@ -238,7 +258,7 @@ function IntervalLoop() {
   setInterval(() => {
     GetAllWeatherData()
     CheckDateTime()
-    }, 7000) //  900000 milisecounds, 15min interval update
+    }, 900000) //  900000 milisecounds, 15min interval update
 }
 GetAllWeatherData()   // Hämtar all väder-data och sorterar allting
 CheckDateTime()       // Kollar vilket specifikt väder-objekt vi ska ta
