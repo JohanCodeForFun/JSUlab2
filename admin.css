@@ -1,0 +1,62 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600;700;800&family=Roboto:wght@100;300;400;500;700;900&family=Silkscreen:wght@700&display=swap");
+
+/* 1. Root-element-settings */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  /* font-family: Roboto Slab; */
+  overflow-x: hidden;
+}
+
+body, html {
+  /* background-color: black; */
+}
+
+/*3. Navbar*/
+nav {
+  display: flex;
+}
+nav #navbar-list {
+  cursor: pointer;
+  display: flex;
+  font-size: 1.4rem;
+  font-weight: 600;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 10vh;
+  background-color: rgb(0, 123, 0);
+  list-style: none;
+  color: white;
+}
+
+#adminForm {
+  display: flex;
+  flex-direction: column;
+}
+
+#form-container {
+  margin-top: 5vh;
+  height: 70vh;
+  background-color: green;
+  overflow: hidden;
+}
+
+.image-display {
+  height: 50vh;
+  /* background-image: url('img/lake-640.jpg'); */
+
+  background-size: contain;
+}
+
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+#btn {
+  background-color: aqua;
+}
