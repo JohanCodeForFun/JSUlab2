@@ -23,6 +23,10 @@ body {
   background-color: #ffe9dc;
 }
 
+section {
+  padding: 1rem;
+}
+
 /* 4. Hero-section */
 #hero-section {
   grid-area: hero;
@@ -39,7 +43,8 @@ body {
     background-size: cover;
     /* background-position: center; */
   height: 40vh;
-  margin-bottom: 8rem;
+  margin-bottom: 12rem;
+  box-shadow: 2px 2px 2px 2px black;
 }
 
 #hero-section h1 {
@@ -57,7 +62,7 @@ body {
   width: 16rem;
   position: absolute;
   margin: auto;
-  top: 160px;
+  top: 12rem;
   border-radius: 1rem;
   background-color: white;
   color: black;
