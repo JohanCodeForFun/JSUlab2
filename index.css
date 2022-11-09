@@ -148,3 +148,47 @@ nav #navbar-list {
   justify-content: center;
   align-items: center;
 }
+/* white background for the form */
+.white {
+  padding: 1rem;
+  height: 16rem;
+  width: 16rem;
+  position:absolute;
+  top: 100px;
+  left: 50px;
+  border-radius: 1rem;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  border: 1px black solid;
+  z-index: 1;
+}
+/* Fishing spots */
+#hero-fishingspots {
+  border: 3px solid red;
+  background-color: #FFE9DC;
+  color: black;
+  background-image: url(img/hero\ image.png);
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  height: 30vh;
+}
+
+.startpunkt, .checkbox {
+    display: flex;
+    flex-direction: column;
+    gap: .4rem;
+    margin-bottom: .6rem;
+}
+
+.checkradio {
+  display: flex;
+}
+
+.radiobutt {
+  display: flex;
+  justify-content: center;
+  flex: 1;
+}
