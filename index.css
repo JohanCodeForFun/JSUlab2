@@ -581,6 +581,17 @@ body {
   }
 
   .form {
-    left: 8rem;
+    left: 3rem;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .form {
+    left: 5rem
+  }
+}
+@media screen and (min-width: 900px) {
+  .form {
+    left: 8rem
   }
 }
