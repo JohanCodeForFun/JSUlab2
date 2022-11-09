@@ -230,7 +230,7 @@ function IntervalLoop() {
   setInterval(() => {
     GetAllWeatherData()
     CheckDateTime()
-    }, 7000) //  900000 milisecounds, 15min interval update
+    }, 900000) //  900000 milisecounds, 15min interval update
 }
 GetAllWeatherData()   // Hämtar all väder-data och sorterar allting
 CheckDateTime()       // Kollar vilket specifikt väder-objekt vi ska ta
