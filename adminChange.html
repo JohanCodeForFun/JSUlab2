@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />    <title>Fiska i Norge</title>
+    <link rel="stylesheet" href="admin.css">
+  </head>
+  <body>
+    <nav>
+      <ul id="navbar-list">
+        <li><a href="index.html">Hem</a></li>
+        <li><a href="adminDelete.html">Ta bort</a></li>
+        <li><a href="adminChange.html"></a>Ändra</li>
+        <li><a href="admin.html">Admin (POST)</a></li>
+      </ul>
+    </nav>
+    <section id="form-container">
+      <h2>Ändra</h2>
+      <form>
+        <h3>Skriv in id</h3>
+        <label for="idInput"></label>
+        <input id="idInput" type="text">
+
+        <h3>Skriv in namn*</h3>
+        <label for="nameInput"></label>
+        <input id="nameInput" type="text" placeholder="Minst 2-tecken">
+
+        <h3>Vad för fisk fångades*</h3>
+        <label for="fishInput"></label>
+        <input id="fishInput" type="text" placeholder="Minst 2-tecken">
+
+        <h3>Fiskens vikt*</h3>
+        <label for="fishWeightInput"></label>
+        <input id="fishWeightInput" type="text" placeholder="Minst 2-tecken" style="margin-bottom: 4vh;">
+
+        <h3>Ladda upp bild*</h3>
+        <input id="imageInput" type="file" accept="image/jpeg, image/png">
+        <textarea id="description" name="description" cols="30" rows="10"></textarea>
+
+        <input type="button" id="btn" value="Submit" onclick="SubmitChange()">
+      </form>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="js/adminChange.js"></script>
+   </body>
+</html>
