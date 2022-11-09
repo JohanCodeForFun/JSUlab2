@@ -12,17 +12,55 @@
   </head>
   <link rel="stylesheet" href="index.css" />
   <body>
-    <nav>
-      <ul id="navbar-list">
-        <li>Hem</li>
-        <li>Fiskeplatser</li>
-        <li>Kontakt</li>
-      </ul>
-    </nav>
-    <section id="hero-section">
-      <h1>Fiska i Norge</h1>
-      <h2>Hitta drömfisket</h2>
-      <h2>Till bästa priset</h2>
+    <!-- Form elementet med relaterade inputs i olika former nästlade inuti. På en vikt bakgrund i en sektion. -->
+    <section id="hero-fishingspots">
+      <div class="white">
+        <div>
+        <form action="http://127.0.0.1:5501/index.html" method="POST">
+          <label for="destination">Vart vill du resa?</label>
+          <select id="destination" name="destination">
+            <option value="Tana">Tana</option>
+            <option value="Lofoten">Lofoten</option>
+            <option value="Hallingdalselva">Hallingsdalselva</option>
+          </select>
+        </div>
+        <div>
+          <div class="startpunkt">
+          <label for="startpunkt">Startpunkt :</label>
+          <select id="startpunkt" name="startpunkt">
+          </div>
+            <option value="Stockholm">Stockholm</option>
+          </select>
+        </div>
+        <div class="checkradio">
+        <div class="checkbox">
+          <label for="utrustning">Hyra utrustning</label>
+          <label for="guide">Hyra guide</label>
+        </div>
+        <div class="checkbox">
+          <input checked name="checkbox1" type="checkbox" value="utrustning" />
+          <input name="checkbox2" type="checkbox" value="guide" />
+          <label for="Tana"></label>
+        </div>
+        <div class="radiobutt">
+          <input
+            type="radio"
+            name="vehicle"
+            id="motorcycle"
+            value="motorcycle"
+          />
+          <label for="motorcycle"></label>
+          <input type="radio" name="vehicle" id="car" value="car" checked/>
+          <label for="car"></label>
+          <input type="radio" name="vehicle" id="light-t" value="light-truck" />
+          <label for="light-t"></label>
+        </div>
+      </div>
+          <div>
+          <button type="submit">Räkna på priset!</button>
+        </div>
+        </form>
+      </div>
     </section>
     <section id="content">
       <div class="image-container">
@@ -36,7 +74,10 @@
         <div id="locationHallingdalselva"></div>
         <div id="info">
           <h3>Fiska i Norge!</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure laboriosam porro harum officia?</p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure
+            laboriosam porro harum officia?
+          </p>
           <button>Räkna på resan!</button>
         </div>
       </div>
