@@ -1,0 +1,29 @@
+section {
+  padding: 1rem;
+}
+
+
+#hero-fishing-container {
+  margin: 0.5rem 0.5rem;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+#hero-fishingspots #fishing-header {
+  flex: 1;
+}
+
+#hero-fishingspots img {
+  height: 30px;
+  width: 30px;
+}
+
+#description-fishingspots p {
+  margin-bottom: 1rem;
+}
+
+#other-fishingspots {
+    margin-bottom: 2rem;
+}

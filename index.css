@@ -4,7 +4,8 @@
   3. Navbar
   4. Hero-section
   5. Content
-  5. Footer
+  6. Fishing spots css
+  7. Footer
 */
 
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600;700;800&family=Roboto:wght@100;300;400;500;700;900&family=Silkscreen:wght@700&display=swap");
@@ -15,43 +16,24 @@
   margin: 0;
   box-sizing: border-box;
   /* font-family: Roboto Slab; */
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
 }
 
-/*3. Navbar*/
-nav {
-  display: flex;
+body,
+html {
+  background-color: #ffe9dc;
 }
-nav #navbar-list {
-  cursor: pointer;
-  display: flex;
-  font-size: 1.4rem;
-  font-weight: 600;
-  justify-content: space-around;
-  align-items: center;
-  width: 100%;
-  height: 10vh;
-  background-color: rgb(0, 123, 0);
-  list-style: none;
-  color: white;
+
+body {
+  background-color: #ffe9dc;
 }
 
 /* 4. Hero-section */
-#hero-section {
-  display: flex;
-  color: white;
-  font-size: 1.2rem;
-  gap: 1rem;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-image: linear-gradient(rgba(1, 1, 1, 0.25), rgba(1, 1, 1, 0.25)),
-    url("img/lake-640.jpg");
-  height: 30vh;
-}
+
 
 /* 5. Content */
 #content {
+  grid-area: weather;
   display: flex;
   height: 50vh;
   /* background-color: red; */
@@ -94,7 +76,6 @@ nav #navbar-list {
 #content .image-container #locationHallingdalselva {
   color: red;
   text-shadow: 1px 1px 1px black;
-  margin: 0.5rem 0.3rem;
   border-radius: 1rem;
   display: flex;
   justify-content: center;
@@ -134,7 +115,7 @@ nav #navbar-list {
 #content .image-container button {
   margin-top: 0.5rem;
   padding: 0.5rem 0.3rem;
-  border-radius: .3rem;
+  border-radius: 0.3rem;
 }
 
 /* #content img {
@@ -148,15 +129,247 @@ nav #navbar-list {
   justify-content: center;
   align-items: center;
 }
-
-#admin-display {
-
-  margin-top: 15vh;
+/* white background for the form */
+.form {
+  padding: 1rem;
+  height: 16rem;
+  width: 16rem;
+  position: absolute;
+  top: 100px;
+  left: 50px;
+  border-radius: 1rem;
+  background-color: white;
   display: flex;
+  justify-content: center;
   flex-direction: column;
-  background-color: lightblue;
+  border: 1px black solid;
+  z-index: 1;
+}
+/* Fishing spots */
+#hero-fishingspots {
+  grid-area: hero;
+  margin-bottom: 8rem;
+  background-color: #ffe9dc;
+  color: black;
+  background-image: url(img/hero\ image.png);
 }
 
+
+#offer-display {
+  grid-area: offer;
+  margin-top: 10vh;
+}
+
+#offer-display h2 {
+  font-size: 2.2rem;
+}
+
+#offer-container {
+  margin: 2vw 2vh;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 1fr);
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    "house fish"
+    "weather people";
+  height: 40vh;
+  font-size: 1.5rem;
+}
+
+@media screen and (min-width: 800px) {
+  .grid-container {
+    height: 40vh;
+    width: 20vw;
+  }
+}
+
+.house1 {
+  display: flex;
+  height: 5vh;
+  width: 10vw;
+  margin: 1vh 1vw;
+  margin-left: 10vw;
+  margin-right: 5vw;
+  background-image: url("img/hus3.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+@media screen and (min-width: 800px) {
+  .house1 {
+    display: flex;
+    height: 5vh;
+    width: 10vw;
+  }
+}
+
+.house2 {
+  display: flex;
+  justify-content: center;
+  height: 5vh;
+  width: 10vw;
+  margin: 1vh 1vw;
+  background-image: url("img/hus3.png");
+  background-size: cover;
+}
+
+@media screen and (min-width: 800px) {
+  .house2 {
+    display: flex;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+}
+
+.weather-icon-1 {
+  display: flex;
+  height: 5vh;
+  width: 10vw;
+  margin: 1vh 1vw;
+  margin-left: 10vw;
+  margin-right: 5vw;
+  background-image: url("img/sun.png");
+  background-size: cover;
+}
+.weather-icon-2 {
+  display: flex;
+  height: 5vh;
+  width: 10vw;
+  margin: 1vh 1vw;
+  margin-right: 5vw;
+  background-image: url("img/moon.png");
+  background-size: cover;
+}
+
+.house-container-upper {
+  display: flex;
+  margin-top: 1.5vh;
+}
+
+.weather-container-upper {
+  display: flex;
+  margin-top: 1.5vh;
+}
+
+.house-container-under {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1vh;
+}
+
+.weather-container-under {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1vh;
+}
+
+.weather-icon-3 {
+  display: flex;
+  justify-content: center;
+  height: 5vh;
+  width: 10vw;
+
+  background-image: url("img/rain.png");
+  background-size: cover;
+}
+
+.house3 {
+  display: flex;
+  justify-content: center;
+  height: 5vh;
+  width: 10vw;
+
+  background-image: url("img/hus3.png");
+  background-size: cover;
+}
+
+@media screen and (min-width: 800px) {
+  .house3 {
+  }
+}
+
+.house-text {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+}
+
+.grid-item-1 {
+  grid-area: house;
+}
+.grid-item-2 {
+  grid-area: fish;
+}
+.grid-item-3 {
+  grid-area: weather;
+}
+.grid-item-4 {
+  grid-area: people;
+}
+
+.user-image-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 60%;
+  align-items: center;
+}
+
+.user-image-container img {
+  width: 50%;
+  height: 50%;
+}
+
+.user-text {
+  margin-top: 0.2vh;
+  display: flex;
+  height: 41%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.fish-upper-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 40%;
+  margin-top: 2vh;
+}
+
+.fish-upper {
+  display: flex;
+  height: 100%;
+  width: 38%;
+  background-image: url("img/fishIcon.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+#fishDescription {
+  margin-top: 2vh;
+  font-size: 1.5rem;
+}
+
+.fish-text {
+  display: flex;
+  margin-top: 1.5vh;
+  justify-content: center;
+  align-items: center;
+  height: 50%;
+  width: 100%;
+  font-size: 1.5rem;
+}
+
+#admin-display {
+  grid-area: testimonial;
+  margin-top: 5vh;
+  display: flex;
+  flex-direction: column;
+}
 
 .admin-header {
   display: flex;
@@ -164,11 +377,10 @@ nav #navbar-list {
   justify-content: center;
   flex-wrap: wrap;
   align-items: center;
-  font-size: 1.1rem;
-  background-color: rgb(27, 92, 172);
-  color: white;
+  font-size: 1.5rem;
   text-align: center;
-  padding: 3vh 3vw;
+  padding: 4vh 4vw;
+  margin-bottom: 6vh;
 }
 
 .admin-content {
@@ -176,30 +388,138 @@ nav #navbar-list {
   background-color: pink;
   width: 100%;
   overflow: hidden;
-
 }
-/* .admin-image-container {
-  height: 40vh;
-  background-color: pink;
-  width: 100%;
-} */
+
 #admin-image {
   width: 100%;
   height: 100%;
 }
 
 #userDescription {
-  font-family:cursive;
+  font-family: cursive;
   font-size: 1.5rem;
 }
 
 .admin-footer {
-  background-color: rgb(27, 92, 172);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   font-size: 1.5rem;
-  color: white;
+  color: black;
   padding: 3vh 3vw;
+  margin-top: 5vh;
+}
+
+#display-howto h2 {
+  margin-bottom: 3vh;
+  font-size: 1.5rem;
+}
+
+#display-howto ol {
+  margin: 4vw 4vh;
+  list-style-type: list;
+}
+
+#display-howto {
+  grid-area: steps;
+  margin: 12vh 12vw;
+  margin-top: 6vh;
+}
+
+#display-howto > ol {
+  font-size: 1.5rem;
+}
+
+#display-howto > ol li {
+  margin-bottom: 2vh;
+}
+
+#fish-places {
+  grid-area: calculator;
+  display: flex;
+  justify-content: center;
+}
+
+#fish-places input {
+  border-style: none;
+  width: 80vw;
+  height: 8vh;
+  background-color: green;
+  border-radius: 16px;
+  color: white;
+  font-size: 1.7rem;
+  font-weight: 700;
+}
+
+.calculator-container {
+  /* margin: 6vw 6vh; */
+  height: 40vh;
+  border-radius: 8px;
+  background-image: url("img/kalkylatorFinal.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.calc-text-container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-top: 5vh;
+  height: 10vh;
+  font-size: 1.6rem;
+}
+
+/* Fishing spots */
+#hero-fishingspots {
+  background-color: #ffe9dc;
+  color: black;
+  background-image: url("img/fishing-spots/hero-lofoten.png");
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  height: 30vh;
+}
+
+.startpunkt,
+.checkbox {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 0.6rem;
+}
+
+.checkradio {
+  display: flex;
+}
+
+.radiobutt {
+  display: flex;
+  justify-content: center;
+  flex: 1;
+}
+
+footer {
+  grid-area: footer;
+  background-color: #733b36;
+  padding: 1rem;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+@media screen and (min-width:600px) {
+  body {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas: 
+    "hero hero hero"
+    "offer steps testimonial"
+    "weather calculator calculator"
+    "footer footer footer"
+    ;
+  }
 }
