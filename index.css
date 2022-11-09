@@ -16,7 +16,11 @@
   margin: 0;
   box-sizing: border-box;
   /* font-family: Roboto Slab; */
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
+}
+
+body, html {
+  background-color: #FFE9DC;
 }
 
 body {
@@ -99,7 +103,6 @@ nav #navbar-list {
 #content .image-container #locationHallingdalselva {
   color: red;
   text-shadow: 1px 1px 1px black;
-  margin: 0.5rem 0.3rem;
   border-radius: 1rem;
   display: flex;
   justify-content: center;
@@ -154,14 +157,225 @@ nav #navbar-list {
   align-items: center;
 }
 
-#admin-display {
-
-  margin-top: 15vh;
-  display: flex;
-  flex-direction: column;
-  background-color: lightblue;
+#offer-display {
+  margin-top: 10vh;
 }
 
+#offer-display h2 {
+  font-size: 2.2rem;
+}
+
+#offer-container {
+  margin: 2vw 2vh;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 1fr);
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas: "house fish"
+                       "weather people";
+  height: 40vh;
+  font-size: 1.5rem;
+}
+
+@media screen and (min-width: 800px)  {
+  .grid-container {
+    height: 40vh;
+    width: 20vw;
+  }
+}
+
+
+.house1 {
+  display: flex;
+  height: 5vh;
+  width: 10vw;
+  margin: 1vh 1vw;
+  margin-left: 10vw;
+  margin-right: 5vw;
+  background-image: url('img/hus3.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+@media screen and (min-width: 800px) {
+  .house1 {
+    display: flex;
+    height: 5vh;
+    width: 10vw;
+  }
+}
+
+.house2 {
+  display: flex;
+  justify-content: center;
+  height: 5vh;
+  width: 10vw;
+  margin: 1vh 1vw;
+  background-image: url('img/hus3.png');
+  background-size: cover;
+}
+
+@media screen and (min-width: 800px) {
+  .house2 {
+    display: flex;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+}
+
+.weather-icon-1 {
+  display: flex;
+  height: 5vh;
+  width: 10vw;
+  margin: 1vh 1vw;
+  margin-left: 10vw;
+  margin-right: 5vw;
+  background-image: url('img/sun.png');
+  background-size: cover;
+}
+.weather-icon-2 {
+  display: flex;
+  height: 5vh;
+  width: 10vw;
+  margin: 1vh 1vw;
+  margin-right: 5vw;
+  background-image: url('img/moon.png');
+  background-size: cover;
+}
+
+.house-container-upper {
+  display: flex;
+  margin-top: 1.5vh;
+}
+
+.weather-container-upper {
+  display: flex;
+  margin-top: 1.5vh;
+}
+
+.house-container-under {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1vh;
+}
+
+.weather-container-under {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1vh;
+}
+
+.weather-icon-3{
+  display: flex;
+  justify-content: center;
+  height: 5vh;
+  width: 10vw;
+  /* background-color: red; */
+
+  background-image: url('img/rain.png');
+  background-size: cover;
+}
+
+.house3 {
+  display: flex;
+  justify-content: center;
+  height: 5vh;
+  width: 10vw;
+  /* background-color: red; */
+
+  background-image: url('img/hus3.png');
+  background-size: cover;
+}
+
+@media screen and (min-width: 800px) {
+  .house3{
+
+  }
+
+}
+
+.house-text {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+}
+
+
+
+.grid-item-1 {
+  grid-area: house;
+}
+.grid-item-2 {
+  grid-area: fish;
+}
+.grid-item-3 {
+  grid-area: weather;
+}
+.grid-item-4 {
+  grid-area: people;
+}
+
+.user-image-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 60%;
+  align-items: center;
+}
+
+.user-image-container img {
+  width: 50%;
+  height: 50%;
+}
+
+.user-text {
+  margin-top: 0.2vh;
+  display: flex;
+  height: 41%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.fish-upper-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 40%;
+  margin-top: 2vh;
+}
+
+.fish-upper {
+  display: flex;
+  height: 100%;
+  width: 38%;
+  background-image: url('img/fishIcon.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+#fishDescription {
+  margin-top: 2vh;
+  font-size: 1.5rem;
+}
+
+.fish-text {
+  display: flex;
+  margin-top: 1.5vh;
+  justify-content: center;
+  align-items: center;
+  height: 50%;
+  width: 100%;
+  font-size: 1.5rem;
+}
+
+#admin-display {
+  margin-top: 5vh;
+  display: flex;
+  flex-direction: column;
+}
 
 .admin-header {
   display: flex;
@@ -169,11 +383,10 @@ nav #navbar-list {
   justify-content: center;
   flex-wrap: wrap;
   align-items: center;
-  font-size: 1.1rem;
-  background-color: rgb(27, 92, 172);
-  color: white;
+  font-size: 1.5rem;
   text-align: center;
-  padding: 3vh 3vw;
+  padding: 4vh 4vw;
+  margin-bottom: 6vh;
 }
 
 .admin-content {
@@ -183,11 +396,7 @@ nav #navbar-list {
   overflow: hidden;
 
 }
-/* .admin-image-container {
-  height: 40vh;
-  background-color: pink;
-  width: 100%;
-} */
+
 #admin-image {
   width: 100%;
   height: 100%;
@@ -199,14 +408,71 @@ nav #navbar-list {
 }
 
 .admin-footer {
-  background-color: rgb(27, 92, 172);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   font-size: 1.5rem;
-  color: white;
+  color: black;
   padding: 3vh 3vw;
+  margin-top: 5vh;
+}
+
+#display-howto h2 {
+  margin-bottom: 3vh;
+  font-size: 1.5rem;
+}
+
+#display-howto ol {
+  margin: 4vw 4vh;
+  list-style-type: list;
+}
+
+#display-howto {
+  margin: 12vh 12vw;
+  margin-top: 6vh;
+}
+
+#display-howto > ol {
+  font-size: 1.5rem;
+}
+
+#display-howto > ol li {
+  margin-bottom: 2vh;
+}
+
+#fish-places {
+  display: flex;
+  justify-content: center;
+}
+
+#fish-places input {
+  border-style: none;
+  width: 80vw;
+  height: 8vh;
+  background-color: green;
+  border-radius: 16px;
+  color: white;
+  font-size: 1.7rem;
+  font-weight: 700;
+}
+
+.image-container {
+  margin: 6vw 6vh;
+  height: 40vh;
+  border-radius: 8px;
+  background-image: url('img/kalkylatorFinal.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.calc-text-container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-top: 5vh;
+  height: 10vh;
+  font-size: 1.6rem;
 }
 
 
