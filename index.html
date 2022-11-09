@@ -12,70 +12,77 @@
   </head>
   <link rel="stylesheet" href="index.css" />
   <body>
-    <section id="hero-section">
-      <h1>Fiska i Norge</h1>
-
-      <div class="white">
-        <h3>Välj vart du vill resa</h3>
-        <input type="text" placeholder="Lofoten" />
-        <p>Start stad</p>
-        <input type="text" placeholder="Stockholm" />
-        <button>Räkna på priset</button>
-      </div>
-      
     <!-- Form elementet med relaterade inputs i olika former nästlade inuti. På en vikt bakgrund i en sektion. -->
-    <section id="hero-fishingspots">
+    <section id="hero-section">
       <div class="form">
-        <div>
         <form>
-          <label for="destination">Vart vill du resa?</label>
-          <select id="destination" name="destination">
-            <option value="Tana">Tana</option>
-            <option value="Lofoten">Lofoten</option>
-            <option value="Hallingdalselva">Hallingsdalselva</option>
-          </select>
-        </div>
-        <div>
-          <div class="startpunkt">
-          <label for="startpunkt">Startpunkt :</label>
-          <select id="startpunkt" name="startpunkt">
-          </div>
-            <option value="Stockholm">Stockholm</option>
-          </select>
-        </div>
-        <div class="checkradio">
-        <div class="checkbox">
-          <label for="utrustning">Hyra utrustning</label>
-          <label for="guide">Hyra guide</label>
-        </div>
-        <div class="checkbox">
-          <input checked name="checkbox1" type="checkbox" value="utrustning" />
-          <input name="checkbox2" type="checkbox" value="guide" />
-          <label for="Tana"></label>
-        </div>
-        <div class="radiobutt">
-          <input
-            type="radio"
-            name="vehicle"
-            id="motorcycle"
-            value="motorcycle"
-          />
-          <label for="motorcycle"></label>
-          <input type="radio" name="vehicle" id="car" value="car" checked/>
-          <label for="car"></label>
-          <input type="radio" name="vehicle" id="light-t" value="light-truck" />
-          <label for="light-t"></label>
-        </div>
-      </div>
           <div>
-          <input type="button" id="submitBtn" value="Räkna på priset!" onclick="CounterPrice()">
-        </div>
+            <label for="destination">Vart vill du resa?</label>
+            <select id="destination" name="destination">
+              <option value="Tana">Tana</option>
+              <option value="Lofoten">Lofoten</option>
+              <option value="Hallingdalselva">Hallingsdalselva</option>
+            </select>
+          </div>
+          <div>
+            <div class="startpunkt">
+              <label for="startpunkt">Startpunkt:</label>
+              <select id="startpunkt" name="startpunkt">
+                <option value="Stockholm">Stockholm</option>
+              </select>
+            </div>
+          </div>
+          <div class="checkradio">
+            <div class="checkbox">
+              <label for="utrustning">Hyra utrustning</label>
+              <label for="guide">Hyra guide</label>
+            </div>
+            <div class="checkbox">
+              <input
+                checked
+                name="checkbox1"
+                type="checkbox"
+                value="utrustning"
+              />
+              <input name="checkbox2" type="checkbox" value="guide" />
+              <label for="Tana"></label>
+            </div>
+            <div class="radiobutt">
+              <input
+                type="radio"
+                name="vehicle"
+                id="motorcycle"
+                value="motorcycle"
+              />
+              <label for="motorcycle">MC</label>
+              <input type="radio" name="vehicle" id="car" value="car" checked />
+              <label for="car">CAR</label>
+              <input
+                type="radio"
+                name="vehicle"
+                id="light-t"
+                value="light-truck"
+              />
+              <label for="light-t">BUS</label>
+            </div>
+          </div>
+          <div class="btn-div">
+            <input
+              type="button"
+              id="submitBtn"
+              value="Räkna på priset!"
+              onclick="CounterPrice()"
+            />
+          </div>
         </form>
       </div>
     </section>
 
     <section id="offer-display">
-      <div id="offer-container">
+      <div>Hello</div>
+
+      <!-- old code offer display -->
+      <!-- <div id="offer-container">
         <h2>Vi erbjuder:</h2>
         <div class="grid-container">
           <div class="grid-item-1">
@@ -121,7 +128,7 @@
             <p>Gott kamratskap</p>
           </div>
         </div>
-      </div>
+      </div> -->
     </section>
 
     <!-- Admin-display -->
@@ -133,7 +140,7 @@
       </div>
       <div class="admin-content">
         <!-- Imagen alltså bilden! -->
-        <img id="admin-image" src="" alt="Fiskbild">
+        <img id="admin-image" src="" alt="Fiskbild" />
       </div>
       <div class="admin-footer">
         <h2>Recension:</h2>
@@ -156,10 +163,9 @@
         <p>Använd vår <a href="#">kalkyl här </a>för</p>
         <p>att få en beräknat pris på resan</p>
         <div class="calculator-container"></div>
-        <input type="button" value="Se fiskeplatser">
-    </div>
-  </section>
-
+        <input type="button" value="Se fiskeplatser" />
+      </div>
+    </section>
 
     <section id="content">
       <div class="image-container">
@@ -171,25 +177,13 @@
         <div id="loc4"></div>
         <div id="loc5"></div>
         <div id="locationHallingdalselva"></div>
-        <div id="info">
-          <h3>Fiska i Norge!</h3>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure
-            laboriosam porro harum officia?
-          </p>
-          <button>Räkna på resan!</button>
-        </div>
       </div>
     </section>
 
-
     <footer>
-      <p> Copyrigth 2022</p>
+      <p>Copyrigth 2022</p>
       <p>Created by Dennis, Simon and Johan</p>
-
     </footer>
-
-
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="js/index.js"></script>

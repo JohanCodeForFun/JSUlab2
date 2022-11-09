@@ -19,13 +19,8 @@
   /* overflow-x: hidden; */
 }
 
-body,
-html {
-  background-color: #ffe9dc;
-}
-
 body {
-  background-color: #FFE9DC;
+  background-color: #ffe9dc;
 }
 
 
@@ -202,7 +197,7 @@ body {
 
 #offer-display {
   grid-area: offer;
-  margin-top: 10vh;
+  background-color: red;
 }
 
 #offer-display h2 {
@@ -411,7 +406,7 @@ body {
 
 #admin-display {
   grid-area: testimonial;
-  margin-top: 5vh;
+  background-color: blue;
   display: flex;
   flex-direction: column;
 }
@@ -431,7 +426,6 @@ body {
 .admin-content {
   height: 25vh;
   background-color: pink;
-  width: 100%;
   overflow: hidden;
 }
 
@@ -453,11 +447,19 @@ body {
   font-size: 1.5rem;
   color: black;
   padding: 3vh 3vw;
-  margin-top: 5vh;
+  /* margin-top: 5vh; */
+}
+
+
+#display-howto {
+  grid-area: steps;
+  background-color: green;
+  /* margin: 12vh 12vw; */
+  /* margin-top: 6vh; */
 }
 
 #display-howto h2 {
-  margin-bottom: 3vh;
+  /* margin-bottom: 3vh; */
   font-size: 1.5rem;
 }
 
@@ -466,11 +468,7 @@ body {
   list-style-type: list;
 }
 
-#display-howto {
-  grid-area: steps;
-  margin: 12vh 12vw;
-  margin-top: 6vh;
-}
+
 
 #display-howto > ol {
   font-size: 1.5rem;
@@ -489,7 +487,6 @@ body {
 #fish-places input {
   border-style: none;
   width: 80vw;
-  height: 8vh;
   background-color: green;
   border-radius: 16px;
   color: white;
@@ -511,7 +508,6 @@ body {
   flex-direction: column;
   text-align: center;
   margin-top: 5vh;
-  height: 10vh;
   font-size: 1.6rem;
 }
 
@@ -542,6 +538,20 @@ body {
   display: flex;
   justify-content: center;
   flex: 1;
+  border: 1px solid black;
+  border-radius: 1rem;
+}
+
+.btn-div {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.btn-div input {
+  padding: .5rem 1rem;
+  border-radius: 1rem;
+  background-color: green;
 }
 
 footer {
