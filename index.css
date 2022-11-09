@@ -19,48 +19,21 @@
   /* overflow-x: hidden; */
 }
 
-body, html {
-  background-color: #FFE9DC;
+body,
+html {
+  background-color: #ffe9dc;
 }
 
 body {
-  background-color: #FFE9DC;
-}
-
-/*3. Navbar*/
-nav {
-  display: flex;
-}
-nav #navbar-list {
-  cursor: pointer;
-  display: flex;
-  font-size: 1.4rem;
-  font-weight: 600;
-  justify-content: space-around;
-  align-items: center;
-  width: 100%;
-  height: 10vh;
-  background-color: rgb(0, 123, 0);
-  list-style: none;
-  color: white;
+  background-color: #ffe9dc;
 }
 
 /* 4. Hero-section */
-#hero-section {
-  display: flex;
-  color: white;
-  font-size: 1.2rem;
-  gap: 1rem;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-image: linear-gradient(rgba(1, 1, 1, 0.25), rgba(1, 1, 1, 0.25)),
-    url("img/lake-640.jpg");
-  height: 30vh;
-}
+
 
 /* 5. Content */
 #content {
+  grid-area: weather;
   display: flex;
   height: 50vh;
   /* background-color: red; */
@@ -142,7 +115,7 @@ nav #navbar-list {
 #content .image-container button {
   margin-top: 0.5rem;
   padding: 0.5rem 0.3rem;
-  border-radius: .3rem;
+  border-radius: 0.3rem;
 }
 
 /* #content img {
@@ -157,11 +130,11 @@ nav #navbar-list {
   align-items: center;
 }
 /* white background for the form */
-.white {
+.form {
   padding: 1rem;
   height: 16rem;
   width: 16rem;
-  position:absolute;
+  position: absolute;
   top: 100px;
   left: 50px;
   border-radius: 1rem;
@@ -174,13 +147,16 @@ nav #navbar-list {
 }
 /* Fishing spots */
 #hero-fishingspots {
-  border: 3px solid red;
-  background-color: #FFE9DC;
+  grid-area: hero;
+  margin-bottom: 8rem;
+  background-color: #ffe9dc;
   color: black;
   background-image: url(img/hero\ image.png);
 }
 
+
 #offer-display {
+  grid-area: offer;
   margin-top: 10vh;
 }
 
@@ -196,19 +172,19 @@ nav #navbar-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, 1fr);
   grid-template-rows: 1fr 1fr;
-  grid-template-areas: "house fish"
-                       "weather people";
+  grid-template-areas:
+    "house fish"
+    "weather people";
   height: 40vh;
   font-size: 1.5rem;
 }
 
-@media screen and (min-width: 800px)  {
+@media screen and (min-width: 800px) {
   .grid-container {
     height: 40vh;
     width: 20vw;
   }
 }
-
 
 .house1 {
   display: flex;
@@ -217,7 +193,7 @@ nav #navbar-list {
   margin: 1vh 1vw;
   margin-left: 10vw;
   margin-right: 5vw;
-  background-image: url('img/hus3.png');
+  background-image: url("img/hus3.png");
   background-repeat: no-repeat;
   background-size: contain;
 }
@@ -236,7 +212,7 @@ nav #navbar-list {
   height: 5vh;
   width: 10vw;
   margin: 1vh 1vw;
-  background-image: url('img/hus3.png');
+  background-image: url("img/hus3.png");
   background-size: cover;
 }
 
@@ -255,7 +231,7 @@ nav #navbar-list {
   margin: 1vh 1vw;
   margin-left: 10vw;
   margin-right: 5vw;
-  background-image: url('img/sun.png');
+  background-image: url("img/sun.png");
   background-size: cover;
 }
 .weather-icon-2 {
@@ -264,7 +240,7 @@ nav #navbar-list {
   width: 10vw;
   margin: 1vh 1vw;
   margin-right: 5vw;
-  background-image: url('img/moon.png');
+  background-image: url("img/moon.png");
   background-size: cover;
 }
 
@@ -290,14 +266,13 @@ nav #navbar-list {
   margin-bottom: 1vh;
 }
 
-.weather-icon-3{
+.weather-icon-3 {
   display: flex;
   justify-content: center;
   height: 5vh;
   width: 10vw;
-  /* background-color: red; */
 
-  background-image: url('img/rain.png');
+  background-image: url("img/rain.png");
   background-size: cover;
 }
 
@@ -306,17 +281,14 @@ nav #navbar-list {
   justify-content: center;
   height: 5vh;
   width: 10vw;
-  /* background-color: red; */
 
-  background-image: url('img/hus3.png');
+  background-image: url("img/hus3.png");
   background-size: cover;
 }
 
 @media screen and (min-width: 800px) {
-  .house3{
-
+  .house3 {
   }
-
 }
 
 .house-text {
@@ -324,8 +296,6 @@ nav #navbar-list {
   align-items: baseline;
   justify-content: center;
 }
-
-
 
 .grid-item-1 {
   grid-area: house;
@@ -374,7 +344,7 @@ nav #navbar-list {
   display: flex;
   height: 100%;
   width: 38%;
-  background-image: url('img/fishIcon.png');
+  background-image: url("img/fishIcon.png");
   background-size: contain;
   background-repeat: no-repeat;
 }
@@ -395,6 +365,7 @@ nav #navbar-list {
 }
 
 #admin-display {
+  grid-area: testimonial;
   margin-top: 5vh;
   display: flex;
   flex-direction: column;
@@ -417,7 +388,6 @@ nav #navbar-list {
   background-color: pink;
   width: 100%;
   overflow: hidden;
-
 }
 
 #admin-image {
@@ -426,7 +396,7 @@ nav #navbar-list {
 }
 
 #userDescription {
-  font-family:cursive;
+  font-family: cursive;
   font-size: 1.5rem;
 }
 
@@ -452,6 +422,7 @@ nav #navbar-list {
 }
 
 #display-howto {
+  grid-area: steps;
   margin: 12vh 12vw;
   margin-top: 6vh;
 }
@@ -465,6 +436,7 @@ nav #navbar-list {
 }
 
 #fish-places {
+  grid-area: calculator;
   display: flex;
   justify-content: center;
 }
@@ -480,11 +452,11 @@ nav #navbar-list {
   font-weight: 700;
 }
 
-.image-container {
-  margin: 6vw 6vh;
+.calculator-container {
+  /* margin: 6vw 6vh; */
   height: 40vh;
   border-radius: 8px;
-  background-image: url('img/kalkylatorFinal.png');
+  background-image: url("img/kalkylatorFinal.png");
   background-size: contain;
   background-repeat: no-repeat;
 }
@@ -498,24 +470,23 @@ nav #navbar-list {
   font-size: 1.6rem;
 }
 
-
-
 /* Fishing spots */
 #hero-fishingspots {
-  background-color: #FFE9DC;
+  background-color: #ffe9dc;
   color: black;
-  background-image: url('img/fishing-spots/hero-lofoten.png');
+  background-image: url("img/fishing-spots/hero-lofoten.png");
   background-position: center;
   background-size: cover;
   display: flex;
   height: 30vh;
 }
 
-.startpunkt, .checkbox {
-    display: flex;
-    flex-direction: column;
-    gap: .4rem;
-    margin-bottom: .6rem;
+.startpunkt,
+.checkbox {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 0.6rem;
 }
 
 .checkradio {
@@ -528,11 +499,11 @@ nav #navbar-list {
   flex: 1;
 }
 #hero-fishing-container {
-  margin: .5rem .5rem;
+  margin: 0.5rem 0.5rem;
   display: flex;
   width: 100%;
   justify-content: center;
-  gap: .5rem;
+  gap: 0.5rem;
 }
 
 #hero-fishingspots #fishing-header {
@@ -548,13 +519,27 @@ nav #navbar-list {
   margin-bottom: 1rem;
 }
 
-
 footer {
-  background-color: #733B36;
+  grid-area: footer;
+  background-color: #733b36;
   padding: 1rem;
   color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+
+@media screen and (min-width:600px) {
+  body {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas: 
+    "hero hero hero"
+    "offer steps testimonial"
+    "weather calculator calculator"
+    "footer footer footer"
+    ;
+  }
 }
