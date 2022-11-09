@@ -7,7 +7,6 @@
 // 5.
 
 
-
 // 2. Hämta element att jobba med
 const weatherDataSection = document.querySelector("#weatherDataSection");
 
@@ -76,13 +75,11 @@ async function GetAllWeatherData() {
     if(result[i].hasOwnProperty(result[i]) !== undefined) {
       locationKeyInput.push(Object.keys(result[i]))
     }
-    console.log(locationKeyInput);
   }
 
   // Object.keys-funktion will return a array and locationKey is a array too
   // locationKeyInput är redan en array och Object.keys returnar också en array därför i detta fall använder jag mig av funktionen-flat som gör dessa till värden istället för arrays
   let locationKey = locationKeyInput.flat()
-  console.log(locationKey);
 
   // Pushar in objekt till arrayn weatherData, så många som det finns location
   let weatherData = [];
@@ -134,7 +131,7 @@ async function GetAllWeatherData() {
 }
 
 // Function Jämnför den lokala tiden med tiden med väder-arrayn
-function CheckDateTime() {
+function checkDateTime() {
   let dateToday = new Date().toLocaleDateString();
   let timeToday = new Date().toLocaleTimeString();
 
@@ -145,9 +142,11 @@ function CheckDateTime() {
 
   // Här så splitar jag varje tid på weatherData-arrayn och jämför om det är rätt datum och tid
   for(let i = 0; i < weatherDataFinal.length; i++) {
-    console.log(weatherDataFinal);
-    console.log(weatherDataFinal[0]);
-    console.log(weatherDataFinal[0][locationKeys[0]])
+    // console.log(weatherDataFinal);
+    // console.log(weatherDataFinal[0]);
+    // console.log(weatherDataFinal[0][locationKeys[0]])
+    console.log(`Uncaught TypeError: Cannot read properties of null (reading '0') at checkDateTime (index.js:151:56)
+    at index.js:264:1`)
     for(let j = 0; j < weatherDataFinal[i][locationKeys[i]].data.length; j++) {
 
       let ArrayindexTime = weatherDataFinal[i][locationKeys[i]].data[j].time.indexOf(":");
@@ -252,16 +251,16 @@ function CheckDateTime() {
   }
 }
 /*
-  Denna funktion, hämtar all väderData på ett interval exempelvis varje 5 sekunder hämta api datat. Sorterar väder-datat. Funktionen "CheckDateTime" den kollar vilken den lokala tiden är alltså vad är klockan nu? jämförelse vad det är för tid på datat vi får på vädret. Om klockan är 12:34 och i vårat objekt har vi tiden 12:00 och vädret för denna tidslag. Så kommer detta objekt att sättas och displays "realtid" för varje timme, vad det är för väder just för denna timme.
+  Denna funktion, hämtar all väderData på ett interval exempelvis varje 5 sekunder hämta api datat. Sorterar väder-datat. Funktionen "checkDateTime" den kollar vilken den lokala tiden är alltså vad är klockan nu? jämförelse vad det är för tid på datat vi får på vädret. Om klockan är 12:34 och i vårat objekt har vi tiden 12:00 och vädret för denna tidslag. Så kommer detta objekt att sättas och displays "realtid" för varje timme, vad det är för väder just för denna timme.
 */
 function IntervalLoop() {
   setInterval(() => {
     GetAllWeatherData()
-    CheckDateTime()
+    checkDateTime()
     }, 900000) //  900000 milisecounds, 15min interval update
 }
 GetAllWeatherData()   // Hämtar all väder-data och sorterar allting
-CheckDateTime()       // Kollar vilket specifikt väder-objekt vi ska ta
+checkDateTime()       // Kollar vilket specifikt väder-objekt vi ska ta
 IntervalLoop() // This function is asyncroumus
 
 // Display admin-uploads to home-page
