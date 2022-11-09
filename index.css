@@ -46,8 +46,8 @@ body {
   position: absolute;
   font-size: 1.2rem;
   display: flex;
-  top: 1rem;
-  left: 1rem;
+  top: .6rem;
+  left: .6rem;
   color: black;
 }
 
@@ -571,8 +571,8 @@ body {
 
   #hero-section h1 {
   font-size: 2.6rem;
-  top: 2rem;
-  left: 2rem;
+  top: 1.6rem;
+  left: 1.6rem;
   }
 
   .form {
