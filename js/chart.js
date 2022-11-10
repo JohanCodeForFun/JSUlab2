@@ -10,6 +10,9 @@ let vechileInput = urlParams.get('vechile');
 let guideInput = urlParams.get('guide');
 let equipementInput = urlParams.get('equipement');
 
+let nightValue = Number(urlParams.get('night'));
+console.log(nightValue)
+
 let guideValue = 0;
 let equipementValue = 0;
 
@@ -23,6 +26,9 @@ if(equipementInput !== "no-equipement") {
 
 console.log(guideValue)
 console.log(equipementValue);
+console.log(destinationInput);
+console.log(startpointInput);
+console.log(vechileInput);
 
 // 2. Funktioner för att visa graf med Chart.js
 
