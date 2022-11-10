@@ -2,7 +2,6 @@ section {
   padding: 1rem;
 }
 
-
 #hero-fishing-container {
   margin: 0.5rem 0.5rem;
   display: flex;
@@ -16,6 +15,7 @@ section {
 }
 
 #hero-fishingspots img {
+  mix-blend-mode: multiply;
   height: 30px;
   width: 30px;
 }
@@ -25,5 +25,5 @@ section {
 }
 
 #other-fishingspots {
-    margin-bottom: 2rem;
+  margin-bottom: 2rem;
 }

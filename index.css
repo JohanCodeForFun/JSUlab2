@@ -19,23 +19,65 @@
   /* overflow-x: hidden; */
 }
 
-body,
-html {
-  background-color: #ffe9dc;
-}
-
 body {
   background-color: #ffe9dc;
+  font-family: "Roboto", sans-serif;
+  font-family: "Merriweather", serif;
+}
+
+section {
+  padding: 1rem;
 }
 
 /* 4. Hero-section */
+#hero-section {
+  grid-area: hero;
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* background-image: linear-gradient(rgba(1, 1, 1, 0.25), rgba(1, 1, 1, 0.25)),
+    url("img/lake-640.jpg"); */
+  background-image: url(img/hero1.jpg);
+  background-position: center;
+  background-size: cover;
+  /* background-position: center; */
+  height: 40vh;
+  margin-bottom: 12rem;
+  box-shadow: 2px 2px 2px 2px black;
+}
 
+#hero-section h1 {
+  position: absolute;
+  font-size: 1.2rem;
+  display: flex;
+  top: 0.6rem;
+  left: 0.6rem;
+  color: black;
+}
+
+.form {
+  padding: 1rem;
+  position: absolute;
+  margin: auto;
+  top: 12rem;
+  border-radius: 1rem;
+  background-color: white;
+  color: black;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  border: 1px black solid;
+}
 
 /* 5. Content */
-#content {
+#weathermap {
   grid-area: weather;
   display: flex;
   height: 50vh;
+  background-color: #ffe9dc;
+
   /* background-color: red; */
   /* background-image: url('img/NorgemapFinal.jpg'); */
   /* background-size: cover; */
@@ -44,7 +86,12 @@ body {
   background-size: cover;
 }
 
-#content .image-container {
+#weathermap .weathermap-container {
+  padding: 1rem;
+  background-color: white;
+  border-radius: 1rem;
+  border: 1px solid black;
+  grid-area: weather;
   display: grid;
   grid-template-areas:
     "loc1 locTana"
@@ -67,13 +114,13 @@ body {
   position: relative;
 }
 
-#content .image-container #loc1 {
+#weathermap .weathermap-container #loc1 {
   grid-area: loc1;
 }
 
-#content .image-container #locationTana,
-#content .image-container #locationLofoten,
-#content .image-container #locationHallingdalselva {
+#weathermap .weathermap-container #locationTana,
+#weathermap .weathermap-container #locationLofoten,
+#weathermap .weathermap-container #locationHallingdalselva {
   color: red;
   text-shadow: 1px 1px 1px black;
   border-radius: 1rem;
@@ -81,21 +128,21 @@ body {
   justify-content: center;
 }
 
-#content .image-container #locationTana {
+#weathermap .weathermap-container #locationTana {
   grid-area: locTana;
 }
 
-#content .image-container #locationLofoten {
+#weathermap .weathermap-container #locationLofoten {
   grid-area: locLofoten;
 }
-#content .image-container #locationHallingdalselva {
+#weathermap .weathermap-container #locationHallingdalselva {
   grid-area: locHall;
 }
 
-#content .image-container #infoHeader {
+#weathermap .weathermap-container #infoHeader {
   grid-area: infoHeader;
 }
-#content .image-container #info {
+#weathermap .weathermap-container #info {
   grid-area: info;
 
   display: flex;
@@ -103,25 +150,10 @@ body {
   align-items: center;
   flex-direction: column;
 
-  background-color: green;
   color: white;
   border-radius: 1rem;
   padding: 1rem;
 }
-#content .image-container #info h3 {
-  margin-bottom: 0.5rem;
-}
-
-#content .image-container button {
-  margin-top: 0.5rem;
-  padding: 0.5rem 0.3rem;
-  border-radius: 0.3rem;
-}
-
-/* #content img {
-    width: 100%;
-    height: 100%;
-} */
 
 #mer-info {
   margin-top: 1rem;
@@ -129,22 +161,11 @@ body {
   justify-content: center;
   align-items: center;
 }
-/* white background for the form */
-.form {
-  padding: 1rem;
-  height: 16rem;
-  width: 16rem;
-  position: absolute;
-  top: 100px;
-  left: 50px;
-  border-radius: 1rem;
-  background-color: white;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  border: 1px black solid;
-  z-index: 1;
+
+#admin-display {
+  grid-area: testimonial;
 }
+
 /* Fishing spots */
 #hero-fishingspots {
   grid-area: hero;
@@ -154,160 +175,37 @@ body {
   background-image: url(img/hero\ image.png);
 }
 
-
-#offer-display {
-  grid-area: offer;
-  margin-top: 10vh;
-}
-
-#offer-display h2 {
-  font-size: 2.2rem;
-}
-
 #offer-container {
-  margin: 2vw 2vh;
+  grid-area: offer;
 }
 
-.grid-container {
+#offer-images {
   display: grid;
-  grid-template-columns: repeat(auto-fit, 1fr);
-  grid-template-rows: 1fr 1fr;
-  grid-template-areas:
-    "house fish"
-    "weather people";
-  height: 40vh;
-  font-size: 1.5rem;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  text-align: center;
 }
 
-@media screen and (min-width: 800px) {
-  .grid-container {
-    height: 40vh;
-    width: 20vw;
-  }
-}
-
-.house1 {
-  display: flex;
-  height: 5vh;
-  width: 10vw;
-  margin: 1vh 1vw;
-  margin-left: 10vw;
-  margin-right: 5vw;
-  background-image: url("img/hus3.png");
-  background-repeat: no-repeat;
-  background-size: contain;
-}
-
-@media screen and (min-width: 800px) {
-  .house1 {
-    display: flex;
-    height: 5vh;
-    width: 10vw;
-  }
-}
-
-.house2 {
+#offer-house,
+#offer-fish,
+#offer-weather,
+#offer-community {
   display: flex;
   justify-content: center;
-  height: 5vh;
-  width: 10vw;
-  margin: 1vh 1vw;
-  background-image: url("img/hus3.png");
-  background-size: cover;
+  align-items: center;
+  flex: 1;
+  flex-wrap: wrap;
+  margin: 1rem 1rem;
 }
 
-@media screen and (min-width: 800px) {
-  .house2 {
-    display: flex;
-    background-size: contain;
-    background-repeat: no-repeat;
-  }
-}
-
-.weather-icon-1 {
-  display: flex;
-  height: 5vh;
-  width: 10vw;
-  margin: 1vh 1vw;
-  margin-left: 10vw;
-  margin-right: 5vw;
-  background-image: url("img/sun.png");
-  background-size: cover;
-}
-.weather-icon-2 {
-  display: flex;
-  height: 5vh;
-  width: 10vw;
-  margin: 1vh 1vw;
-  margin-right: 5vw;
-  background-image: url("img/moon.png");
-  background-size: cover;
-}
-
-.house-container-upper {
-  display: flex;
-  margin-top: 1.5vh;
-}
-
-.weather-container-upper {
-  display: flex;
-  margin-top: 1.5vh;
-}
-
-.house-container-under {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 1vh;
-}
-
-.weather-container-under {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 1vh;
-}
-
-.weather-icon-3 {
-  display: flex;
-  justify-content: center;
-  height: 5vh;
-  width: 10vw;
-
-  background-image: url("img/rain.png");
-  background-size: cover;
-}
-
-.house3 {
-  display: flex;
-  justify-content: center;
-  height: 5vh;
-  width: 10vw;
-
-  background-image: url("img/hus3.png");
-  background-size: cover;
-}
-
-@media screen and (min-width: 800px) {
-  .house3 {
-  }
-}
-
-.house-text {
-  display: flex;
-  align-items: baseline;
-  justify-content: center;
-}
-
-.grid-item-1 {
-  grid-area: house;
-}
-.grid-item-2 {
-  grid-area: fish;
-}
-.grid-item-3 {
-  grid-area: weather;
-}
-.grid-item-4 {
-  grid-area: people;
+#offer-house img,
+#offer-fish img,
+#offer-weather img,
+#offer-community img,
+#offer-image-container {
+  mix-blend-mode: multiply;
+  height: 50px;
+  width: 50px;
 }
 
 .user-image-container {
@@ -350,7 +248,7 @@ body {
 }
 
 #fishDescription {
-  margin-top: 2vh;
+  margin-top: 2rem;
   font-size: 1.5rem;
 }
 
@@ -366,7 +264,6 @@ body {
 
 #admin-display {
   grid-area: testimonial;
-  margin-top: 5vh;
   display: flex;
   flex-direction: column;
 }
@@ -377,16 +274,13 @@ body {
   justify-content: center;
   flex-wrap: wrap;
   align-items: center;
-  font-size: 1.5rem;
   text-align: center;
-  padding: 4vh 4vw;
-  margin-bottom: 6vh;
+  margin-bottom: 2rem;
 }
 
 .admin-content {
-  height: 25vh;
+  height: 12rem;
   background-color: pink;
-  width: 100%;
   overflow: hidden;
 }
 
@@ -405,26 +299,20 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-size: 1.5rem;
-  color: black;
-  padding: 3vh 3vw;
-  margin-top: 5vh;
+  padding: 1rem;
+}
+
+#display-howto {
+  grid-area: steps;
 }
 
 #display-howto h2 {
-  margin-bottom: 3vh;
   font-size: 1.5rem;
 }
 
 #display-howto ol {
   margin: 4vw 4vh;
   list-style-type: list;
-}
-
-#display-howto {
-  grid-area: steps;
-  margin: 12vh 12vw;
-  margin-top: 6vh;
 }
 
 #display-howto > ol {
@@ -444,7 +332,6 @@ body {
 #fish-places input {
   border-style: none;
   width: 80vw;
-  height: 8vh;
   background-color: green;
   border-radius: 16px;
   color: white;
@@ -453,7 +340,6 @@ body {
 }
 
 .calculator-container {
-  /* margin: 6vw 6vh; */
   height: 40vh;
   border-radius: 8px;
   background-image: url("img/kalkylatorFinal.png");
@@ -461,13 +347,16 @@ body {
   background-repeat: no-repeat;
 }
 
+
+
 .calc-text-container {
   display: flex;
   flex-direction: column;
   text-align: center;
-  margin-top: 5vh;
-  height: 10vh;
-  font-size: 1.6rem;
+}
+
+.calc-text-container h3 {
+  margin-bottom: 1rem;
 }
 
 /* Fishing spots */
@@ -481,7 +370,7 @@ body {
   height: 30vh;
 }
 
-.startpunkt,
+.label,
 .checkbox {
   display: flex;
   flex-direction: column;
@@ -491,12 +380,39 @@ body {
 
 .checkradio {
   display: flex;
+  gap: 1rem;
+}
+
+.checkbox {
+  display: flex;
+  justify-content: center;
 }
 
 .radiobutt {
   display: flex;
   justify-content: center;
-  flex: 1;
+  flex-direction: column;
+  border: 1px solid black;
+  border-radius: .5rem;
+  padding: .3rem;
+}
+
+.radiobutt-div {
+  display: flex;
+  justify-content: space-around;
+}
+
+.btn-div {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.btn-div input {
+  padding: 0.5rem 2rem;
+  border-radius: .5rem;
+  color: white;
+  background-color: #4F7336;
 }
 
 footer {
@@ -509,17 +425,74 @@ footer {
   justify-content: center;
   align-items: center;
 }
+footer p {
+  margin-bottom: .3rem;
+}
+footer a {
+  color: white;
+}
 
+body {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "hero"
+    "offer"
+    "steps"
+    "testimonial"
+    "weather"
+    "calculator"
+    "footer";
+}
 
-@media screen and (min-width:600px) {
+@media screen and (min-width: 924px) {
+  body {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:
+      "hero hero"
+      "offer steps"
+      "testimonial weather"
+      "calculator calculator"
+      "footer footer";
+  }
+
+  #hero-section {
+    height: 100vh;
+    background-position: center;
+    background-size: cover;
+    margin-bottom: 0;
+  }
+  #hero-section > h1 {
+    font-size: 2rem;
+  }
+
+  .form {
+    left: 5rem;
+  }
+}
+@media screen and (min-width: 1024px) {
   body {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-areas: 
-    "hero hero hero"
-    "offer steps testimonial"
-    "weather calculator calculator"
-    "footer footer footer"
-    ;
+    grid-template-areas:
+      "hero hero hero"
+      "offer steps testimonial"
+      "weather calculator calculator"
+      "footer footer footer";
+  }
+
+  #hero-section {
+    height: 100vh;
+    background-position: center;
+    background-size: cover;
+    margin-bottom: 0;
+  }
+
+  #hero-section > h1 {
+    font-size: 2.6rem;
+  }
+  .form {
+    left: 8rem;
   }
 }

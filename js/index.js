@@ -100,7 +100,7 @@ async function GetAllWeatherData() {
       method: 'GET',
       headers: headers
 })).json()},
-    {"Lofoten " : await (await fetch('https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=68.04534&lon=13.38235', {
+    {"Lofoten" : await (await fetch('https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=68.04534&lon=13.38235', {
       method: 'GET',
       headers: headers
 })).json()},
@@ -128,11 +128,14 @@ async function GetAllWeatherData() {
   for(let i = 0; i < result.length; i++) {
     weatherData.push({[locationKey[i]]: {data: [], updatedWeatherReport: {}}})
   }
+  // console.log(weatherData);
 
   // Genom denna loop får vi det uppdaterade-väder-raporten för just det specifika location
   for(let i = 0; i < result.length; i++) {
     let updatedDate = result[i][locationKey[i]].properties.meta.updated_at.slice(0,10)
+    // console.log(updatedDate);
     let currenTimeIndex = result[i][locationKey[i]].properties.meta.updated_at.indexOf(':')
+    // console.log(currenTimeIndex);
 
     updatedTimeFinal = result[i][locationKey[i]].properties.meta.updated_at.slice(currenTimeIndex - 2, currenTimeIndex + 3)
 
@@ -170,7 +173,7 @@ async function GetAllWeatherData() {
 }
 
 // Function Jämnför den lokala tiden med tiden med väder-arrayn
-function CheckDateTime() {
+function checkDateTime() {
   let dateToday = new Date().toLocaleDateString();
   let timeToday = new Date().toLocaleTimeString();
 
@@ -180,7 +183,14 @@ function CheckDateTime() {
   let weatherIcon = [];
 
   // Här så splitar jag varje tid på weatherData-arrayn och jämför om det är rätt datum och tid
+  console.log(weatherDataFinal.length)
   for(let i = 0; i < weatherDataFinal.length; i++) {
+    console.log(weatherDataFinal.locationKeys);
+    console.log(weatherDataFinal[1]);
+    console.log(weatherDataFinal[1][locationKeys[1]])
+    console.log(`Uncaught TypeError: Cannot read properties of null (reading '0') at checkDateTime (index.js:151:56)
+    at index.js:264:1`)
+    console.log(weatherDataFinal[0]);
     for(let j = 0; j < weatherDataFinal[i][locationKeys[i]].data.length; j++) {
 
       let ArrayindexTime = weatherDataFinal[i][locationKeys[i]].data[j].time.indexOf(":");
@@ -285,16 +295,16 @@ function CheckDateTime() {
   }
 }
 /*
-  Denna funktion, hämtar all väderData på ett interval exempelvis varje 5 sekunder hämta api datat. Sorterar väder-datat. Funktionen "CheckDateTime" den kollar vilken den lokala tiden är alltså vad är klockan nu? jämförelse vad det är för tid på datat vi får på vädret. Om klockan är 12:34 och i vårat objekt har vi tiden 12:00 och vädret för denna tidslag. Så kommer detta objekt att sättas och displays "realtid" för varje timme, vad det är för väder just för denna timme.
+  Denna funktion, hämtar all väderData på ett interval exempelvis varje 5 sekunder hämta api datat. Sorterar väder-datat. Funktionen "checkDateTime" den kollar vilken den lokala tiden är alltså vad är klockan nu? jämförelse vad det är för tid på datat vi får på vädret. Om klockan är 12:34 och i vårat objekt har vi tiden 12:00 och vädret för denna tidslag. Så kommer detta objekt att sättas och displays "realtid" för varje timme, vad det är för väder just för denna timme.
 */
 function IntervalLoop() {
   setInterval(() => {
     GetAllWeatherData()
-    CheckDateTime()
+    checkDateTime()
     }, 900000) //  900000 milisecounds, 15min interval update
 }
 GetAllWeatherData()   // Hämtar all väder-data och sorterar allting
-CheckDateTime()       // Kollar vilket specifikt väder-objekt vi ska ta
+checkDateTime()       // Kollar vilket specifikt väder-objekt vi ska ta
 IntervalLoop() // This function is asyncroumus
 
 // Display admin-uploads to home-page
