@@ -40,23 +40,23 @@ let nightCount = document.querySelector('#nightCount')
 let counterValue = 1
 
 let decreaseButton = document.getElementById("decrease");
-decreaseButton.disabled = true;
-// counterValue.textContent = 1; //Bestämmer startvärdet
-document.querySelector("#increase").addEventListener("click", () => {
-    counterValue++;
-    nightCount.innerHTML = counterValue
-    if(counterValue > 1) {
-      decreaseButton.disabled = false;
-    }
-});
+// decreaseButton.disabled = true;
+// // counterValue.textContent = 1; //Bestämmer startvärdet
+// document.querySelector("#increase").addEventListener("click", () => {
+//     counterValue++;
+//     nightCount.innerHTML = counterValue
+//     if(counterValue > 1) {
+//       decreaseButton.disabled = false;
+//     }
+// });
 
-document.querySelector("#decrease").addEventListener("click", () => {
-  counterValue--;
-  nightCount.innerHTML = counterValue
-  if (counterValue === 1) {
-    decreaseButton.disabled = true;
-  }
-});
+// document.querySelector("#decrease").addEventListener("click", () => {
+//   counterValue--;
+//   nightCount.innerHTML = counterValue
+//   if (counterValue === 1) {
+//     decreaseButton.disabled = true;
+//   }
+// });
 
 function CounterPrice() {
   console.log(destinationElement.value);
@@ -191,6 +191,7 @@ function CheckDateTime() {
       let currentTimeIndex = timeToday.indexOf(":");
       let currentTime = timeToday.slice(0, currentTimeIndex);
 
+      console.log(dateToday);
       if (ArraytimeNow === currentTime && weatherDataFinal[i][locationKeys[i]].data[j].date === dateToday) {
         switch(weatherDataFinal[i][locationKeys[i]].data[j]["Weather-Symbol"]) {
           case "partlycloudy_night":
@@ -272,7 +273,9 @@ function CheckDateTime() {
             break;
           default:
             weatherIcon.push("Missing weather data switch")
+
         }
+        console.log(weatherIcon);
          // För denna kommer endast kör 3 gånger för den exakta tiden finns bara 1 i arrayn och då på dessa 3 location och dessa element har jag redan i arrayn-locationElements
         locationElements[i].innerHTML = `<h3>${weatherDataFinal[i][locationKeys[i]].data[j]["Weather-Details"].air_temperature} c°</h3>
           <img src=img/${weatherIcon[i]}.png alt="Weather Icon" height="50px" width="50px">
