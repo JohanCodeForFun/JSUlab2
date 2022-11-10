@@ -1,35 +1,41 @@
 /*
   1. Root-element-settings
   2. body & html-settings
-  3. Navbar
-  4. Hero-section
-  5. Content
-  6. Fishing spots css
-  7. Footer
+  3. Hero-section
+  4. Form-styling
+  5. Offer-section
+  6. Testimonials-section
+  7. How it works-section
+  8. Opt-in section, to main form
+  9. Weathermap
+  10. Footer
+  11. Media Queries
 */
 
-@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600;700;800&family=Roboto:wght@100;300;400;500;700;900&family=Silkscreen:wght@700&display=swap");
+/* Validated css code below, OK! */
 
 /* 1. Root-element-settings */
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  /* font-family: Roboto Slab; */
-  /* overflow-x: hidden; */
 }
 
+
+/* 2. body & html-settings */
 body {
   background-color: #ffe9dc;
   font-family: "Roboto", sans-serif;
   font-family: "Merriweather", serif;
 }
 
-section {
+section,
+#weathermap {
   padding: 1rem;
 }
 
-/* 4. Hero-section */
+
+/* 3. Hero-section */
 #hero-section {
   grid-area: hero;
   display: flex;
@@ -37,12 +43,9 @@ section {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* background-image: linear-gradient(rgba(1, 1, 1, 0.25), rgba(1, 1, 1, 0.25)),
-    url("img/lake-640.jpg"); */
   background-image: url(img/hero1.jpg);
   background-position: center;
   background-size: cover;
-  /* background-position: center; */
   height: 40vh;
   margin-bottom: 12rem;
   box-shadow: 2px 2px 2px 2px black;
@@ -71,90 +74,55 @@ section {
   border: 1px black solid;
 }
 
-/* 5. Content */
-#weathermap {
-  grid-area: weather;
+/* form styling */
+.label,
+.checkbox {
   display: flex;
-  height: 50vh;
-  background-color: #ffe9dc;
-
-  /* background-color: red; */
-  /* background-image: url('img/NorgemapFinal.jpg'); */
-  /* background-size: cover; */
-  /* background-image: linear-gradient(rgba(1, 1, 1, 0.25), rgba(1, 1, 1, 0.25)), url('img/map.png'); */
-  background-position: center;
-  background-size: cover;
-}
-
-#weathermap .weathermap-container {
-  padding: 1rem;
-  background-color: white;
-  border-radius: 1rem;
-  border: 1px solid black;
-  grid-area: weather;
-  display: grid;
-  grid-template-areas:
-    "loc1 locTana"
-    "locLofoten ."
-    "loc3 info"
-    "loc4 info"
-    "locHall info";
-
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(5, 1fr);
-
-  width: 100%;
-  height: 100%;
-  /* background-color: green; */
-  background-image: url("img/NorgemapFinal.jpg");
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  /* background-position: center; */
-  position: relative;
-}
-
-#weathermap .weathermap-container #loc1 {
-  grid-area: loc1;
-}
-
-#weathermap .weathermap-container #locationTana,
-#weathermap .weathermap-container #locationLofoten,
-#weathermap .weathermap-container #locationHallingdalselva {
-  color: red;
-  text-shadow: 1px 1px 1px black;
-  border-radius: 1rem;
-  display: flex;
-  justify-content: center;
-}
-
-#weathermap .weathermap-container #locationTana {
-  grid-area: locTana;
-}
-
-#weathermap .weathermap-container #locationLofoten {
-  grid-area: locLofoten;
-}
-#weathermap .weathermap-container #locationHallingdalselva {
-  grid-area: locHall;
-}
-
-#weathermap .weathermap-container #infoHeader {
-  grid-area: infoHeader;
-}
-#weathermap .weathermap-container #info {
-  grid-area: info;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
-
-  color: white;
-  border-radius: 1rem;
-  padding: 1rem;
+  gap: 0.4rem;
+  margin-bottom: 0.6rem;
 }
 
+.checkradio {
+  display: flex;
+  gap: 1rem;
+}
+
+.checkbox {
+  display: flex;
+  justify-content: center;
+}
+
+.radiobutt {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  border: 1px solid black;
+  border-radius: .5rem;
+  padding: .3rem;
+}
+
+.radiobutt-div {
+  display: flex;
+  justify-content: space-around;
+}
+
+.btn-div {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.btn-div input {
+  padding: 0.5rem 2rem;
+  border-radius: .5rem;
+  color: white;
+  background-color: #4F7336;
+}
+
+
+
+/* 4. Offer-section */
 #mer-info {
   margin-top: 1rem;
   display: flex;
@@ -164,15 +132,6 @@ section {
 
 #admin-display {
   grid-area: testimonial;
-}
-
-/* Fishing spots */
-#hero-fishingspots {
-  grid-area: hero;
-  margin-bottom: 8rem;
-  background-color: #ffe9dc;
-  color: black;
-  background-image: url(img/hero\ image.png);
 }
 
 #offer-container {
@@ -208,45 +167,8 @@ section {
   width: 50px;
 }
 
-.user-image-container {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  height: 60%;
-  align-items: center;
-}
 
-.user-image-container img {
-  width: 50%;
-  height: 50%;
-}
-
-.user-text {
-  margin-top: 0.2vh;
-  display: flex;
-  height: 41%;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-}
-
-.fish-upper-container {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  height: 40%;
-  margin-top: 2vh;
-}
-
-.fish-upper {
-  display: flex;
-  height: 100%;
-  width: 38%;
-  background-image: url("img/fishIcon.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
+/* 5. Testimonials-section */
 #fishDescription {
   margin-top: 2rem;
   font-size: 1.5rem;
@@ -302,41 +224,27 @@ section {
   padding: 1rem;
 }
 
+
+/* 6. How it works-section */
 #display-howto {
   grid-area: steps;
 }
 
-#display-howto h2 {
-  font-size: 1.5rem;
-}
-
 #display-howto ol {
-  margin: 4vw 4vh;
-  list-style-type: list;
-}
-
-#display-howto > ol {
-  font-size: 1.5rem;
+  padding: 1rem;
+  font-size: 1.2rem;
 }
 
 #display-howto > ol li {
-  margin-bottom: 2vh;
+  margin-bottom: .5rem;
 }
 
+
+/* 7. Opt-in section, to main form */
 #fish-places {
   grid-area: calculator;
   display: flex;
   justify-content: center;
-}
-
-#fish-places input {
-  border-style: none;
-  width: 80vw;
-  background-color: green;
-  border-radius: 16px;
-  color: white;
-  font-size: 1.7rem;
-  font-weight: 700;
 }
 
 .calculator-container {
@@ -346,8 +254,6 @@ section {
   background-size: contain;
   background-repeat: no-repeat;
 }
-
-
 
 .calc-text-container {
   display: flex;
@@ -359,62 +265,85 @@ section {
   margin-bottom: 1rem;
 }
 
-/* Fishing spots */
-#hero-fishingspots {
+
+/* 8. Weathermap */
+#weathermap {
+  grid-area: weather;
+  display: flex;
+  height: 50vh;
   background-color: #ffe9dc;
-  color: black;
-  background-image: url("img/fishing-spots/hero-lofoten.png");
   background-position: center;
   background-size: cover;
-  display: flex;
-  height: 30vh;
 }
 
-.label,
-.checkbox {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  margin-bottom: 0.6rem;
-}
-
-.checkradio {
-  display: flex;
-  gap: 1rem;
-}
-
-.checkbox {
-  display: flex;
-  justify-content: center;
-}
-
-.radiobutt {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
+#weathermap .weathermap-container {
+  padding: 1rem;
+  background-color: white;
+  border-radius: 1rem;
   border: 1px solid black;
-  border-radius: .5rem;
-  padding: .3rem;
+  grid-area: weather;
+  display: grid;
+  grid-template-areas:
+    "loc1 locTana"
+    "locLofoten ."
+    "loc3 info"
+    "loc4 info"
+    "locHall info";
+
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+
+  width: 100%;
+  height: 100%;
+  background-image: url("img/NorgemapFinal.jpg");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
 }
 
-.radiobutt-div {
-  display: flex;
-  justify-content: space-around;
+#weathermap .weathermap-container #loc1 {
+  grid-area: loc1;
 }
 
-.btn-div {
+#weathermap .weathermap-container #locationTana,
+#weathermap .weathermap-container #locationLofoten,
+#weathermap .weathermap-container #locationHallingdalselva {
+  color: red;
+  text-shadow: 1px 1px 1px black;
+  border-radius: 1rem;
   display: flex;
   justify-content: center;
-  margin-top: 1rem;
 }
 
-.btn-div input {
-  padding: 0.5rem 2rem;
-  border-radius: .5rem;
+#weathermap .weathermap-container #locationTana {
+  grid-area: locTana;
+}
+
+#weathermap .weathermap-container #locationLofoten {
+  grid-area: locLofoten;
+}
+#weathermap .weathermap-container #locationHallingdalselva {
+  grid-area: locHall;
+}
+
+#weathermap .weathermap-container #infoHeader {
+  grid-area: infoHeader;
+}
+#weathermap .weathermap-container #info {
+  grid-area: info;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
   color: white;
-  background-color: #4F7336;
+  border-radius: 1rem;
+  padding: 1rem;
 }
 
+/* 9. Footer */
 footer {
   grid-area: footer;
   background-color: #733b36;
@@ -445,6 +374,8 @@ body {
     "footer";
 }
 
+
+/* 10. Media Queries */
 @media screen and (min-width: 924px) {
   body {
     display: grid;
@@ -496,3 +427,5 @@ body {
     left: 8rem;
   }
 }
+
+/* Validated css code above, OK! */
