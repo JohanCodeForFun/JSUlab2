@@ -31,15 +31,35 @@ let destinationElement = document.querySelector('#destination')
 let startpointElement = document.querySelector('#startpunkt')
 let vechileElement = document.querySelectorAll('input[type="radio"]')
 
+let equipementElement = document.querySelector('#equipement')
+let guideElement = document.querySelector('#guide')
 
 // 2. Hämta data från user till annan sida
 function CounterPrice() {
   console.log(destinationElement.value);
   console.log(startpointElement.value);
+  if(equipementElement.checked) {
+    equipementElement.value = "2000"
+  }
+  else {
+    equipementElement.value = "no-equipement"
+  }
+
+  if(guideElement.checked) {
+    guideElement.value = "500"
+  }
+  else {
+    guideElement.value = "no-guide"
+  }
+
+  console.log(equipementElement.value)
+  console.log(guideElement.value)
+
+
   for(let i = 0; i < vechileElement.length; i++) {
     let isChecked = vechileElement[i].checked
     if(isChecked === true) {
-      window.location.href = `http://127.0.0.1:5501/fiskeplatser.html?destination=${destinationElement.value}&startpoint=${startpointElement.value}&vechile=${vechileElement[i].value}`
+      window.location.href = `http://127.0.0.1:5501/fiskeplatser.html?destination=${destinationElement.value}&startpoint=${startpointElement.value}&vechile=${vechileElement[i].value}&equipement=${equipementElement.value}&guide=${guideElement.value}`
     }
   }
 }

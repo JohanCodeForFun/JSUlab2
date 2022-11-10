@@ -3,14 +3,26 @@ const queryString = window.location.search;
 
 const urlParams = new URLSearchParams(queryString);
 
-let destinationValue = urlParams.get('destination');
-let startpointValue = urlParams.get('startpoint');
-let vechileValue = urlParams.get('vechile');
+let destinationInput = urlParams.get('destination');
+let startpointInput = urlParams.get('startpoint');
+let vechileInput = urlParams.get('vechile');
 
+let guideInput = urlParams.get('guide');
+let equipementInput = urlParams.get('equipement');
 
-console.log(destinationValue);
-console.log(startpointValue);
-console.log(vechileValue);
+let guideValue = 0;
+let equipementValue = 0;
+
+if(guideInput !== "no-guide") {
+  guideValue = Number(guideInput);
+}
+
+if(equipementInput !== "no-equipement") {
+  equipementValue = Number(equipementInput)
+}
+
+console.log(guideValue);
+console.log(equipementValue);
 
 // 2. Funktioner för att visa graf med Chart.js
 
