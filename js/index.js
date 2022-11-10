@@ -182,6 +182,7 @@ function checkDateTime() {
   // 3 deklarerade väder-iconer
   let weatherIcon = [];
 
+
   // Här så splitar jag varje tid på weatherData-arrayn och jämför om det är rätt datum och tid
   console.log(weatherDataFinal.length)
   for(let i = 0; i < weatherDataFinal.length; i++) {
@@ -192,108 +193,104 @@ function checkDateTime() {
     at index.js:264:1`)
     console.log(weatherDataFinal[0]);
     for(let j = 0; j < weatherDataFinal[i][locationKeys[i]].data.length; j++) {
-
       let ArrayindexTime = weatherDataFinal[i][locationKeys[i]].data[j].time.indexOf(":");
-
       let ArraytimeNow = weatherDataFinal[i][locationKeys[i]].data[j].time.slice(0, ArrayindexTime);
 
       let currentTimeIndex = timeToday.indexOf(":");
       let currentTime = timeToday.slice(0, currentTimeIndex);
 
-      // Kollar rätt tid för arrayn och för den lokala tiden
-      // Denna kommer ju bli sant 3 gånger, för vi har 3 olika locations
       if (ArraytimeNow === currentTime && weatherDataFinal[i][locationKeys[i]].data[j].date === dateToday) {
-        // Här kollar jag om våran array innehåller denna symbol och om det gör det så kollar vi också här i switchen vilken location det är. Sedan pushar vi in detta. Locationen kan bara vara sant 1 på i för vi har bara 3 location så tittar efter och så kan bara j också vara sant 1 gång för det är ju den nuvarande tiden så kommer va densamma. Därför blir det 3 gånger rätt på denna if-sats som vi sedan pushar in i arrayn-weatherIcon.
         switch(weatherDataFinal[i][locationKeys[i]].data[j]["Weather-Symbol"]) {
-        case "partlycloudy_night":
-          if(locationKeys[i] === "Tana") {
-            weatherIcon.push("partlycloudy_night")
-          }
-          else if(locationKeys[i] === "Lofoten ") {
-            weatherIcon.push("partlycloudy_night")
-          }
-          else if (locationKeys[i] === "Hallingdalselva"){
-            weatherIcon.push("partlycloudy_night")
-          }
-          break;
-        case "fair_night":
-          if(locationKeys[i] === "Tana") {
-            weatherIcon.push("fair_night")
-          }
-          else if(locationKeys[i] === "Lofoten ") {
-            weatherIcon.push("fair_night")
-          }
-          else if (locationKeys[i] === "Hallingdalselva"){
-            weatherIcon.push("fair_night")
-          }
-          break;
-        case "partlycloudy_day":
-          if(locationKeys[i] === "Tana") {
-            weatherIcon.push("partlycloudy_day")
-          }
-          else if(locationKeys[i] === "Lofoten ") {
-            weatherIcon.push("partlycloudy_day")
-          }
-          else if (locationKeys[i] === "Hallingdalselva"){
-            weatherIcon.push("partlycloudy_day")
-          }
-          break;
-        case "cloudy":
-          if(locationKeys[i] === "Tana") {
-            weatherIcon.push("cloudy")
-          }
-          else if(locationKeys[i] === "Lofoten ") {
-            weatherIcon.push("cloudy")
-          }
-          else if (locationKeys[i] === "Hallingdalselva"){
-            weatherIcon.push("cloudy")
-          }
-          break;
-        case "lightrain":
-          if(locationKeys[i] === "Tana") {
-            weatherIcon.push("lightrain")
-          }
-          else if(locationKeys[i] === "Lofoten ") {
-            weatherIcon.push("lightrain")
-          }
-          else if (locationKeys[i] === "Hallingdalselva"){
-            weatherIcon.push("lightrain")
-          }
-          break;
-        case "heavyrain":
-          if(locationKeys[i] === "Tana") {
-            weatherIcon.push("heavyrain")
-          }
-          else if(locationKeys[i] === "Lofoten ") {
-            weatherIcon.push("heavyrain")
-          }
-          else if (locationKeys[i] === "Hallingdalselva"){
-            weatherIcon.push("heavyrain")
-          }
-          break;
-        case "fog":
-          if(locationKeys[i] === "Tana") {
-            weatherIcon.push("fog")
-          }
-          else if(locationKeys[i] === "Lofoten ") {
-            weatherIcon.push("fog")
-          }
-          else if (locationKeys[i] === "Hallingdalselva"){
-            weatherIcon.push("fog")
-          }
-          break;
-        default:
-          weatherIcon.push("Missing weather data switch")
+          case "partlycloudy_night":
+            if(locationKeys[i] === "Tana") {
+              weatherIcon.push("partlycloudy_night")
+            }
+            else if(locationKeys[i] === "Lofoten ") {
+              weatherIcon.push("partlycloudy_night")
+            }
+            else if (locationKeys[i] === "Hallingdalselva"){
+              weatherIcon.push("partlycloudy_night")
+            }
+            break;
+          case "fair_night":
+            if(locationKeys[i] === "Tana") {
+              weatherIcon.push("fair_night")
+            }
+            else if(locationKeys[i] === "Lofoten ") {
+              weatherIcon.push("fair_night")
+            }
+            else if (locationKeys[i] === "Hallingdalselva"){
+              weatherIcon.push("fair_night")
+            }
+            break;
+          case "partlycloudy_day":
+            if(locationKeys[i] === "Tana") {
+              weatherIcon.push("partlycloudy_day")
+            }
+            else if(locationKeys[i] === "Lofoten ") {
+              weatherIcon.push("partlycloudy_day")
+            }
+            else if (locationKeys[i] === "Hallingdalselva"){
+              weatherIcon.push("partlycloudy_day")
+            }
+            break;
+          case "cloudy":
+            if(locationKeys[i] === "Tana") {
+              weatherIcon.push("cloudy")
+            }
+            else if(locationKeys[i] === "Lofoten ") {
+              weatherIcon.push("cloudy")
+            }
+            else if (locationKeys[i] === "Hallingdalselva"){
+              weatherIcon.push("cloudy")
+            }
+            break;
+          case "lightrain":
+            if(locationKeys[i] === "Tana") {
+              weatherIcon.push("lightrain")
+            }
+            else if(locationKeys[i] === "Lofoten ") {
+              weatherIcon.push("lightrain")
+            }
+            else if (locationKeys[i] === "Hallingdalselva"){
+              weatherIcon.push("lightrain")
+            }
+            break;
+          case "heavyrain":
+            if(locationKeys[i] === "Tana") {
+              weatherIcon.push("heavyrain")
+            }
+            else if(locationKeys[i] === "Lofoten ") {
+              weatherIcon.push("heavyrain")
+            }
+            else if (locationKeys[i] === "Hallingdalselva"){
+              weatherIcon.push("heavyrain")
+            }
+            break;
+          case "fog":
+            if(locationKeys[i] === "Tana") {
+              weatherIcon.push("fog")
+            }
+            else if(locationKeys[i] === "Lofoten ") {
+              weatherIcon.push("fog")
+            }
+            else if (locationKeys[i] === "Hallingdalselva"){
+              weatherIcon.push("fog")
+            }
+            break;
+          default:
+            weatherIcon.push("Missing weather data switch")
         }
-       // För denna kommer endast kör 3 gånger för den exakta tiden finns bara 1 i arrayn och då på dessa 3 location och dessa element har jag redan i arrayn-locationElements
-      locationElements[i].innerHTML = `<h3>${weatherDataFinal[i][locationKeys[i]].data[j]["Weather-Details"].air_temperature} c°</h3>
-        <img src=img/${weatherIcon[i]}.png alt="Weather Icon" height="50px" width="50px">
-        `
-      break;
+         // För denna kommer endast kör 3 gånger för den exakta tiden finns bara 1 i arrayn och då på dessa 3 location och dessa element har jag redan i arrayn-locationElements
+        locationElements[i].innerHTML = `<h3>${weatherDataFinal[i][locationKeys[i]].data[j]["Weather-Details"].air_temperature} c°</h3>
+          <img src=img/${weatherIcon[i]}.png alt="Weather Icon" height="50px" width="50px">
+          `
+        break;
       }
     }
   }
 }
+
 /*
   Denna funktion, hämtar all väderData på ett interval exempelvis varje 5 sekunder hämta api datat. Sorterar väder-datat. Funktionen "checkDateTime" den kollar vilken den lokala tiden är alltså vad är klockan nu? jämförelse vad det är för tid på datat vi får på vädret. Om klockan är 12:34 och i vårat objekt har vi tiden 12:00 och vädret för denna tidslag. Så kommer detta objekt att sättas och displays "realtid" för varje timme, vad det är för väder just för denna timme.
 */
