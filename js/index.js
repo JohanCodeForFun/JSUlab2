@@ -141,12 +141,14 @@ function checkDateTime() {
   let weatherIcon = [];
 
   // Här så splitar jag varje tid på weatherData-arrayn och jämför om det är rätt datum och tid
+  console.log(weatherDataFinal.length)
   for(let i = 0; i < weatherDataFinal.length; i++) {
-    // console.log(weatherDataFinal);
-    // console.log(weatherDataFinal[0]);
-    // console.log(weatherDataFinal[0][locationKeys[0]])
+    console.log(weatherDataFinal.locationKeys);
+    console.log(weatherDataFinal[1]);
+    console.log(weatherDataFinal[1][locationKeys[1]])
     console.log(`Uncaught TypeError: Cannot read properties of null (reading '0') at checkDateTime (index.js:151:56)
     at index.js:264:1`)
+    console.log(weatherDataFinal[0]);
     for(let j = 0; j < weatherDataFinal[i][locationKeys[i]].data.length; j++) {
 
       let ArrayindexTime = weatherDataFinal[i][locationKeys[i]].data[j].time.indexOf(":");
