@@ -181,6 +181,7 @@ function CheckDateTime() {
   // 3 deklarerade väder-iconer
   let weatherIcon = [];
 
+
   // Här så splitar jag varje tid på weatherData-arrayn och jämför om det är rätt datum och tid
   for(let i = 0; i < weatherDataFinal.length; i++) {
     for(let j = 0; j < weatherDataFinal[i][locationKeys[i]].data.length; j++) {
@@ -281,6 +282,7 @@ function CheckDateTime() {
     }
   }
 }
+
 /*
   Denna funktion, hämtar all väderData på ett interval exempelvis varje 5 sekunder hämta api datat. Sorterar väder-datat. Funktionen "checkDateTime" den kollar vilken den lokala tiden är alltså vad är klockan nu? jämförelse vad det är för tid på datat vi får på vädret. Om klockan är 12:34 och i vårat objekt har vi tiden 12:00 och vädret för denna tidslag. Så kommer detta objekt att sättas och displays "realtid" för varje timme, vad det är för väder just för denna timme.
 */
