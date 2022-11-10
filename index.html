@@ -17,7 +17,7 @@
       <h1>Här börjar ditt fiskeäventyr i Norge!</h1>
       <div class="form">
         <form>
-          <div>
+          <div class="label">
             <label for="destination">Vart vill du resa?</label>
             <select id="destination" name="destination">
               <option value="Tana">Tana</option>
@@ -26,7 +26,7 @@
             </select>
           </div>
           <div>
-            <div class="startpunkt">
+            <div class="label">
               <label for="startpunkt">Startpunkt:</label>
               <select id="startpunkt" name="startpunkt">
                 <option value="Stockholm">Stockholm</option>
@@ -49,22 +49,32 @@
               <label for="Tana"></label>
             </div>
             <div class="radiobutt">
-              <input
-                type="radio"
-                name="vehicle"
-                id="motorcycle"
-                value="motorcycle"
-              />
-              <label for="motorcycle">MC</label>
-              <input type="radio" name="vehicle" id="car" value="car" checked />
-              <label for="car">CAR</label>
-              <input
-                type="radio"
-                name="vehicle"
-                id="light-t"
-                value="light-truck"
-              />
-              <label for="light-t">BUS</label>
+              <div>
+                <label for="motorcycle">MC</label>
+                <label for="car">CAR</label>
+                <label for="light-t">BUS</label>
+              </div>
+              <div class="radiobutt-div">
+                <input
+                  type="radio"
+                  name="vehicle"
+                  id="motorcycle"
+                  value="motorcycle"
+                />
+                <input
+                  type="radio"
+                  name="vehicle"
+                  id="car"
+                  value="car"
+                  checked
+                />
+                <input
+                  type="radio"
+                  name="vehicle"
+                  id="light-t"
+                  value="light-truck"
+                />
+              </div>
             </div>
           </div>
           <div class="btn-div">
@@ -104,7 +114,10 @@
             <img src="img/fishing-spots/moon.png" alt="Väder ikon" />
             <img src="img/fishing-spots/rain.png" alt="Väder ikon" />
           </div>
-          <p>Vi fiskar i alla väder och väljer perfekta vattnet som passar vädret.</p>
+          <p>
+            Vi fiskar i alla väder och väljer perfekta vattnet som passar
+            vädret.
+          </p>
         </div>
         <div id="offer-community">
           <div class="offer-image-container">
@@ -113,7 +126,6 @@
             <img src="img/fishing-spots/groupGubbe.png" alt="Gemenskap ikon" />
           </div>
           <p>Garanterat skön grupp och omtyckta guider.</p>
-          
         </div>
       </div>
 
@@ -196,14 +208,13 @@
     </section>
     <section id="fish-places">
       <div class="calc-text-container">
-        <p>Använd vår <a href="#">kalkyl här </a>för</p>
-        <p>att få en beräknat pris på resan</p>
+        <h3>Använd vår <a href="#">kalkylator här</a> för att få ett beräknat pris på resan!</h3>
         <div class="calculator-container"></div>
       </div>
     </section>
 
     <section id="weathermap">
-      <div class="image-container">
+      <div class="weathermap-container">
         <div id="loc1"></div>
         <div id="locationTana"></div>
         <div id="locationLofoten"></div>

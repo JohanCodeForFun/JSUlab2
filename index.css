@@ -33,7 +33,6 @@ section {
 #hero-section {
   grid-area: hero;
   display: flex;
-  font-size: 1.2rem;
   gap: 1rem;
   flex-direction: column;
   justify-content: center;
@@ -60,8 +59,6 @@ section {
 
 .form {
   padding: 1rem;
-  height: 16rem;
-  width: 16rem;
   position: absolute;
   margin: auto;
   top: 12rem;
@@ -72,7 +69,6 @@ section {
   justify-content: center;
   flex-direction: column;
   border: 1px black solid;
-  z-index: 1;
 }
 
 /* 5. Content */
@@ -90,7 +86,10 @@ section {
   background-size: cover;
 }
 
-#weathermap .image-container {
+#weathermap .weathermap-container {
+  padding: 1rem;
+  background-color: white;
+  border-radius: 1rem;
   grid-area: weather;
   display: grid;
   grid-template-areas:
@@ -114,13 +113,13 @@ section {
   position: relative;
 }
 
-#weathermap .image-container #loc1 {
+#weathermap .weathermap-container #loc1 {
   grid-area: loc1;
 }
 
-#weathermap .image-container #locationTana,
-#weathermap .image-container #locationLofoten,
-#weathermap .image-container #locationHallingdalselva {
+#weathermap .weathermap-container #locationTana,
+#weathermap .weathermap-container #locationLofoten,
+#weathermap .weathermap-container #locationHallingdalselva {
   color: red;
   text-shadow: 1px 1px 1px black;
   border-radius: 1rem;
@@ -128,21 +127,21 @@ section {
   justify-content: center;
 }
 
-#weathermap .image-container #locationTana {
+#weathermap .weathermap-container #locationTana {
   grid-area: locTana;
 }
 
-#weathermap .image-container #locationLofoten {
+#weathermap .weathermap-container #locationLofoten {
   grid-area: locLofoten;
 }
-#weathermap .image-container #locationHallingdalselva {
+#weathermap .weathermap-container #locationHallingdalselva {
   grid-area: locHall;
 }
 
-#weathermap .image-container #infoHeader {
+#weathermap .weathermap-container #infoHeader {
   grid-area: infoHeader;
 }
-#weathermap .image-container #info {
+#weathermap .weathermap-container #info {
   grid-area: info;
 
   display: flex;
@@ -340,7 +339,6 @@ section {
 }
 
 .calculator-container {
-  /* margin: 6vw 6vh; */
   height: 40vh;
   border-radius: 8px;
   background-image: url("img/kalkylatorFinal.png");
@@ -348,12 +346,16 @@ section {
   background-repeat: no-repeat;
 }
 
+
+
 .calc-text-container {
   display: flex;
   flex-direction: column;
   text-align: center;
-  margin-top: 5vh;
-  font-size: 1.6rem;
+}
+
+.calc-text-container h3 {
+  margin-bottom: 1rem;
 }
 
 /* Fishing spots */
@@ -367,7 +369,7 @@ section {
   height: 30vh;
 }
 
-.startpunkt,
+.label,
 .checkbox {
   display: flex;
   flex-direction: column;
@@ -377,14 +379,26 @@ section {
 
 .checkradio {
   display: flex;
+  gap: 1rem;
+}
+
+.checkbox {
+  display: flex;
+  justify-content: center;
 }
 
 .radiobutt {
   display: flex;
   justify-content: center;
-  flex: 1;
+  flex-direction: column;
   border: 1px solid black;
-  border-radius: 1rem;
+  border-radius: .5rem;
+  padding: .3rem;
+}
+
+.radiobutt-div {
+  display: flex;
+  justify-content: space-around;
 }
 
 .btn-div {
@@ -394,9 +408,10 @@ section {
 }
 
 .btn-div input {
-  padding: 0.5rem 1rem;
-  border-radius: 1rem;
-  background-color: green;
+  padding: 0.5rem 2rem;
+  border-radius: .5rem;
+  color: white;
+  background-color: #4F7336;
 }
 
 footer {
