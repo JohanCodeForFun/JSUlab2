@@ -27,3 +27,15 @@ section {
 #other-fishingspots {
   margin-bottom: 2rem;
 }
+
+
+/* Fishing spots */
+#hero-fishingspots {
+  background-color: #ffe9dc;
+  color: black;
+  background-image: url("img/fishing-spots/hero-lofoten.png");
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  height: 30vh;
+}
