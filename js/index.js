@@ -122,6 +122,7 @@ async function GetAllWeatherData() {
   // Object.keys-funktion will return a array and locationKey is a array too
   // locationKeyInput är redan en array och Object.keys returnar också en array därför i detta fall använder jag mig av funktionen-flat som gör dessa till värden istället för arrays
   let locationKey = locationKeyInput.flat()
+  localStorage.setItem('locationKey', JSON.stringify(locationKey))
 
   // Pushar in objekt till arrayn weatherData, så många som det finns location
   let weatherData = [];
@@ -175,8 +176,7 @@ function CheckDateTime() {
   let timeToday = new Date().toLocaleTimeString();
 
   let weatherDataFinal = JSON.parse(localStorage.getItem('weatherDataFinal'))
-  let locationKeys = JSON.parse(localStorage.getItem('locationKeys'))
-  locationKeys[1] = locationKeys[1].trim(); // Blev något skumt med index-1 att det var ett mellanrum på namnet
+  let locationKeys = JSON.parse(localStorage.getItem('locationKey'))
 
   // 3 deklarerade väder-iconer
   let weatherIcon = [];
@@ -296,12 +296,14 @@ GetAllWeatherData()   // Hämtar all väder-data och sorterar allting
 CheckDateTime()       // Kollar vilket specifikt väder-objekt vi ska ta
 IntervalLoop() // This function is asyncroumus
 
-// Display admin-uploads to home-page
-axios.get('http://localhost:3000/adminUpload').then(result => {
+// Admin-uploads
+fetch('db.json')
+.then(response => response.json())
+.then(result => {
   fishDescriptionElement.innerHTML += `
-    ${result.data[0].name} är en av våra många glada besökare,
-    här har fångats ${result.data[0].fishType}, med en vikt på hela ${result.data[0].fishWeight}
+    ${result.adminUpload[0].name} är en av våra många glada besökare,
+    här har fångats ${result.adminUpload[0].fishType}, med en vikt på hela ${result.adminUpload[0].fishWeight}
   `
-  adminImageElement.setAttribute('src', `${result.data[0].image}`)
-  userDescriptionElement.innerHTML += `"${result.data[0].textDescription}"`
+  adminImageElement.setAttribute('src', `${result.adminUpload[0].image}`)
+  userDescriptionElement.innerHTML += `"${result.adminUpload[0].textDescription}"`
 })
