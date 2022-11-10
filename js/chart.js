@@ -153,6 +153,7 @@ const myChart = new Chart(ctx, {
     datasets: [
       {
         label: "Tält",
+        fill: true,
         data: livingArrayCheap,
         // data: [tent, result += tent, result += tent, ],
         backgroundColor: ["rgba(180, 191, 96, 0.2)"],
@@ -161,6 +162,7 @@ const myChart = new Chart(ctx, {
       },
       {
         label: "Stuga",
+        fill: true,
         data: livingArrayBudget,
         backgroundColor: ["rgba(202, 217, 89, 0.2)"],
         borderColor: ["rgba(202, 217, 89, 1)"],
@@ -168,6 +170,7 @@ const myChart = new Chart(ctx, {
       },
       {
         label: "Hotell",
+        fill: true,
         data: livingArrayLuxury,
         backgroundColor: ["rgba(100, 115, 47, 0.2)"],
         borderColor: ["rgba(100, 115, 47, 1)"],
