@@ -146,7 +146,7 @@ async function GetAllWeatherData() {
       if(result[i][locationKey[i]].properties.timeseries[j].data?.next_1_hours !== undefined) {
         let weatherSymbol = result[i][locationKey[i]].properties.timeseries[j].data.next_1_hours.summary.symbol_code
 
-        //IndexTime
+        //IndexTim
         let timeIndex = result[i][locationKey[i]].properties.timeseries[j].time.indexOf("T")
         //TIME
         let time = result[i][locationKey[i]].properties.timeseries[j].time.lastIndexOf(":")
