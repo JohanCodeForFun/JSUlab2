@@ -90,6 +90,7 @@ section {
   padding: 1rem;
   background-color: white;
   border-radius: 1rem;
+  border: 1px solid black;
   grid-area: weather;
   display: grid;
   grid-template-areas:
