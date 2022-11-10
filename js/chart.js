@@ -21,7 +21,7 @@ if(equipementInput !== "no-equipement") {
   equipementValue = Number(equipementInput)
 }
 
-console.log(guideValue);
+console.log(guideValue)
 console.log(equipementValue);
 
 // 2. Funktioner för att visa graf med Chart.js

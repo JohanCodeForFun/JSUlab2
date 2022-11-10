@@ -7,7 +7,6 @@
 // 5.
 
 
-
 // 2. Hämta element att jobba med
 const weatherDataSection = document.querySelector("#weatherDataSection");
 
@@ -34,7 +33,30 @@ let vechileElement = document.querySelectorAll('input[type="radio"]')
 let equipementElement = document.querySelector('#equipement')
 let guideElement = document.querySelector('#guide')
 
+
 // 2. Hämta data från user till annan sida
+
+let countercounterValue = document.querySelector("#counterValue"); //Bestämmer vilket id
+let decreaseButton = document.getElementById("decrease");
+counterValue.textContent = 1; //Bestämmer startvärdet
+decreaseButton.disabled = true;
+document.querySelector("#increase").addEventListener("click", () => {
+  counterValue.textContent++;
+  console.log(counterValue);
+
+  if (counterValue.textContent > 0) {
+    decreaseButton.disabled = false;
+  }
+});
+
+document.querySelector("#decrease").addEventListener("click", () => {
+  counterValue.textContent--;
+  console.log(counterValue);
+  if (Number(counterValue.textContent) === 1) {
+    decreaseButton.disabled = true;
+  }
+});
+
 function CounterPrice() {
   console.log(destinationElement.value);
   console.log(startpointElement.value);
@@ -54,7 +76,6 @@ function CounterPrice() {
 
   console.log(equipementElement.value)
   console.log(guideElement.value)
-
 
   for(let i = 0; i < vechileElement.length; i++) {
     let isChecked = vechileElement[i].checked
