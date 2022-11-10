@@ -424,6 +424,13 @@ footer {
   justify-content: center;
   align-items: center;
 }
+footer p {
+  margin-bottom: .3rem;
+}
+footer a {
+  color: white;
+}
+
 body {
   display: grid;
   grid-template-columns: 1fr;
@@ -434,38 +441,8 @@ body {
     "testimonial"
     "weather"
     "calculator"
-    /* "offer" */
     "footer";
 }
-
-/* @media screen and (min-width: 600px) {
-  body {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-areas:
-      "hero hero hero"
-      "offer steps testimonial"
-      "weather calculator calculator"
-      "footer footer footer";
-  }
-
-  #hero-section {
-    height: 100vh;
-    background-position: center;
-    background-size: cover;
-    margin-bottom: 0;
-  }
-
-  #hero-section h1 {
-    font-size: 2.6rem;
-    top: 1.6rem;
-    left: 1.6rem;
-  }
-
-  .form {
-    left: 3rem;
-  }
-} */
 
 @media screen and (min-width: 924px) {
   body {
@@ -484,6 +461,9 @@ body {
     background-position: center;
     background-size: cover;
     margin-bottom: 0;
+  }
+  #hero-section > h1 {
+    font-size: 2rem;
   }
 
   .form {
@@ -506,6 +486,10 @@ body {
     background-position: center;
     background-size: cover;
     margin-bottom: 0;
+  }
+
+  #hero-section > h1 {
+    font-size: 2.6rem;
   }
   .form {
     left: 8rem;
