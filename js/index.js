@@ -239,6 +239,17 @@ function CheckDateTime() {
               weatherIcon.push("cloudy")
             }
             break;
+            case "rain":
+              if(locationKeys[i] === "Tana") {
+                weatherIcon.push("rain")
+              }
+              else if(locationKeys[i] === "Lofoten") {
+                weatherIcon.push("rain")
+              }
+              else if (locationKeys[i] === "Hallingdalselva"){
+                weatherIcon.push("rain")
+              }
+              break;
           case "lightrain":
             if(locationKeys[i] === "Tana") {
               weatherIcon.push("lightrain")
