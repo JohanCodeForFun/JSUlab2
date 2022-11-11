@@ -172,8 +172,9 @@ async function GetAllWeatherData() {
 }
 
 function CheckDateTime() {
-  let dateToday = new Date().toLocaleDateString();
-  let timeToday = new Date().toLocaleTimeString();
+  let dateToday = new Date().toLocaleDateString('sv-SE');
+  var timeToday = new Date().toLocaleTimeString('sv-SE', {hour: '2-digit', minute:'2-digit'}); // Fixa så att dessa med datum och tid och nu tvingat att göra det till Svenskt!
+
 
   let weatherDataFinal = JSON.parse(localStorage.getItem('weatherDataFinal'))
   let locationKeys = JSON.parse(localStorage.getItem('locationKey'))
