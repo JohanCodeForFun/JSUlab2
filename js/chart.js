@@ -27,7 +27,7 @@ const urlParams = new URLSearchParams(queryString);
 
 let destinationInput = urlParams.get("destination");
 let startpointInput = urlParams.get("startpoint");
-let vechileInput = urlParams.get("vechile");
+let vehicleInput = urlParams.get("vechile");
 
 let guideInput = urlParams.get("guide");
 let equipementInput = urlParams.get("equipement");
@@ -50,7 +50,7 @@ console.log(guideValue);
 console.log(equipementValue);
 console.log(destinationInput);
 console.log(startpointInput);
-console.log(vechileInput);
+console.log(vehicleInput);
 
 // länka locationElements till header
 // för att hämta väderdata
@@ -131,7 +131,6 @@ const travelCostVehicle = (vehicle, distance, currgasprice) => {
   return totalCostArray.push((vehicle / 100) * distance * currgasprice * 2); // ger vehicle liter per km * distans till location * nuvarande gas price
 };
 /* function checking which location value destinationInput dropdown from the form has and returns the relevant distance. */
-//const destinationArray = [];
 const destinationChoice = (destinationInput) => {
   if (destinationInput === "Tana") {
     return tanaDistance;
@@ -139,12 +138,8 @@ const destinationChoice = (destinationInput) => {
     return lofotenDistance;
   } else return hallingdalselvaDistance;
 };
-//destinationArray.push
-//
 /* function that checks which vehicle has been chosen in the radiobutton on the form and returns the relevant liter per 100km data. */
-//const vehicleArray = [];
-//vehicleArray.push();
-const vehicleChoice = (vehicleInput) => {
+const vehicleChoice = () => {
   if (vehicleInput === "motorcycle") {
     return motorcycleVehicleLiter100Km;
   } else if (vehicleInput === "car") {
@@ -152,26 +147,16 @@ const vehicleChoice = (vehicleInput) => {
   } else return suvVehicleLiter100Km;
 };
 
-console.log(totalCostArray);
-/* accumulator (sum) initial value is 0, index[0] is added to accumulator (sum) so accumulator value will now be same as index [0]
- then index[1] ... and so on */
-const totalCost = totalCostArray.reduce((accumulator, currVal) => {
-  return accumulator + currVal;
-}, 0);
-console.log(totalCost);
-
 livingCost(cabin, nightValue);
 travelCostVehicle(vehicleChoice(), destinationChoice(), standardGasPrice);
 totalCostArray.push(equipementValue);
 guideCost(guideValue, nightValue);
-console.log(totalCostArray);
-/*const totalCost = () => {
-  return totalCostArray.reduce
-  (prev, curr) => {
-    return prev + curr;
-  };
-}; */
-
+/* sum variable that sums up the value in the totalCostArray to one to also show total in chart.js pushing the summarized value into the totalCostArray */
+let sum = totalCostArray.reduce(
+  (previndex, currindex) => previndex + currindex,
+  0
+);
+totalCostArray.push(sum);
 // 2. Funktioner för att visa graf med Chart.js
 const chartHeader = document.querySelector("#chart-header");
 
@@ -199,7 +184,13 @@ const myChart = new Chart(ctx, {
         label: "Kostnader",
         fill: true,
         data: totalCostArray,
-        backgroundColor: ["red", "blue", "green", "yellow"],
+        backgroundColor: [
+          "rgba(245, 40, 145, 0.37)",
+          "rgba(47, 40, 145, 0.37)",
+          "rgba(47, 162, 145, 0.37)",
+          "rgba(109, 166, 100, 0.31)",
+          "rgba(196, 220, 255, 0.31)",
+        ],
         borderColor: ["rgba(180, 191, 96, 1)"],
         borderWidth: 3,
       },
