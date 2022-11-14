@@ -380,16 +380,13 @@ function CheckDateTime() {
         // <img src=img/${weatherIcon[i]}.png alt="Weather Icon" height="50px" width="50px">
         // `
         if (destinationInput === locationKeys[i]) {
-          weatherIcon.push(
-            weatherDataFinal[i][locationKeys[i]].data[j]["Weather-Symbol"]
-          );
-          fishingWeatherDisplay.innerHTML = `<h4>${locationKeys[i]},<br> ${
+            weatherIcon.push(weatherDataFinal[i][locationKeys[i]].data[j]["Weather-Symbol"]);
+
+            fishingWeatherDisplay.innerHTML = `<h4>${locationKeys[i]},<br> ${
             weatherDataFinal[i][locationKeys[i]].data[j]["Weather-Details"]
               .air_temperature
           } c°</h4>
-        <img src=img/${
-          weatherIcon[i]
-        }.png alt="Weather Icon" height="50px" width="50px">`;
+        <img src=img/${weatherIcon[0]}.png alt="Weather Icon" height="50px" width="50px">`;
           break;
         }
         break;
