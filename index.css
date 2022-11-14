@@ -317,7 +317,6 @@ section,
 #weathermap .weathermap-container #locationHallingdalselva {
   color: red;
   text-shadow: 1px 1px 1px black;
-  border-radius: 1rem;
   display: flex;
   justify-content: center;
 }
