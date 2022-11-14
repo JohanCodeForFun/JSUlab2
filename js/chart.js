@@ -217,10 +217,6 @@ const myChart = new Chart(ctx, {
   },
 });
 
-chartHeader.innerHTML += `Beräknat pris för ${nights} nätter, med hyrd stuga:  ${
-  livingArrayBudget[livingArrayBudget.length - 1]
-}kr`;
-
 // 3. Hämta väderdata funktioner
 // Header för att identifiera oss mot weather api, yr.no
 let headers = new Headers({
