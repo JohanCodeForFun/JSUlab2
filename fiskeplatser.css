@@ -1,5 +1,28 @@
+body {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "hero"
+    "description"
+    "chart"
+    "other"
+    "footer";
+}
+
 section {
   padding: 1rem;
+}
+
+/* Fishing spots */
+#hero-fishingspots {
+  grid-area: hero;
+  background-color: #ffe9dc;
+  color: black;
+  background-image: url("img/fishing-spots/hero-lofoten.png");
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  height: 30vh;
 }
 
 #hero-fishing-container {
@@ -13,6 +36,14 @@ section {
 #hero-fishingspots #fishing-header {
   flex: 1;
 }
+#hero-fishingspots #fishing-header,
+#hero-fishingspots #weather-h1 {
+  /* background-color: white; */
+  /* border-radius: 1rem; */
+  /* padding: 1rem; */
+  /* border: 1px solid red; */
+  height: 30px;
+}
 
 #hero-fishingspots img {
   mix-blend-mode: multiply;
@@ -20,22 +51,75 @@ section {
   width: 30px;
 }
 
+#description-fishingspots {
+  grid-area: description;
+}
+
 #description-fishingspots p {
   margin-bottom: 1rem;
 }
 
+#myChartContainer {
+  grid-area: chart;
+}
+
 #other-fishingspots {
+  grid-area: other;
   margin-bottom: 2rem;
 }
 
+footer {
+  grid-area: footer;
+}
 
-/* Fishing spots */
-#hero-fishingspots {
-  background-color: #ffe9dc;
-  color: black;
-  background-image: url("img/fishing-spots/hero-lofoten.png");
-  background-position: center;
-  background-size: cover;
-  display: flex;
-  height: 30vh;
+/* 10. Media Queries */
+@media screen and (min-width: 924px) {
+  body {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:
+      "hero hero"
+      "offer steps"
+      "testimonial weather"
+      "calculator calculator"
+      "footer footer";
+  }
+
+  #hero-section {
+    height: 100vh;
+    background-position: center;
+    background-size: cover;
+    margin-bottom: 0;
+  }
+  #hero-section > h1 {
+    font-size: 2rem;
+  }
+
+  .form {
+    left: 5rem;
+  }
+}
+@media screen and (min-width: 1024px) {
+  body {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:
+      "hero hero"
+      "description chart"
+      "footer footer";
+  }
+
+  #hero-section {
+    height: 100vh;
+    background-position: center;
+    background-size: cover;
+    margin-bottom: 0;
+  }
+
+  #hero-section > h1 {
+    font-size: 2.6rem;
+  }
+  .form {
+    left: 8rem;
+  }
 }
