@@ -29,7 +29,7 @@ let userDescriptionElement = document.querySelector("#userDescription");
 
 let destinationElement = document.querySelector("#destination");
 let startpointElement = document.querySelector("#startpunkt");
-let vechileElement = document.querySelectorAll('input[type="radio"]');
+let vehicleElement = document.querySelectorAll('input[type="radio"]');
 
 let equipementElement = document.querySelector("#equipement");
 let guideElement = document.querySelector("#guide");
@@ -79,10 +79,10 @@ function CounterPrice() {
   console.log(equipementElement.value);
   console.log(guideElement.value);
 
-  for (let i = 0; i < vechileElement.length; i++) {
-    let isChecked = vechileElement[i].checked;
+  for (let i = 0; i < vehicleElement.length; i++) {
+    let isChecked = vehicleElement[i].checked;
     if (isChecked === true) {
-      window.location.href = `http://127.0.0.1:5501/fiskeplatser.html?destination=${destinationElement.value}&startpoint=${startpointElement.value}&vechile=${vechileElement[i].value}&equipement=${equipementElement.value}&guide=${guideElement.value}&night=${counterValue}`;
+      window.location.href = `http://127.0.0.1:5501/fiskeplatser.html?destination=${destinationElement.value}&startpoint=${startpointElement.value}&vehicle=${vehicleElement[i].value}&equipement=${equipementElement.value}&guide=${guideElement.value}&night=${counterValue}`;
     }
   }
 }
