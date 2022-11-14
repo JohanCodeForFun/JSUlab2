@@ -33,11 +33,10 @@ let guideInput = urlParams.get("guide");
 let equipementInput = urlParams.get("equipement");
 
 let nightValue = Number(urlParams.get("night"));
-console.log(nightValue);
 
 let guideValue = 0;
 let equipementValue = 0;
-console.log(guideInput);
+
 if (guideInput !== "no-guide") {
   guideValue = 500;
 }
@@ -45,12 +44,6 @@ if (guideInput !== "no-guide") {
 if (equipementInput !== "no-equipement") {
   equipementValue = 2000;
 }
-
-console.log(guideValue);
-console.log(equipementValue);
-console.log(destinationInput);
-console.log(startpointInput);
-console.log(vehicleInput);
 
 // länka locationElements till header
 // för att hämta väderdata
@@ -70,8 +63,6 @@ fetch("fiskeplatser.json")
   .then(
     (data) => {
       for (let i = 0; i < data.length; i++) {
-        console.log(data[i]);
-
         if (destinationInput === data[i].name) {
           fishingHeader.textContent = data[i].name;
 
@@ -128,10 +119,12 @@ const livingCost = (living, nights) => {
 };
 /* function based on which vehicle and destination has been chosen in the form calculates the l/km price multiplies it with the distance and then multiplies it with the gas price. */
 const travelCostVehicle = (vehicle, distance, currgasprice) => {
-  return totalCostArray.push((vehicle / 100) * distance * currgasprice * 2); // ger vehicle liter per km * distans till location * nuvarande gas price
+  totalCostArray.push((vehicle / 100) * distance * currgasprice * 2); // ger vehicle liter per km * distans till location * nuvarande gas price
+
 };
 /* function checking which location value destinationInput dropdown from the form has and returns the relevant distance. */
-const destinationChoice = (destinationInput) => {
+//const destinationArray = [];
+const destinationChoice = () => {
   if (destinationInput === "Tana") {
     return tanaDistance;
   } else if (destinationInput === "Lofoten") {
@@ -142,13 +135,24 @@ const destinationChoice = (destinationInput) => {
 const vehicleChoice = () => {
   if (vehicleInput === "motorcycle") {
     return motorcycleVehicleLiter100Km;
-  } else if (vehicleInput === "car") {
+  }
+  else if (vechileInput === "car") {
     return averageVehicleLiter100Km;
-  } else return suvVehicleLiter100Km;
-};
+  }
+  else {
+    return suvVehicleLiter100Km;
+  }
+}
+
+/* accumulator (sum) initial value is 0, index[0] is added to accumulator (sum) so accumulator value will now be same as index [0]
+ then index[1] ... and so on */
+const totalCost = totalCostArray.reduce((accumulator, currVal) => {
+  return accumulator + currVal;
+}, 0);
 
 livingCost(cabin, nightValue);
 travelCostVehicle(vehicleChoice(), destinationChoice(), standardGasPrice);
+
 totalCostArray.push(equipementValue);
 guideCost(guideValue, nightValue);
 /* sum variable that sums up the value in the totalCostArray to one to also show total in chart.js pushing the summarized value into the totalCostArray */
@@ -368,7 +372,6 @@ function CheckDateTime() {
       let currentTimeIndex = timeToday.indexOf(":");
       let currentTime = timeToday.slice(0, currentTimeIndex);
 
-      console.log(dateToday);
       if (
         ArraytimeNow === currentTime &&
         weatherDataFinal[i][locationKeys[i]].data[j].date === dateToday
@@ -378,16 +381,13 @@ function CheckDateTime() {
         // <img src=img/${weatherIcon[i]}.png alt="Weather Icon" height="50px" width="50px">
         // `
         if (destinationInput === locationKeys[i]) {
-          weatherIcon.push(
-            weatherDataFinal[i][locationKeys[i]].data[j]["Weather-Symbol"]
-          );
-          fishingWeatherDisplay.innerHTML = `<h4>${locationKeys[i]},<br> ${
+            weatherIcon.push(weatherDataFinal[i][locationKeys[i]].data[j]["Weather-Symbol"]);
+
+            fishingWeatherDisplay.innerHTML = `<h4>${locationKeys[i]},<br> ${
             weatherDataFinal[i][locationKeys[i]].data[j]["Weather-Details"]
               .air_temperature
           } c°</h4>
-        <img src=img/${
-          weatherIcon[i]
-        }.png alt="Weather Icon" height="50px" width="50px">`;
+        <img src=img/${weatherIcon[0]}.png alt="Weather Icon" height="50px" width="50px">`;
           break;
         }
         break;
