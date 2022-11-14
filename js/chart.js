@@ -33,11 +33,10 @@ let guideInput = urlParams.get("guide");
 let equipementInput = urlParams.get("equipement");
 
 let nightValue = Number(urlParams.get("night"));
-console.log(nightValue);
 
 let guideValue = 0;
 let equipementValue = 0;
-console.log(guideInput);
+
 if (guideInput !== "no-guide") {
   guideValue = 500;
 }
@@ -45,12 +44,6 @@ if (guideInput !== "no-guide") {
 if (equipementInput !== "no-equipement") {
   equipementValue = 2000;
 }
-
-console.log(guideValue);
-console.log(equipementValue);
-console.log(destinationInput);
-console.log(startpointInput);
-console.log(vechileInput);
 
 // länka locationElements till header
 // för att hämta väderdata
@@ -70,8 +63,6 @@ fetch("fiskeplatser.json")
   .then(
     (data) => {
       for (let i = 0; i < data.length; i++) {
-        console.log(data[i]);
-
         if (destinationInput === data[i].name) {
           fishingHeader.textContent = data[i].name;
 
@@ -128,11 +119,12 @@ const livingCost = (living, nights) => {
 };
 /* function based on which vehicle and destination has been chosen in the form calculates the l/km price multiplies it with the distance and then multiplies it with the gas price. */
 const travelCostVehicle = (vehicle, distance, currgasprice) => {
-  return totalCostArray.push((vehicle / 100) * distance * currgasprice * 2); // ger vehicle liter per km * distans till location * nuvarande gas price
+  totalCostArray.push((vehicle / 100) * distance * currgasprice * 2); // ger vehicle liter per km * distans till location * nuvarande gas price
+
 };
 /* function checking which location value destinationInput dropdown from the form has and returns the relevant distance. */
 //const destinationArray = [];
-const destinationChoice = (destinationInput) => {
+const destinationChoice = () => {
   if (destinationInput === "Tana") {
     return tanaDistance;
   } else if (destinationInput === "Lofoten") {
@@ -144,27 +136,29 @@ const destinationChoice = (destinationInput) => {
 /* function that checks which vehicle has been chosen in the radiobutton on the form and returns the relevant liter per 100km data. */
 //const vehicleArray = [];
 //vehicleArray.push();
-const vehicleChoice = (vehicleInput) => {
-  if (vehicleInput === "motorcycle") {
+const vehicleChoice = () => {
+  if (vechileInput === "motorcycle") {
     return motorcycleVehicleLiter100Km;
-  } else if (vehicleInput === "car") {
+  }
+  else if (vechileInput === "car") {
     return averageVehicleLiter100Km;
-  } else return suvVehicleLiter100Km;
-};
+  }
+  else {
+    return suvVehicleLiter100Km;
+  }
+}
 
-console.log(totalCostArray);
 /* accumulator (sum) initial value is 0, index[0] is added to accumulator (sum) so accumulator value will now be same as index [0]
  then index[1] ... and so on */
 const totalCost = totalCostArray.reduce((accumulator, currVal) => {
   return accumulator + currVal;
 }, 0);
-console.log(totalCost);
 
 livingCost(cabin, nightValue);
 travelCostVehicle(vehicleChoice(), destinationChoice(), standardGasPrice);
+
 totalCostArray.push(equipementValue);
 guideCost(guideValue, nightValue);
-console.log(totalCostArray);
 /*const totalCost = () => {
   return totalCostArray.reduce
   (prev, curr) => {
@@ -216,10 +210,6 @@ const myChart = new Chart(ctx, {
     },
   },
 });
-
-chartHeader.innerHTML += `Beräknat pris för ${nights} nätter, med hyrd stuga:  ${
-  livingArrayBudget[livingArrayBudget.length - 1]
-}kr`;
 
 // 3. Hämta väderdata funktioner
 // Header för att identifiera oss mot weather api, yr.no
@@ -381,7 +371,6 @@ function CheckDateTime() {
       let currentTimeIndex = timeToday.indexOf(":");
       let currentTime = timeToday.slice(0, currentTimeIndex);
 
-      console.log(dateToday);
       if (
         ArraytimeNow === currentTime &&
         weatherDataFinal[i][locationKeys[i]].data[j].date === dateToday
