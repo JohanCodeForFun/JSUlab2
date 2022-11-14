@@ -80,7 +80,7 @@ footer {
 }
 
 /* 10. Media Queries */
-@media screen and (min-width: 924px) {
+@media screen and (width: 924px) {
   body {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -89,30 +89,6 @@ footer {
       "offer steps"
       "testimonial weather"
       "calculator calculator"
-      "footer footer";
-  }
-
-  #hero-section {
-    height: 100vh;
-    background-position: center;
-    background-size: cover;
-    margin-bottom: 0;
-  }
-  #hero-section > h1 {
-    font-size: 2rem;
-  }
-
-  .form {
-    left: 5rem;
-  }
-}
-@media screen and (min-width: 1024px) {
-  body {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-areas:
-      "hero hero"
-      "description chart"
       "footer footer";
   }
 
@@ -133,6 +109,35 @@ footer {
     display: flex;
     height: 30vh;
   }
+
+  #hero-section > h1 {
+    font-size: 2rem;
+  }
+
+  .form {
+    left: 5rem;
+  }
+}
+@media screen and (min: 1024px) {
+  body {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:
+      "hero hero"
+      "description chart"
+      "footer footer";
+  }
+
+
+
+
+  #hero-section {
+    height: 100vh;
+    background-position: center;
+    background-size: cover;
+    margin-bottom: 0;
+  }
+
 
   #hero-section > h1 {
     font-size: 2.6rem;
