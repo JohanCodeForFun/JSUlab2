@@ -107,6 +107,12 @@ section,
   justify-content: space-around;
 }
 
+.nights-container {
+  margin-top: 2vh;
+  height: 5vh;
+  /* background-color: red; */
+}
+
 .btn-div {
   display: flex;
   justify-content: center;

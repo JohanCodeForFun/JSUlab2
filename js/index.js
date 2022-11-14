@@ -40,27 +40,30 @@ let nightCount = document.querySelector('#nightCount')
 let counterValue = 1
 
 let decreaseButton = document.getElementById("decrease");
-// decreaseButton.disabled = true;
-// // counterValue.textContent = 1; //Bestämmer startvärdet
-// document.querySelector("#increase").addEventListener("click", () => {
-//     counterValue++;
-//     nightCount.innerHTML = counterValue
-//     if(counterValue > 1) {
-//       decreaseButton.disabled = false;
-//     }
-// });
+decreaseButton.disabled = true;
+// counterValue.textContent = 1; //Bestämmer startvärdet
+document.querySelector("#increase").addEventListener("click", () => {
+    counterValue++;
+    nightCount.innerHTML = counterValue
+    if(counterValue > 1) {
+      decreaseButton.disabled = false;
+    }
+});
 
-// document.querySelector("#decrease").addEventListener("click", () => {
-//   counterValue--;
-//   nightCount.innerHTML = counterValue
-//   if (counterValue === 1) {
-//     decreaseButton.disabled = true;
-//   }
-// });
+document.querySelector("#decrease").addEventListener("click", () => {
+  counterValue--;
+  nightCount.innerHTML = counterValue
+  if (counterValue === 1) {
+    decreaseButton.disabled = true;
+  }
+});
 
 function CounterPrice() {
-  console.log(destinationElement.value);
-  console.log(startpointElement.value);
+  // console.log(destinationElement.value);
+  // console.log(startpointElement.value);
+  // console.log(equipementElement.value);
+  // console.log(guideElement.value);
+
   if(equipementElement.checked) {
     equipementElement.value = "2000"
   }
@@ -110,14 +113,13 @@ async function GetAllWeatherData() {
   // Gör att denna array bara består av nyckeln-värdet av locationen alltså locationKeyInput-arrayn
   let locationKeyInput = []; // Här har jag alla keys som jag behöver
 
+  console.log(result)
   // Denna kollar om många områden som finns som vi hämtar
   for(let i = 0; i < result.length; i++) {
     if(result[i].hasOwnProperty(result[i]) !== undefined) {
       locationKeyInput.push(Object.keys(result[i]))
     }
   }
-
-
 
   // Object.keys-funktion will return a array and locationKey is a array too
   // locationKeyInput är redan en array och Object.keys returnar också en array därför i detta fall använder jag mig av funktionen-flat som gör dessa till värden istället för arrays
@@ -182,7 +184,6 @@ function CheckDateTime() {
   // 3 deklarerade väder-iconer
   let weatherIcon = [];
 
-
   // Här så splitar jag varje tid på weatherData-arrayn och jämför om det är rätt datum och tid
   for(let i = 0; i < weatherDataFinal.length; i++) {
     for(let j = 0; j < weatherDataFinal[i][locationKeys[i]].data.length; j++) {
@@ -194,12 +195,12 @@ function CheckDateTime() {
 
       console.log(dateToday);
       if (ArraytimeNow === currentTime && weatherDataFinal[i][locationKeys[i]].data[j].date === dateToday) {
-        weatherIcon.push(weatherDataFinal[i][locationKeys[i]].data[j]["Weather-Symbol"])
-        locationElements[i].innerHTML = `<h4>${locationKeys[i]},<br> ${weatherDataFinal[i][locationKeys[i]].data[j]["Weather-Details"].air_temperature} c°</h4>
-        <img src=img/${weatherIcon[i]}.png alt="Weather Icon" height="50px" width="50px">
-        `
-      break;
-        }
+        weatherIcon.push(weatherDataFinal[i][locationKeys[i]].data[j]["Weather-Symbol"]);
+        // För denna kommer endast kör 3 gånger för den exakta tiden finns bara 1 i arrayn och då på dessa 3 location och dessa element har jag redan i arrayn-locationElements
+        locationElements[i].innerHTML = `<h3>${weatherDataFinal[i][locationKeys[i]].data[j]["Weather-Details"].air_temperature} c°</h3>
+          <img src=img/${weatherIcon[i]}.png alt="Weather Icon" height="50px" width="50px">
+          `
+        break;
       }
     }
   }
@@ -228,3 +229,4 @@ fetch('db.json')
   adminImageElement.setAttribute('src', `${result.adminUpload[2].image}`)
   userDescriptionElement.innerHTML += `"${result.adminUpload[2].textDescription}"`
 })
+}
