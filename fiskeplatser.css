@@ -18,7 +18,7 @@ section {
   grid-area: hero;
   background-color: #ffe9dc;
   color: black;
-  background-image: url("img/fishing-spots/hero-lofoten.png");
+  background-image: url("img/fishing-spots/hero-lofoten.jpg");
   background-position: center;
   background-size: cover;
   display: flex;
@@ -37,12 +37,10 @@ section {
 
   flex: 1;
 }
-#hero-fishingspots #fishing-header,
-#hero-fishingspots #weather-h1 {
-  background-color: white;
-  /* border-radius: 1rem; */
-  /* padding: 1rem; */
-  /* border: 1px solid red; */
+#hero-fishingspots #fishing-header {
+  /* background-color: white; */
+  /* border: 1px solid black; */
+  border-radius: 1rem;
   height: 30px;
 }
 
@@ -50,6 +48,14 @@ section {
   mix-blend-mode: multiply;
   height: 30px;
   width: 30px;
+}
+
+#weather-display {
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 1rem;
+  padding: 1rem;
+  height: 100px;
 }
 
 #description-fishingspots {
@@ -115,6 +121,17 @@ footer {
     background-position: center;
     background-size: cover;
     margin-bottom: 0;
+  }
+
+  #hero-fishingspots {
+    grid-area: hero;
+    background-color: #ffe9dc;
+    color: black;
+    background-image: url("img/fishing-spots/hero-lofoten.jpg");
+    background-position: bottom;
+    background-size: cover;
+    display: flex;
+    height: 30vh;
   }
 
   #hero-section > h1 {
