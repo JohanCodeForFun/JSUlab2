@@ -34,11 +34,12 @@ section {
 }
 
 #hero-fishingspots #fishing-header {
+
   flex: 1;
 }
 #hero-fishingspots #fishing-header,
 #hero-fishingspots #weather-h1 {
-  /* background-color: white; */
+  background-color: white;
   /* border-radius: 1rem; */
   /* padding: 1rem; */
   /* border: 1px solid red; */

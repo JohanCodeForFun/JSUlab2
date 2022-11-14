@@ -13,16 +13,20 @@
       <div id="hero-fishing-container">
         <img src="img/fishing-spots/fish-icon.png" alt="fishing icon" />
         <h1 id="fishing-header">Lofoten</h1>
-        <h1 id="weather-h1">getWeather()</h1>
+        <div id="weather-display">
+          <div id="locationTana"></div>
+          <div id="locationLofoten"></div>
+          <div id="locationHallingdalselva"></div>
+        </div>
       </div>
     </section>
 
     <section id="description-fishingspots">
-      <div id="fetchedData"> </div>
+      <div id="fetchedData"></div>
     </section>
 
     <section id="myChartContainer">
-        <h3 id="chart-header"></h3>
+      <h3 id="chart-header"></h3>
       <canvas id="myChart" width="400" height="400"></canvas>
     </section>
 
@@ -37,16 +41,18 @@
     <footer>
       <p>Copyright © 2022</p>
       <p>
-        Created by 
-        <a href="https://github.com/TheProgrammer1000" target="_blank">Dennis</a>,
-        <a href="https://github.com/SimonFritzNguesseu" target="_blank">Simon</a>
+        Created by
+        <a href="https://github.com/TheProgrammer1000" target="_blank">Dennis</a
+        >,
+        <a href="https://github.com/SimonFritzNguesseu" target="_blank"
+          >Simon</a
+        >
         and
         <a href="https://github.com/JohanCodeForFun" target="_blank">Johan</a>
       </p>
       <p>Väder data från yr.no</p>
     </footer>
 
-    <!-- <script src="js/index.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
     <script src="js/chart.js"></script>
   </body>

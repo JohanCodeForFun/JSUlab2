@@ -1,4 +1,21 @@
-let locationElements = [];
+
+const fetchedData = document.querySelector("#fetchedData");
+const fishingHeader = document.querySelector("#fishing-header");
+const fishingWeatherDisplay = document.querySelector('#weather-display');
+
+locationElements = [];
+let locationTana = document.querySelector('#locationTana');
+let locationLofoten = document.querySelector('#locationLofoten');
+let locationHallingdalselva = document.querySelector('#locationHallingdalselva');
+
+locationElements.push(locationTana)
+locationElements.push(locationLofoten)
+locationElements.push(locationHallingdalselva)
+
+document.querySelector("#locationTana").style.display = "none";
+document.querySelector("#locationLofoten").style.display = "none";
+document.querySelector("#locationHallingdalselva").style.display = "none";
+
 
 // import GetAllWeatherData() 
 // import CheckDateTime()
@@ -35,8 +52,7 @@ console.log(destinationInput);
 console.log(startpointInput);
 console.log(vechileInput);
 
-const fetchedData = document.querySelector("#fetchedData");
-const fishingHeader = document.querySelector("#fishing-header");
+
 
 
 
@@ -64,6 +80,16 @@ fetch("fiskeplatser.json")
 
         if (destinationInput === data[i].name) {
           fishingHeader.textContent = data[i].name;
+
+          // locationLofoten
+          // let textstring = 'location' + data[i].name;
+          // console.log(textstring);
+
+          // textstring.style.display = "block";
+          // `location${destinationInput}`.style.display = "inline";
+          // location.data.style.display = "inline";
+
+          // locationTana.style.display = "inline";
 
           fetchedData.innerHTML += `
         <h3>${data[i].name}</h3>
@@ -290,3 +316,141 @@ const myChart = new Chart(ctx, {
 chartHeader.innerHTML += `Beräknat pris för ${nights} nätter, med hyrd stuga:  ${
   livingArrayBudget[livingArrayBudget.length - 1]
 }kr`;
+
+
+// 3. Hämta väderdata funktioner
+// Header för att identifiera oss mot weather api, yr.no
+let headers = new Headers({
+  "User-Agent": "jhellberg.com johan@jhellberg.com",
+});
+
+async function GetAllWeatherData() {
+  result = await Promise.all([
+    {"Tana" : await (await fetch('https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=60.43112&lon=6.24668', {
+      method: 'GET',
+      headers: headers
+})).json()},
+    {"Lofoten" : await (await fetch('https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=68.04534&lon=13.38235', {
+      method: 'GET',
+      headers: headers
+})).json()},
+    {"Hallingdalselva" : await (await fetch('https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=60.42843&lon=9.38549', {
+      method: 'GET',
+      headers: headers
+})).json()}
+])
+  // Gör att denna array bara består av nyckeln-värdet av locationen alltså locationKeyInput-arrayn
+  let locationKeyInput = []; // Här har jag alla keys som jag behöver
+
+  // Denna kollar om många områden som finns som vi hämtar
+  for(let i = 0; i < result.length; i++) {
+    if(result[i].hasOwnProperty(result[i]) !== undefined) {
+      locationKeyInput.push(Object.keys(result[i]))
+    }
+  }
+
+
+
+  // Object.keys-funktion will return a array and locationKey is a array too
+  // locationKeyInput är redan en array och Object.keys returnar också en array därför i detta fall använder jag mig av funktionen-flat som gör dessa till värden istället för arrays
+  let locationKey = locationKeyInput.flat()
+  localStorage.setItem('locationKey', JSON.stringify(locationKey))
+
+  // Pushar in objekt till arrayn weatherData, så många som det finns location
+  let weatherData = [];
+  for(let i = 0; i < result.length; i++) {
+    weatherData.push({[locationKey[i]]: {data: [], updatedWeatherReport: {}}})
+  }
+  // Genom denna loop får vi det uppdaterade-väder-raporten för just det specifika location
+  for(let i = 0; i < result.length; i++) {
+    let updatedDate = result[i][locationKey[i]].properties.meta.updated_at.slice(0,10)
+    // console.log(updatedDate);
+    let currenTimeIndex = result[i][locationKey[i]].properties.meta.updated_at.indexOf(':')
+    // console.log(currenTimeIndex);
+
+    updatedTimeFinal = result[i][locationKey[i]].properties.meta.updated_at.slice(currenTimeIndex - 2, currenTimeIndex + 3)
+
+    weatherData[i][locationKey[i]].updatedWeatherReport.time = updatedTimeFinal;
+    weatherData[i][locationKey[i]].updatedWeatherReport.date = updatedDate;
+  }
+
+  for(let i = 0; i < result.length; i++) {
+    for(let j = 0; j < result[i][locationKey[i]].properties.timeseries.length; j++) {
+      if(result[i][locationKey[i]].properties.timeseries[j].data?.next_1_hours !== undefined) {
+        let weatherSymbol = result[i][locationKey[i]].properties.timeseries[j].data.next_1_hours.summary.symbol_code
+
+        //IndexTim
+        let timeIndex = result[i][locationKey[i]].properties.timeseries[j].time.indexOf("T")
+        //TIME
+        let time = result[i][locationKey[i]].properties.timeseries[j].time.lastIndexOf(":")
+        // TIME FInal
+        let timeFinal = result[i][locationKey[i]].properties.timeseries[j].time.slice(timeIndex + 1, time)
+
+        let dateFinal = result[i][locationKey[i]].properties.timeseries[j].time.slice(0, 10)
+
+        let weatherDetail = result[i][locationKey[i]].properties.timeseries[j].data.instant.details
+
+        weatherData[i][locationKey[i]].data.push({
+          "Weather-Details": weatherDetail,
+          "Weather-Symbol": weatherSymbol,
+          date: dateFinal,
+          time: timeFinal
+        })
+      }
+    }
+  }
+  localStorage.setItem('weatherDataFinal', JSON.stringify(weatherData))
+  // SLUT PÅ FUNKTIONEN
+}
+
+function CheckDateTime() {
+  let dateToday = new Date().toLocaleDateString('sv-SE');
+  var timeToday = new Date().toLocaleTimeString('sv-SE', {hour: '2-digit', minute:'2-digit'}); // Fixa så att dessa med datum och tid och nu tvingat att göra det till Svenskt!
+
+
+  let weatherDataFinal = JSON.parse(localStorage.getItem('weatherDataFinal'))
+  let locationKeys = JSON.parse(localStorage.getItem('locationKey'))
+
+  // 3 deklarerade väder-iconer
+  let weatherIcon = [];
+
+
+  // Här så splitar jag varje tid på weatherData-arrayn och jämför om det är rätt datum och tid
+  for(let i = 0; i < weatherDataFinal.length; i++) {
+    for(let j = 0; j < weatherDataFinal[i][locationKeys[i]].data.length; j++) {
+      let ArrayindexTime = weatherDataFinal[i][locationKeys[i]].data[j].time.indexOf(":");
+      let ArraytimeNow = weatherDataFinal[i][locationKeys[i]].data[j].time.slice(0, ArrayindexTime);
+
+      let currentTimeIndex = timeToday.indexOf(":");
+      let currentTime = timeToday.slice(0, currentTimeIndex);
+
+      console.log(dateToday);
+      if (ArraytimeNow === currentTime && weatherDataFinal[i][locationKeys[i]].data[j].date === dateToday) {
+        // weatherIcon.push(weatherDataFinal[i][locationKeys[i]].data[j]["Weather-Symbol"])
+        // locationElements[i].innerHTML = `<h4>${locationKeys[i]},<br> ${weatherDataFinal[i][locationKeys[i]].data[j]["Weather-Details"].air_temperature} c°</h4>
+        // <img src=img/${weatherIcon[i]}.png alt="Weather Icon" height="50px" width="50px">
+        // `
+        if (destinationInput === locationKeys[i]) {
+          weatherIcon.push(weatherDataFinal[i][locationKeys[i]].data[j]["Weather-Symbol"])
+            fishingWeatherDisplay.innerHTML = `<h4>${locationKeys[i]},<br> ${weatherDataFinal[i][locationKeys[i]].data[j]["Weather-Details"].air_temperature} c°</h4>
+        <img src=img/${weatherIcon[i]}.png alt="Weather Icon" height="50px" width="50px">`
+          break;
+        }
+      break;
+        }
+      }
+    }
+  }
+
+/*
+  Denna funktion, hämtar all väderData på ett interval exempelvis varje 5 sekunder hämta api datat. Sorterar väder-datat. Funktionen "checkDateTime" den kollar vilken den lokala tiden är alltså vad är klockan nu? jämförelse vad det är för tid på datat vi får på vädret. Om klockan är 12:34 och i vårat objekt har vi tiden 12:00 och vädret för denna tidslag. Så kommer detta objekt att sättas och displays "realtid" för varje timme, vad det är för väder just för denna timme.
+*/
+function IntervalLoop() {
+  setInterval(() => {
+    GetAllWeatherData()
+    CheckDateTime()
+    }, 900000) //  900000 milisecounds, 15min interval update
+}
+GetAllWeatherData()   // Hämtar all väder-data och sorterar allting
+CheckDateTime()       // Kollar vilket specifikt väder-objekt vi ska ta
+IntervalLoop() // This function is asyncroumus
