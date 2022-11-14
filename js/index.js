@@ -204,6 +204,7 @@ function CheckDateTime() {
       }
     }
   }
+}
 
 /*
   Denna funktion, hämtar all väderData på ett interval exempelvis varje 5 sekunder hämta api datat. Sorterar väder-datat. Funktionen "checkDateTime" den kollar vilken den lokala tiden är alltså vad är klockan nu? jämförelse vad det är för tid på datat vi får på vädret. Om klockan är 12:34 och i vårat objekt har vi tiden 12:00 och vädret för denna tidslag. Så kommer detta objekt att sättas och displays "realtid" för varje timme, vad det är för väder just för denna timme.
@@ -229,4 +230,3 @@ fetch('db.json')
   adminImageElement.setAttribute('src', `${result.adminUpload[2].image}`)
   userDescriptionElement.innerHTML += `"${result.adminUpload[2].textDescription}"`
 })
-}
