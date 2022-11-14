@@ -1,36 +1,94 @@
+let locationElements = [];
+
+// import GetAllWeatherData() 
+// import CheckDateTime()
+
 // 1. Få all data från andra sidan
 const queryString = window.location.search;
 
 const urlParams = new URLSearchParams(queryString);
 
-let destinationInput = urlParams.get('destination');
-let startpointInput = urlParams.get('startpoint');
-let vechileInput = urlParams.get('vechile');
+let destinationInput = urlParams.get("destination");
+let startpointInput = urlParams.get("startpoint");
+let vechileInput = urlParams.get("vechile");
 
-let guideInput = urlParams.get('guide');
-let equipementInput = urlParams.get('equipement');
+let guideInput = urlParams.get("guide");
+let equipementInput = urlParams.get("equipement");
 
-let nightValue = Number(urlParams.get('night'));
-console.log(nightValue)
+let nightValue = Number(urlParams.get("night"));
+console.log(nightValue);
 
 let guideValue = 0;
 let equipementValue = 0;
 
-if(guideInput !== "no-guide") {
+if (guideInput !== "no-guide") {
   guideValue = Number(guideInput);
 }
 
-if(equipementInput !== "no-equipement") {
-  equipementValue = Number(equipementInput)
+if (equipementInput !== "no-equipement") {
+  equipementValue = Number(equipementInput);
 }
 
-console.log(guideValue)
+console.log(guideValue);
 console.log(equipementValue);
 console.log(destinationInput);
 console.log(startpointInput);
 console.log(vechileInput);
 
+const fetchedData = document.querySelector("#fetchedData");
+const fishingHeader = document.querySelector("#fishing-header");
+
+
+
+
+
+// länka locationElements till header
+// för att hämta väderdata
+
+// lägg till funktion (alt lägg in den här koden i chart.js)
+// som läser av url parametern, destinationInput, och hämtar
+// datan från rätt fiskeby från fiskeplatser.json.
+
+// skapa loop, med värde för för att loopa igenom
+// och när if blir sant, visa svaret
+
+// funktion som visar information om fiskeby beroende på
+// vilken by dem valt från föregående sida från lokal json fil
+let resultFromFetch = [];
+fetch("fiskeplatser.json")
+  .then((response) => response.json())
+  .then(
+    (data) => {
+      for (let i = 0; i < data.length; i++) {
+        console.log(data[i]);
+
+        if (destinationInput === data[i].name) {
+          fishingHeader.textContent = data[i].name;
+
+          fetchedData.innerHTML += `
+        <h3>${data[i].name}</h3>
+        <p>${data[i].infoWiki1}</p>
+        <p>${data[i].infoWiki2}</p>
+        `
+        break;
+        } else if (destinationInput !== data[i].name &&
+          i === data.length -1) {
+          fetchedData.innerHTML += `
+        <h3>Error</h3>
+        <p>Saknas resemål. Gå tillbaks till huvudsidan
+        <a href="index.html">Fiska i Norge</a> </p>
+        `;
+        break;
+        }
+      }
+    }
+    // spara data objekt i localstorage för att
+    // skapa en funktion att fylla i sidan beroende
+    // på vilket val användaren har från formuläret
+  );
+
 // 2. Funktioner för att visa graf med Chart.js
+const chartHeader = document.querySelector("#chart-header");
 
 // funktion, visa bil eller boende graf med radio knappar
 
@@ -40,7 +98,7 @@ console.log(vechileInput);
 
 // funktion för hur många nätter
 nights = 0;
-nights = 42;
+nights = 6;
 
 // ide, lägg till dropdown/buttons för att välja mellan,
 // linje, paj, eller doughnot diagram! :)
@@ -144,7 +202,7 @@ let calculateGasCost = (carSize, gasPrice, nights) => {
     for (let i = 0; i < nights; i++) {
       carArrayLarge.push((gasCost += gasPrice * carSize));
     }
-    console.log(carArrayLarge);
+    // console.log(carArrayLarge);
   };
   calculateGasCostSmall(smallCar, gasPrice, nights);
   calculateGasCostMedium(mediumCar, gasPrice, nights);
@@ -194,27 +252,27 @@ const myChart = new Chart(ctx, {
         borderColor: ["rgba(100, 115, 47, 1)"],
         borderWidth: 3,
       },
-      {
-        label: "Liten bil",
-        data: carArraySmall,
-        backgroundColor: ["rgba(166, 91, 75, 0.2)"],
-        borderColor: ["rgba(166, 91, 75, 1)"],
-        borderWidth: 3,
-      },
-      {
-        label: "Mellan bil",
-        data: carArrayMedium,
-        backgroundColor: ["rgba(242, 203, 189, 0.2)"],
-        borderColor: ["rgba(242, 203, 189, 1)"],
-        borderWidth: 3,
-      },
-      {
-        label: "Stor bil",
-        data: carArrayLarge,
-        backgroundColor: ["rgba(115, 59, 54, 0.2)"],
-        borderColor: ["rgba(115, 59, 54, 1)"],
-        borderWidth: 3,
-      },
+      // {
+      //   label: "Liten bil",
+      //   data: carArraySmall,
+      //   backgroundColor: ["rgba(166, 91, 75, 0.2)"],
+      //   borderColor: ["rgba(166, 91, 75, 1)"],
+      //   borderWidth: 3,
+      // },
+      // {
+      //   label: "Mellan bil",
+      //   data: carArrayMedium,
+      //   backgroundColor: ["rgba(242, 203, 189, 0.2)"],
+      //   borderColor: ["rgba(242, 203, 189, 1)"],
+      //   borderWidth: 3,
+      // },
+      // {
+      //   label: "Stor bil",
+      //   data: carArrayLarge,
+      //   backgroundColor: ["rgba(115, 59, 54, 0.2)"],
+      //   borderColor: ["rgba(115, 59, 54, 1)"],
+      //   borderWidth: 3,
+      // },
     ],
   },
   options: {
@@ -229,7 +287,6 @@ const myChart = new Chart(ctx, {
   },
 });
 
-addEventListener("change", () => {
-  // if radio === car => show car gas price graph
-  // if radio === living => show living expenses graph
-});
+chartHeader.innerHTML += `Beräknat pris för ${nights} nätter, med hyrd stuga:  ${
+  livingArrayBudget[livingArrayBudget.length - 1]
+}kr`;
