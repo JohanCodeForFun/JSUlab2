@@ -12,9 +12,9 @@ const weatherDataSection = document.querySelector("#weatherDataSection");
 
 // Här skulle man istället ha appendat till en tom-div för att få detta ännu mer dynamiskt om det exempelvis skulle vara 20 location eller 100 locations.
 let locationElements = []
-const locationTana = document.querySelector('#locationTana');
-const locationLofoten = document.querySelector('#locationLofoten');
-const locationHallingdalselva = document.querySelector('#locationHallingdalselva');
+let locationTana = document.querySelector('#locationTana');
+let locationLofoten = document.querySelector('#locationLofoten');
+let locationHallingdalselva = document.querySelector('#locationHallingdalselva');
 
 locationElements.push(locationTana)
 locationElements.push(locationLofoten)
@@ -194,109 +194,15 @@ function CheckDateTime() {
 
       console.log(dateToday);
       if (ArraytimeNow === currentTime && weatherDataFinal[i][locationKeys[i]].data[j].date === dateToday) {
-        switch(weatherDataFinal[i][locationKeys[i]].data[j]["Weather-Symbol"]) {
-          case "partlycloudy_night":
-            if(locationKeys[i] === "Tana") {
-              weatherIcon.push("partlycloudy_night")
-            }
-            else if(locationKeys[i] === "Lofoten") {
-              weatherIcon.push("partlycloudy_night")
-            }
-            else if (locationKeys[i] === "Hallingdalselva"){
-              weatherIcon.push("partlycloudy_night")
-            }
-            break;
-          case "fair_night":
-            if(locationKeys[i] === "Tana") {
-              weatherIcon.push("fair_night")
-            }
-            else if(locationKeys[i] === "Lofoten") {
-              weatherIcon.push("fair_night")
-            }
-            else if (locationKeys[i] === "Hallingdalselva"){
-              weatherIcon.push("fair_night")
-            }
-            break;
-          case "partlycloudy_day":
-            if(locationKeys[i] === "Tana") {
-              weatherIcon.push("partlycloudy_day")
-            }
-            else if(locationKeys[i] === "Lofoten") {
-              weatherIcon.push("partlycloudy_day")
-            }
-            else if (locationKeys[i] === "Hallingdalselva"){
-              weatherIcon.push("partlycloudy_day")
-            }
-            break;
-          case "cloudy":
-            if(locationKeys[i] === "Tana") {
-              weatherIcon.push("cloudy")
-            }
-            else if(locationKeys[i] === "Lofoten") {
-              weatherIcon.push("cloudy")
-            }
-            else if (locationKeys[i] === "Hallingdalselva"){
-              weatherIcon.push("cloudy")
-            }
-            break;
-            case "rain":
-              if(locationKeys[i] === "Tana") {
-                weatherIcon.push("rain")
-              }
-              else if(locationKeys[i] === "Lofoten") {
-                weatherIcon.push("rain")
-              }
-              else if (locationKeys[i] === "Hallingdalselva"){
-                weatherIcon.push("rain")
-              }
-              break;
-          case "lightrain":
-            if(locationKeys[i] === "Tana") {
-              weatherIcon.push("lightrain")
-            }
-            else if(locationKeys[i] === "Lofoten") {
-              weatherIcon.push("lightrain")
-            }
-            else if (locationKeys[i] === "Hallingdalselva"){
-              weatherIcon.push("lightrain")
-            }
-            break;
-          case "heavyrain":
-            if(locationKeys[i] === "Tana") {
-              weatherIcon.push("heavyrain")
-            }
-            else if(locationKeys[i] === "Lofoten") {
-              weatherIcon.push("heavyrain")
-            }
-            else if (locationKeys[i] === "Hallingdalselva"){
-              weatherIcon.push("heavyrain")
-            }
-            break;
-          case "fog":
-            if(locationKeys[i] === "Tana") {
-              weatherIcon.push("fog")
-            }
-            else if(locationKeys[i] === "Lofoten") {
-              weatherIcon.push("fog")
-            }
-            else if (locationKeys[i] === "Hallingdalselva"){
-              weatherIcon.push("fog")
-            }
-            break;
-          default:
-            weatherIcon.push("Missing weather data switch")
-
+        weatherIcon.push(weatherDataFinal[i][locationKeys[i]].data[j]["Weather-Symbol"])
+        locationElements[i].innerHTML = `<h4>${locationKeys[i]},<br> ${weatherDataFinal[i][locationKeys[i]].data[j]["Weather-Details"].air_temperature} c°</h4>
+        <img src=img/${weatherIcon[i]}.png alt="Weather Icon" height="50px" width="50px">
+        `
+      break;
         }
-        console.log(weatherIcon);
-         // För denna kommer endast kör 3 gånger för den exakta tiden finns bara 1 i arrayn och då på dessa 3 location och dessa element har jag redan i arrayn-locationElements
-        locationElements[i].innerHTML = `<h3>${weatherDataFinal[i][locationKeys[i]].data[j]["Weather-Details"].air_temperature} c°</h3>
-          <img src=img/${weatherIcon[i]}.png alt="Weather Icon" height="50px" width="50px">
-          `
-        break;
       }
     }
   }
-}
 
 /*
   Denna funktion, hämtar all väderData på ett interval exempelvis varje 5 sekunder hämta api datat. Sorterar väder-datat. Funktionen "checkDateTime" den kollar vilken den lokala tiden är alltså vad är klockan nu? jämförelse vad det är för tid på datat vi får på vädret. Om klockan är 12:34 och i vårat objekt har vi tiden 12:00 och vädret för denna tidslag. Så kommer detta objekt att sättas och displays "realtid" för varje timme, vad det är för väder just för denna timme.
@@ -316,9 +222,9 @@ fetch('db.json')
 .then(response => response.json())
 .then(result => {
   fishDescriptionElement.innerHTML += `
-    ${result.adminUpload[0].name} är en av våra många glada besökare,
-    här har fångats ${result.adminUpload[0].fishType}, med en vikt på hela ${result.adminUpload[0].fishWeight}
+    ${result.adminUpload[2].name} är en av våra många glada besökare,
+    här har fångats ${result.adminUpload[2].fishType}, med en vikt på hela ${result.adminUpload[2].fishWeight}
   `
-  adminImageElement.setAttribute('src', `${result.adminUpload[0].image}`)
-  userDescriptionElement.innerHTML += `"${result.adminUpload[0].textDescription}"`
+  adminImageElement.setAttribute('src', `${result.adminUpload[2].image}`)
+  userDescriptionElement.innerHTML += `"${result.adminUpload[2].textDescription}"`
 })

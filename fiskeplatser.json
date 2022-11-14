@@ -1,0 +1,25 @@
+[
+	{
+		"id": "0",
+		"name": "Tana",
+		"infoWiki1": "Saknas info om Tana.",
+		"infoWiki2": "Saknas info om Tana."
+	},
+	{
+		"id": "1",
+		"name": "Lofoten",
+		"infoWiki1": "Lofoten är ett populärt turistmål, med bland annat sina små 'fiskevær'. Det är vanligt att man hyr ut, det som i Norge kallas för 'rorbuer' till övernattning för turister. 'Rorbuer' är små hus som tidigare användes av alla tillresande fiskare under Lofotfisket. Numera bor som regel fiskarna på sina båtar.",
+		"infoWiki2": "'Rorbuer' är små hus som tidigare användes av alla tillresande fiskare under Lofotfisket. Numera bor som regel fiskarna på sina båtar."
+	},
+	{
+		"id": "2",
+		"name": "Hallingdalselva",
+		"infoWiki": "Saknas info om Hallingdalselva."
+	},
+	{
+		"id": "3",
+		"name": "Fiskeplatser",
+		"infoWiki1": "Hej! Det ser ut som du inte gjort ett val från formuläret.",
+		"infoWiki2": "Gå tillbaks till första sidan och fyll i formuläret för att få detaljerad information om din kommande fiskeresa med oss!"
+	}
+]
