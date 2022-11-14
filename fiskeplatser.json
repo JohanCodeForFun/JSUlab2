@@ -1,25 +1,26 @@
 [
-	{
-		"id": "0",
-		"name": "Tana",
-		"infoWiki1": "Saknas info om Tana.",
-		"infoWiki2": "Saknas info om Tana."
-	},
-	{
-		"id": "1",
-		"name": "Lofoten",
-		"infoWiki1": "Lofoten är ett populärt turistmål, med bland annat sina små 'fiskevær'. Det är vanligt att man hyr ut, det som i Norge kallas för 'rorbuer' till övernattning för turister. 'Rorbuer' är små hus som tidigare användes av alla tillresande fiskare under Lofotfisket. Numera bor som regel fiskarna på sina båtar.",
-		"infoWiki2": "'Rorbuer' är små hus som tidigare användes av alla tillresande fiskare under Lofotfisket. Numera bor som regel fiskarna på sina båtar."
-	},
-	{
-		"id": "2",
-		"name": "Hallingdalselva",
-		"infoWiki": "Saknas info om Hallingdalselva."
-	},
-	{
-		"id": "3",
-		"name": "Fiskeplatser",
-		"infoWiki1": "Hej! Det ser ut som du inte gjort ett val från formuläret.",
-		"infoWiki2": "Gå tillbaks till första sidan och fyll i formuläret för att få detaljerad information om din kommande fiskeresa med oss!"
-	}
+  {
+    "id": "0",
+    "name": "Tana",
+    "infoWiki1": "Tana är en gigantisk storälv och den älv i Europa där det fångas mest lax. Den är laxförande i otroliga ca 110 mil om man räknar in alla biälvar. Rinner från Finska urskogen och är en gränsälv till Finland i ca 28 mil. Rinner ut i Tanafjorden och är en av Norges nordligaste älv. De nedersta ca 6 milen på Norsk mark är det hetaste.",
+    "infoWiki2": "I Tana fångas det mest lax i Norge varje år när det gäller antal ton fångad lax. 2009 tog man 34 ton och 2010 tog man 43 ton och 2011 tog man 37 ton och det på den nedre Norska delen av Tana."
+  },
+  {
+    "id": "1",
+    "name": "Lofoten",
+    "infoWiki1": "Lofoten är ett populärt turistmål, med bland annat sina små 'fiskevær'. Det är vanligt att man hyr ut, det som i Norge kallas för 'rorbuer' till övernattning för turister. 'Rorbuer' är små hus som tidigare användes av alla tillresande fiskare under Lofotfisket. Numera bor som regel fiskarna på sina båtar.",
+    "infoWiki2": "'Rorbuer' är små hus som tidigare användes av alla tillresande fiskare under Lofotfisket. Numera bor som regel fiskarna på sina båtar."
+  },
+  {
+    "id": "2",
+    "name": "Hallingdalselva",
+    "infoWiki1": "Hallingdalselva, som slingrar sig genom Gol, från Åls kommungräns vid Trillhus till Nes kommungräns vid Nesbyen, är en fiskekortszon. Nes kommungräns följer älven ca 4 km; i detta fall gäller fiskezonen från östra älvstranden, se karta. Ån har ett väletablerat öringbestånd. Från Trillhus till Gol går älven en varierad bana med forsar, vattenfall, älvpölar och trösklar",
+    "infoWiki2": "Från Gol till Svenkerud är vattenstånden högre, så älven rinner i lugnare tempo där. Följaktligen är denna sträcka idealisk för flugfiske."
+  },
+  {
+    "id": "3",
+    "name": "Fiskeplatser",
+    "infoWiki1": "Hej! Det ser ut som du inte gjort ett val från formuläret.",
+    "infoWiki2": "Gå tillbaks till första sidan och fyll i formuläret för att få detaljerad information om din kommande fiskeresa med oss!"
+  }
 ]
