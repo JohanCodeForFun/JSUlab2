@@ -28,7 +28,7 @@ if (equipementInput !== "no-equipement") {
 }
 
 // länka locationElements till header
-// för att hämta väderdata
+// för att hämta & visa väderdata
 locationElements = [];
 let locationTana = document.querySelector("#locationTana");
 let locationLofoten = document.querySelector("#locationLofoten");
@@ -74,6 +74,7 @@ fetch("fiskeplatser.json")
     }
   });
 
+// Värden till funktioner för att visa resekostnader i chart.js
 const cabin = 1299;
 const totalCostArray = [];
 const startDestination = 0;
@@ -341,10 +342,6 @@ function CheckDateTime() {
         ArraytimeNow === currentTime &&
         weatherDataFinal[i][locationKeys[i]].data[j].date === dateToday
       ) {
-        // weatherIcon.push(weatherDataFinal[i][locationKeys[i]].data[j]["Weather-Symbol"])
-        // locationElements[i].innerHTML = `<h4>${locationKeys[i]},<br> ${weatherDataFinal[i][locationKeys[i]].data[j]["Weather-Details"].air_temperature} c°</h4>
-        // <img src=img/${weatherIcon[i]}.png alt="Weather Icon" height="50px" width="50px">
-        // `
         if (destinationInput === locationKeys[i]) {
           weatherIcon.push(
             weatherDataFinal[i][locationKeys[i]].data[j]["Weather-Symbol"]
