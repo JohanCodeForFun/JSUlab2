@@ -1,3 +1,13 @@
+/* Content
+  1. Body 
+  2. Sections
+  3. Fishingspots
+  4. Weather Display
+  5. Footer
+  6. Media Queries
+ */
+
+ /* 1. Body  */
 body {
   display: grid;
   grid-template-columns: 1fr;
@@ -9,11 +19,14 @@ body {
     "footer";
 }
 
-section {
+/* 2. Sections */
+section,
+#description-fishingspots,
+#myChartContainer {
   padding: 1rem;
 }
 
-/* Fishing spots */
+/* 3. Fishingspots */
 #hero-fishingspots {
   grid-area: hero;
   background-color: #ffe9dc;
@@ -38,8 +51,6 @@ section {
   flex: 1;
 }
 #hero-fishingspots #fishing-header {
-  /* background-color: white; */
-  /* border: 1px solid black; */
   border-radius: 1rem;
   height: 30px;
 }
@@ -50,6 +61,7 @@ section {
   width: 30px;
 }
 
+/* 4. Weather Display */
 #weather-display {
   background-color: white;
   border: 1px solid black;
@@ -75,11 +87,13 @@ section {
   margin-bottom: 2rem;
 }
 
+/* 5. Footer */
 footer {
   grid-area: footer;
 }
 
-/* 10. Media Queries */
+
+/* 6. Media Queries */
 @media screen and (width: 924px) {
   body {
     display: grid;
@@ -128,9 +142,6 @@ footer {
       "footer footer";
   }
 
-
-
-
   #hero-section {
     height: 100vh;
     background-position: center;
@@ -146,3 +157,4 @@ footer {
     left: 8rem;
   }
 }
+/* Validated above, OK! (15/11/2022) */
