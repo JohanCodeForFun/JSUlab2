@@ -132,7 +132,6 @@ async function GetAllWeatherData() {
   // Gör att denna array bara består av nyckeln-värdet av locationen alltså locationKeyInput-arrayn
   let locationKeyInput = []; // Här har jag alla keys som jag behöver
 
-  console.log(result);
   // Denna kollar om många områden som finns som vi hämtar
   for (let i = 0; i < result.length; i++) {
     if (result[i].hasOwnProperty(result[i]) !== undefined) {
@@ -248,7 +247,6 @@ function CheckDateTime() {
       let currentTimeIndex = timeToday.indexOf(":");
       let currentTime = timeToday.slice(0, currentTimeIndex);
 
-      console.log(dateToday);
       if (
         ArraytimeNow === currentTime &&
         weatherDataFinal[i][locationKeys[i]].data[j].date === dateToday
