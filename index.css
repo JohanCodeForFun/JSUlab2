@@ -47,7 +47,7 @@ section,
   background-position: center;
   background-size: cover;
   height: 40vh;
-  margin-bottom: 12rem;
+  margin-bottom: 14rem;
   box-shadow: 2px 2px 2px 2px black;
 }
 
@@ -83,6 +83,11 @@ section,
   margin-bottom: 0.6rem;
 }
 
+label #destination,
+label #startpunkt {
+  font-size: 3rem;
+}
+
 .checkradio {
   display: flex;
   gap: 1rem;
@@ -110,7 +115,6 @@ section,
 .nights-container {
   margin-top: 2vh;
   height: 5vh;
-  /* background-color: red; */
 }
 
 .btn-div {
@@ -126,6 +130,15 @@ section,
   background-color: #4F7336;
 }
 
+.nights-container #nightCount {
+  margin-left: .5rem;
+}
+
+.nights-container #increase,
+.nights-container #decrease {
+  margin-left: .5rem;
+  padding: .2rem .4rem;
+}
 
 
 /* 4. Offer-section */
